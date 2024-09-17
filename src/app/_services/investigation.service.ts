@@ -2,7 +2,7 @@
  * @whatItDoes Provides services for the Investigation Class 
  *
  * @description
- *  Allows components to access and work with Investigations.
+ *  GET (singular and list), POST, PATCH and ARCHIVE are available.
  */
 
 import {Injectable} from '@angular/core';
@@ -19,29 +19,6 @@ import {AuthService} from "./auth.service";
 export class InvestigationService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  //file handling input info
-  investigationId!: string;
-  label!: string;
-  stepId!: string;
-
-  setDocumentDetails(investigationId: string, label: string, stepId: string){
-    this.investigationId = investigationId;
-    this.label = label;
-    this.stepId = stepId;
-  }
-
-  getInvestigationId(): string{
-    return this.investigationId;
-  }
-  getLabel(): string{
-    return this.label;
-  }
-  getStepId(): string{
-    return this.stepId;
-  }
-
-
-  //Investigation: GET, POST, PATCH, ARCHIVE
   getInvestigation(investigationId: string, headers: HttpHeaders): Observable<Investigation> {
     return this.http.get<Investigation>(`${environment.getInvestigationURL}${investigationId}?_format=json`, { headers });
   }
