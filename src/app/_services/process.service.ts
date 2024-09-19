@@ -2,7 +2,7 @@
  * @whatItDoes Provides services for the Process Class 
  *
  * @description
- *  GET (list), POST, DUPLICATE, PATCH and ARCHIVE are available.
+ *  GET (list), POST, DUPLICATE, PATCH and ARCHIVE are available for Process as a whole. GET, POST, PATCH and DELETE are avaialble for individual steps.
  */
 
 import {Injectable} from '@angular/core';
@@ -46,5 +46,32 @@ export class ProcessService {
     return this.http.delete<Process>(`${environment.archiveProcessURL}${processId}`,{headers}); // should this still be have 'delete' or are do we just need to patch: visible = 'no'?
   }
 
-  //NOTE: there used to be get, add, update, update order, delete functions here for individual steps. We're trying to just go through patchProcess now for those functions.
+  //Step Functions: GET POST PATCH DELETE
+  
+  getProcessSteps(processId: string, headers: HttpHeaders): Observable<Process> {
+
+    return this.http.get<Process>(`${environment.getProcessURL}${processId}?_format=json`, { headers });
+  }
+
+  postProcessStep(processId: string, stepData: any): Observable<any> {
+    const headers = this.authService.getHeaders();
+    return this.http.patch<Process>(`${environment.patchProcessURL}${processId}`, stepData, {headers});
+  }
+
+  patchProcessStep(processId:string, stepUuid: string, stepData: any): Observable<any> {
+    const headers = this.authService.getHeaders();
+    const url = `${environment.patchProcessURL.replace('{processId}', processId).replace('{stepUuid}', stepUuid)}`;
+    return this.http.patch<Process>(url, stepData, {headers});
+  }
+
+  patchProcessStepOrder(processId:string, stepsData: any): Observable<any> {
+      const headers = this.authService.getHeaders();
+      return this.http.patch<Process>(`${environment.patchProcessURL}${processId}`, stepsData, {headers});
+  }
+  
+  deleteProcessStep(processId:string, stepUuid: string): Observable<any>{
+    const headers = this.authService.getHeaders();
+    const url = `${environment.patchProcessURL.replace('{processId}', processId).replace('{stepUuid}', stepUuid)}`;
+    return this.http.patch<Process>(url, {headers});
+  }
 }

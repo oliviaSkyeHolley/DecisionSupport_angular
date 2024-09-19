@@ -1,0 +1,15 @@
+// Menubar Links
+.menubar a{
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    float: left;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+// Hovering over the links on the bar.
+.menubar a:hover{
+    background-color: rgb(212, 212, 212);
+    color: rgb(81, 81, 104);
+}
