@@ -32,7 +32,7 @@ export class AuthenticateComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (res) => {
         this.authService.setTokens(res.access_token, res.refresh_token);
-        this.router.navigate(['/investigation/list']); // Where do you want to be sent after successful login?
+        this.router.navigate(['/support']); // Where do you want to be sent after successful login?
       },
       error: (err) => {
         console.error('Login error', err);
