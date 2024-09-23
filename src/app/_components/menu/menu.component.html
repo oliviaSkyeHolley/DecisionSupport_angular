@@ -3,10 +3,9 @@
   @description Provides navigation between pages.
 -->
 
-<div class="menubar">
-    <a routerLink="login"> Login/Logout </a>
-    <a routerLink="process"> Process Builder </a>
-    <a routerLink="support"> Decision Support </a>
-</div>
-
-<br /><br />
+<mat-toolbar>
+        <a [routerLink]="['/']" [ngClass]="{'active': isActive('/')}">Home</a>
+        <a [routerLink]="['/process']" [ngClass]="{'active': isActive('/process')}">Process Builder</a>
+        <a [routerLink]="['/support']" [ngClass]="{'active': isActive('/support')}">Decision Support</a>
+        <a [routerLink]="['/generate/report']" [ngClass]="{'active': isActive('/generate/report')}">Generate Report</a>
+</mat-toolbar>
