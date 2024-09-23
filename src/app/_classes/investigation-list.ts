@@ -11,13 +11,13 @@ export class InvestigationList {
       label: string,
       entityId: number,
       revisionCreationTime: string,
-      investigationId: number,
+      processId: number,
       createdTime:string
     ) {
       this.label = label;
       this.entityId = entityId;
       this.revisionCreationTime = revisionCreationTime;
-      this.investigationId = investigationId;
+      this.processId = processId;
       this.createdTime = createdTime;
     }
     /**
@@ -36,9 +36,9 @@ export class InvestigationList {
     revisionCreationTime: string;
   
     /**
-     * Determines the linked investigation.
+     * Determines the linked process (i.e. the type of process that the investigation is following).
      */
-    investigationId: number;
+    processId: number;
   
     /**
      * Time when the investigation was created
