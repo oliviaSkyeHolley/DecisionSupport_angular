@@ -29,17 +29,25 @@ import { MatListModule } from '@angular/material/list';
 import { MatDivider } from '@angular/material/divider';
 //import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { Investigation } from '../../_classes/investigation';
+
+// Quill
+import { NgModule } from '@angular/core';
 import { QuillModule } from 'ngx-quill';
+
+
 
 @Component({
   selector: 'app-investigation',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, QuillModule], //EditorComponent + FileUploadComponent Deleted to make it work.
+  imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox], //EditorComponent + FileUploadComponent Deleted to make it work.
   templateUrl: './investigation.component.html',
   styleUrl: './investigation.component.scss'
 })
 
 export class InvestigationComponent implements OnInit {
+
+
+
   investigation: Investigation | undefined;
   investigationId: string;
   investigationDetails: any;
@@ -187,5 +195,6 @@ export class InvestigationComponent implements OnInit {
     }
     return false;
   }
+
 
 }
