@@ -29,11 +29,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatDivider } from '@angular/material/divider';
 //import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { Investigation } from '../../_classes/investigation';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-investigation',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox], //EditorComponent + FileUploadComponent Deleted to make it work.
+  imports: [MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, QuillModule], //EditorComponent + FileUploadComponent Deleted to make it work.
   templateUrl: './investigation.component.html',
   styleUrl: './investigation.component.scss'
 })
@@ -53,6 +54,7 @@ export class InvestigationComponent implements OnInit {
   sideNavWidth = computed(() => this.collapsed() ? '65px' : '350px');
   oneStep: any;
   userChoices: Map<string, string> = new Map();
+  editorContent: any;
 
   constructor(
     private route: ActivatedRoute,
