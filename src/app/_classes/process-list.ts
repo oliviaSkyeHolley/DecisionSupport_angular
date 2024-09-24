@@ -7,41 +7,48 @@
 */
 
 export class ProcessList {
-    constructor(
-        label: string,
-        entityId: number,
-        revisionCreationTime: string,
-        revisionStatus: string,
-        createdTime:string
-      ) {
-        this.label = label;
-        this.entityId = entityId;
-        this.revisionCreationTime = revisionCreationTime;
-        this.revisionStatus = revisionStatus;
-        this.createdTime = createdTime;
-      }
-      /**
-       * The title of the Process
-       */
-      label: string;
-    
-      /**
-       * The ID assigned by Drupal for the Process
-       */
-      entityId: number;
-    
-      /**
-       * 
-       */
-      revisionCreationTime: string;
-    
-      /**
-       * Determines the status of the Process (i.e, draft, archived, published)
-       */
-      revisionStatus: string;
-    
-      /**
-       * Time when the Process was created.
-       */
-      createdTime:string;
+  constructor(
+    label: string,
+    entityId: number,
+    revisionCreationTime: string,
+    revisionStatus: string,
+    createdTime: string,
+    updatedTime: string
+  ) {
+    this.label = label;
+    this.entityId = entityId;
+    this.revisionCreationTime = revisionCreationTime;
+    this.revisionStatus = revisionStatus;
+    this.createdTime = createdTime;
+    this.updatedTime = updatedTime;
+  }
+  /**
+   * The title of the Process
+   */
+  label: string;
+
+  /**
+   * The ID assigned by Drupal for the Process
+   */
+  entityId: number;
+
+  /**
+   * 
+   */
+  revisionCreationTime: string;
+
+  /**
+   * Determines the status of the Process (i.e, draft, archived, published)
+   */
+  revisionStatus: string;
+
+  /**
+   * Time when the Process was created.
+   */
+  createdTime: string;
+
+  /**
+  * Time when the Process was updated.
+  */
+  updatedTime: string;
 }    
