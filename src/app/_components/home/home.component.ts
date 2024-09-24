@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import {MenubarComponent} from "../menubar/menubar.component";
+import {MenuComponent} from "../menu/menu.component";
 import {NgIf} from "@angular/common";
-import {AuthService} from "../../_services/auth.service";
-import {Router} from "@angular/router";
+import { AuthService } from '../../_services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    MenubarComponent,
-    NgIf
+    MenuComponent,
+    NgIf,
+    RouterLink
   ],
   templateUrl: './home.component.html',
  /* template: `

@@ -3,6 +3,9 @@
   @description If the user is authenticated, display the menubar.
 -->
 
+
+<router-outlet />
+
 <div *ngIf="authService.isLoggedIn()">
   <app-menu />
 </div>
