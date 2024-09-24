@@ -36,7 +36,7 @@ export class ProcessService {
     return this.http.post<Process>(environment.duplicateProcessURL, data, { headers });
   }
 
-  patchProcess(processId:string, data:any): Observable<any>{
+  patchProcess(processId:number, data:any): Observable<any>{
     const headers = this.authService.getHeaders();
     return this.http.patch<Process>(`${environment.patchProcessURL}${processId}`, data, {headers});
   }
