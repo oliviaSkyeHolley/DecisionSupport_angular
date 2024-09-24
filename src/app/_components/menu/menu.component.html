@@ -3,10 +3,22 @@
   @description Provides navigation between pages.
 -->
 
+<!--
 <div class="menubar">
     <a routerLink="login"> Login/Logout </a>
     <a routerLink="process"> Process Builder </a>
     <a routerLink="support"> Decision Support </a>
 </div>
 
+<br /><br />
+-->
+
+
+<div class="menu">
+  <div routerLink="/home" class="logoButton"> <img ngSrc="/asset/Logo.png" height="60" width="70" alt="Logo" priority></div>
+  <a routerLink="/home">Home</a>
+  <a routerLink="process"> Process Builder </a>
+  <a routerLink="support"> Decision Support </a>
+  <button (click)="logout()" *ngIf="authService.isLoggedIn()">Logout</button>
+</div><br />
 <br /><br />

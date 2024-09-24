@@ -9,13 +9,13 @@
     <mat-dialog-content>
         <!-- Collecting name of the investigation -->
         <p> Title </p>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <input matInput formControlName="name" placeholder="Title" required>
         </mat-form-field>
 
         <!-- Collecting process type of the investigation -->
         <p> What process will you follow? </p>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-select formControlName="process_id" placeholder="Select Process">
                 <mat-option *ngFor="let processId of processId" [value]="processId.value"> {{processId.label}} </mat-option>
             </mat-select>
@@ -24,7 +24,7 @@
 
     <!-- Close and submit form buttons -->
     <mat-dialog-actions>
-        <button mat-button (click)="close()"> Close </button>
-        <button mat-button color="primary" type="submit" [disabled]="form.invalid"> Create </button>
+        <button class="closeButton" mat-button (click)="close()"> Close </button>
+        <button class="createButton" mat-button color="primary" type="submit" [disabled]="form.invalid"> Create </button>
     </mat-dialog-actions>
 </form>
