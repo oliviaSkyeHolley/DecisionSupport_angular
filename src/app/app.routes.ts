@@ -4,6 +4,7 @@ import {InvestigationListComponent} from './_components/investigation-list/inves
 import {AuthGuard} from './_services/auth.guard';
 import {HomeComponent} from "./_components/home/home.component";
 
+//added the home page
 export const appRoutes: Routes = [
     { path: 'login', component: AuthenticateComponent},
     { path: 'home', component: HomeComponent},
