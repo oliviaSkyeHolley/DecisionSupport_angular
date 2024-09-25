@@ -47,14 +47,14 @@ export class AuthenticateComponent {
 }
 */
 
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
-import { AuthService } from '../../_services/auth.service';
+import {AuthService} from '../../_services/auth.service';
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import { MatFormField } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import {MatFormField} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-authenticate',
@@ -84,7 +84,8 @@ export class AuthenticateComponent {
     });
   }
 
+  /*
   logout(): void {
     this.authService.logout();
-  }
+  } */
 }

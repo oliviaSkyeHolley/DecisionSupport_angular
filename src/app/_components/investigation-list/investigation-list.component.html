@@ -5,6 +5,7 @@
 -->
 
 <!-- Heading and New Investigation Button-->
+<div class="wrapper">
     <h2> Decision Support </h2>
 
   <button class="addbutton" (click)="addInvestigation()"> + Decision Support </button>
@@ -23,7 +24,7 @@
     <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <!-- Title is a link to the investigation's page with the link domain.host/support/:entityId -->
-      <a [routerLink]="['support', element.entityId]"> {{element.label}} </a>
+      hom
     </mat-cell>
   </ng-container>
 
@@ -53,3 +54,4 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+</div>

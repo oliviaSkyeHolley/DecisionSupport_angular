@@ -1,22 +1,14 @@
 // Menubar Links
 
-/*
-.menu a{
-    text-decoration: none;
-    color: black;
-    font-size: 17px;
-    float: left;
-    text-align: center;
-    padding: 14px 16px;
-}
+.menu {
 
-// Hovering over the links on the bar.
-.menu a:hover{
-    background-color: rgb(212, 212, 212);
-    color: rgb(81, 81, 104);
-}
-*/
+    background-color: white;
+    border-top: 4px;
+    border-bottom: 4px;
+    padding-right: 25px;
+    padding-left: 15px;
 
+}
 
 .menu a{
   text-decoration: none;
@@ -25,7 +17,10 @@
   float: left;
   text-align: center;
   padding: 14px 16px;
+
+
 }
+
 .menu a:hover{
   background-color: rgb(212, 212, 212);
   color: rgb(81, 81, 104);
@@ -34,9 +29,9 @@
 
 .logoButton{
   float: left;
+  position: relative;
   text-align: center;
-  padding: 14px 16px;
-  padding-right: 50px;
+  padding: 14px 50px 14px 16px;
 }
 
 button{
@@ -68,7 +63,7 @@ hr {
 }
 
 img{
-  top: 5px;
+  top: 1px;
   padding-top: 1px;
   mix-blend-mode: multiply;
   text-align: center;
