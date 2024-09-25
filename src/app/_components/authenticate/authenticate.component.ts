@@ -56,6 +56,7 @@ import {MatFormField} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 
+//
 @Component({
   selector: 'app-authenticate',
   standalone: true,
@@ -84,8 +85,4 @@ export class AuthenticateComponent {
     });
   }
 
-  /*
-  logout(): void {
-    this.authService.logout();
-  } */
 }
