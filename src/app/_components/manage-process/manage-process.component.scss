@@ -1,0 +1,26 @@
+/** Styling for the top container*/
+.top-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; 
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.top-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #143354;
+}
+
+/** Styling for Mat Tab */
+.mattab {
+    width: 100%;
+}
+
+mat-tab-group {
+    width: 100%; 
+}

@@ -48,12 +48,12 @@ export class ProcessService {
 
   //Step Functions: GET POST PATCH DELETE
   
-  getProcessSteps(processId: string, headers: HttpHeaders): Observable<Process> {
-
+  getProcessSteps(processId: string): Observable<Process> {
+    const headers = this.authService.getHeaders();
     return this.http.get<Process>(`${environment.getProcessURL}${processId}?_format=json`, { headers });
   }
 
-  postProcessStep(processId: string, stepData: any): Observable<any> {
+  postProcessStep(processId: number, stepData: any): Observable<any> {
     const headers = this.authService.getHeaders();
     return this.http.patch<Process>(`${environment.patchProcessURL}${processId}`, stepData, {headers});
   }
