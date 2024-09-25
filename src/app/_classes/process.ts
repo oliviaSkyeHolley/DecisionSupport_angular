@@ -9,8 +9,9 @@
 import {Step} from "./step";
 
 export class Process {
-  constructor(entityId: number, label: string, steps: Step[]) {
+  constructor(entityId: number, uuid: number, label: string, steps: Step[]) {
     this.entityId = entityId;
+    this.uuid = uuid
     this.label = label;
     this.steps = steps;
   }
@@ -19,6 +20,11 @@ export class Process {
    * The id of the process.
    */
   entityId: number;
+
+  /**
+   * The unique id of the process.
+   */
+  uuid: number;
 
   /**
    * The name of the process.
