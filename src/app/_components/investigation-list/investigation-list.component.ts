@@ -56,11 +56,11 @@ export class InvestigationListComponent {
     // Recieves result from NewInvestigationDialogComponent...
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        
+
         const formattedData = {
           label: result.name,
           process_id: result.process_id,
-          json_string: JSON.stringify({ name: result.name }) 
+          json_string: JSON.stringify({ name: result.name })
         }
         // ... and posts it to the backend!
         this.investigationService.postInvestigation(formattedData).subscribe({
