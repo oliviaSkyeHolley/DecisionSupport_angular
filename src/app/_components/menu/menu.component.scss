@@ -60,12 +60,14 @@ a.active{
   padding: 14px 50px 14px 16px;
 }
 
-/*button{
+button{
   background-color: transparent;
   color: grey !important;
   width: 5%;
   position: relative;
-  top: 10px;
+  left: 400px;
+ // top: 10px;
+  text-align: center;
   border-radius: 5px;
   float: right;
   border-style: solid;
@@ -80,7 +82,7 @@ button:hover {
   transition: 0.7s;
   font-size: 17px;
   cursor:pointer;
-} */
+}
 
 hr {
   margin: 30px -20px 10px;
