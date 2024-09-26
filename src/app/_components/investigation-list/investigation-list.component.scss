@@ -1,0 +1,84 @@
+
+.material-icons{
+  color: #accbe3;
+  cursor:pointer;
+}
+
+
+a:link {
+  color: #65848b;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #374357;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #586d8a;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+
+.addbutton{
+  color:#ffff;
+  background-color: #accbe3;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border-color: transparent;
+  position: absolute;
+  right: 20px;
+  width: 200px;
+  height: 50px;
+  top: 65px;
+
+}
+
+.mat-mdc-header-row{
+  background-color: #7a9bbf !important;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+
+}
+
+
+
+.mat-mdc-table{
+  border-radius: 8px;
+  overflow:hidden !important;
+  background-color: white !important;
+}
+
+.addbutton:hover{
+  color:#ffff;
+  background-color: #7a9bbf;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border-color: transparent;
+  font-color: white;
+}
+
+a{
+  text-decoration: none;
+}
+
+.Tile{
+  left: 150px;
+  width: 100%;
+  font-size: 35px;
+}
+
+.wrapper{
+  background-color: white;
+  border-top: 4px;
+  border-bottom: 4px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
