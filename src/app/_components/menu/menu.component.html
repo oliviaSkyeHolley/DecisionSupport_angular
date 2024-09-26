@@ -2,10 +2,13 @@
   @component MenuComponent
   @description Provides navigation between pages.
 -->
-
-<mat-toolbar>
-        <a [routerLink]="['/']" [ngClass]="{'active': isActive('/')}">Home</a>
-        <a [routerLink]="['/process']" [ngClass]="{'active': isActive('/process')}">Process Builder</a>
-        <a [routerLink]="['/support']" [ngClass]="{'active': isActive('/support')}">Decision Support</a>
-        <a [routerLink]="['/generate/report']" [ngClass]="{'active': isActive('/generate/report')}">Generate Report</a>
-</mat-toolbar>
+<div class="menu">
+  <mat-toolbar>
+    <div routerLink="/home" class="logoButton"> <img ngSrc="/asset/Logo.png" height="60" width="70" alt="Logo" priority></div>
+    <a [routerLink]="['/home']" [ngClass]="{'active': isActive('/home')}">Home</a>
+    <a [routerLink]="['/process']" [ngClass]="{'active': isActive('/process')}">Process Builder</a>
+    <a [routerLink]="['/support']" [ngClass]="{'active': isActive('/support')}">Decision Support</a>
+    <a [routerLink]="['/generate/report']" [ngClass]="{'active': isActive('/generate/report')}">Generate Report</a>
+    <button (click)="logout()" *ngIf="authService.isLoggedIn()">Logout</button>
+  </mat-toolbar>
+</div>
