@@ -1,7 +1,9 @@
 <div class="container">
     <div class="preview-container">
+        <div *ngIf="processSteps">
         <h1>{{processDetails.label}}</h1>
-        <div *ngFor="let processStep of processSteps">
+
+        <div  *ngFor="let processStep of processSteps">
             <h2>Step {{processStep.id}} </h2>
             <p>{{processStep.description}}</p>
             <!-- Radio & Text Boxes -->
@@ -13,7 +15,7 @@
                 </mat-radio-group>
                 <br />
                 <b>Please provide further details.</b><i>Optional</i><br /><br />
-                <!-- <editor apiKey="r0gpf34f1r14a97ovjgipjiafq78h23ljobqqcamxru11wpd" [init]="init"></editor> -->
+                <quill-editor></quill-editor>
             </div>
             <!-- Radio -->
             <div *ngIf="processStep.type === 'radio'">
@@ -32,7 +34,7 @@
                 </div>
                 <br />
                 <b>Please provide further details. </b><i>Optional</i><br /><br />
-                <!-- <editor apiKey="r0gpf34f1r14a97ovjgipjiafq78h23ljobqqcamxru11wpd" [init]="init" /> -->
+                <quill-editor></quill-editor>
 
             </div>
 
@@ -46,11 +48,11 @@
             <br />
             <!--Textbox-->
             <div *ngIf="processStep.type === 'textbox'">
-                <!-- <editor apiKey="r0gpf34f1r14a97ovjgipjiafq78h23ljobqqcamxru11wpd" [init]="init" /> -->
+                <quill-editor></quill-editor>
             </div>
 
         </div>
-
+    </div>
     </div>
 
 </div>

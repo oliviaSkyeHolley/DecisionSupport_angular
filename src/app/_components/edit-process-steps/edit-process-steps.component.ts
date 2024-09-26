@@ -79,7 +79,9 @@ export class EditProcessStepsComponent {
   
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        this.processService.postProcessStep(this.processDetails.entityId, result).subscribe({
+        const index = this.processDetails.steps.findIndex(step => step.stepUuid == result.stepUuid);
+        this.processDetails.steps[index] = result;
+        this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
           next: (response) => {
             console.log('Successfully updated step:', result.id);
             // Refresh the list after a process step is updated
@@ -95,8 +97,35 @@ export class EditProcessStepsComponent {
     });
   }
   /** Requests the backend to save the changes made in the process step order */
-  saveChanges(){}
+  saveChanges(){
+    this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
+      next: (response) => {
+        console.log('Successfully deleted step:', this.processDetails);
+        // Refresh the list after a new process step is added
+        this.getProcessDetail();
+      },
+      error: (err) => {
+        // Log any errors encountered while adding process step.
+        console.error('Error adding step:', err);
+      }
+    });
+  }
 
   
-  deleteStep(uuid: any): void{}
+  deleteStep(uuid: any): void{
+    const index = this.processDetails.steps.findIndex(step => step.stepUuid == uuid);
+    this.processDetails.steps.splice(index);
+    console.log(this.processDetails.steps)
+    this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
+      next: (response) => {
+        console.log('Successfully deleted step:', this.processDetails);
+        // Refresh the list after a new process step is added
+        this.getProcessDetail();
+      },
+      error: (err) => {
+        // Log any errors encountered while adding process step.
+        console.error('Error adding step:', err);
+      }
+    });
+  }
 }

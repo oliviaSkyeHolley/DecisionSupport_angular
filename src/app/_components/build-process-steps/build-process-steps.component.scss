@@ -14,13 +14,16 @@
 .mat-mdc-row:nth-child(even) {
     background-color: #f0f0f1;
 }
+
 .mat-mdc-row:nth-child(odd) {
     background-color: #fff;
 }
+
 mat-cell {
-    border-bottom: 1px solid #e0e0e0; 
-    padding: 16px; 
+    border-bottom: 1px solid #e0e0e0;
+    padding: 16px;
 }
+
 mat-cell button {
     background-color: #143354;
     color: #fff;
@@ -32,14 +35,31 @@ mat-cell button {
     border: none;
     transition: background-color 0.3s ease;
 }
-  
-.stepid{
+
+.stepid {
     font-weight: 600;
 }
 
-.mat-column-description{
+.mat-column-description {
     flex: 0 0 40%;
 }
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-div{
+    margin-right: 40px;
+}
+
+.search-div mat-form-field {
+    width: 400px; 
+    flex: 1; 
+}
+
+
+
 
 /* No Data Styling */
 .noData {
@@ -58,7 +78,7 @@ mat-cell button {
 }
 
 /** Create Button Styling */
-.createbutton {
+.addbutton {
     color: #fff;
     background-color: #143354;
     border-radius: 8px;
@@ -73,4 +93,8 @@ mat-cell button {
 
 .createbutton:hover {
     background-color: #1b4671;
+}
+
+.pr-addbutton {
+    background-color: #fff;
 }

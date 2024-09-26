@@ -15,16 +15,20 @@ import { MatTableModule } from '@angular/material/table';
 import { ProcessList } from '../../_classes/process-list';
 import { ProcessService } from '../../_services/process.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CreateProcessDialogComponent } from '../dialog-components/process-dialog/create-process-dialog/create-process-dialog.component';
 import { Process } from '../../_classes/process';
 import { UpdateProcessDialogComponent } from '../dialog-components/process-dialog/update-process-dialog/update-process-dialog.component';
 import { DuplicateProcessDialogComponent } from '../dialog-components/process-dialog/duplicate-process-dialog/duplicate-process-dialog.component';
 import { DeleteProcessDialogComponent } from '../dialog-components/process-dialog/delete-process-dialog/delete-process-dialog.component';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-process-list',
   standalone: true,
-  imports: [MatTableModule, CommonModule, MatSelectModule, RouterLink],
+  imports: [FormsModule, MatIconModule, MatTableModule, MatFormFieldModule, MatInputModule, CommonModule, MatSelectModule, RouterLink],
   templateUrl: './process-list.component.html',
   styleUrl: './process-list.component.scss'
 })
@@ -35,6 +39,7 @@ export class ProcessListComponent {
   /** Array to store the filtered processes based on revision status */
   filteredProcesses: ProcessList[] = [];
   revisionStatus = "All";  // Default revision status filter
+  searchInput:string = "";
   displayedColumns: string[] = ['entityid', 'label', 'revisionStatus', 'createdTime', 'updatedTime', 'actions'];
 
   constructor( private processService: ProcessService, private dialog: MatDialog) { }
@@ -59,11 +64,26 @@ export class ProcessListComponent {
     if(revisionStatus == "All"){
       // No filtering, show all processes
       this.filteredProcesses = this.processes; 
+
     }else{
       this.filteredProcesses = this.processes.filter(process => process.revisionStatus == revisionStatus);
+
     }
     
   } 
+
+  /** Filter the available processes based on the user serach input */
+  filterBySearch(): void {
+    if(this.revisionStatus == "All"){
+      this.filteredProcesses = this.processes.filter(process => 
+        process.label.toLowerCase().includes(this.searchInput.toLowerCase()) 
+      );
+    }else{
+      this.filteredProcesses = this.processes.filter(process => 
+        process.label.toLowerCase().includes(this.searchInput.toLowerCase()) && process.revisionStatus == this.revisionStatus
+      );
+    }
+  }
 
   /** Opens CreateProcessDialog and then request the backend to create a new process with the provided data. */
   createProcess(): void{
@@ -158,7 +178,5 @@ export class ProcessListComponent {
       }
     })
   }
-
-
 
 }

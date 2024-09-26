@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from "@angular/common";
 import { ProcessService } from '../../_services/process.service';
-// import { EditorComponent } from '@tinymce/tinymce-angular';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { Step } from '../../_classes/step';
 import { Process } from '../../_classes/process';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-preview-process-steps',
   standalone: true,
-  imports: [CommonModule, MatRadioModule, MatCheckbox],
+  imports: [CommonModule, MatRadioModule, MatCheckbox, QuillModule],
   templateUrl: './preview-process-steps.component.html',
   styleUrl: './preview-process-steps.component.scss'
 })
@@ -20,9 +20,7 @@ export class PreviewProcessStepsComponent {
   processId: string;
   processDetails!: Process;
   processSteps: Step[] = [];
-  // init: EditorComponent['init'] = {
-  //   plugins: 'lists link image table code help wordcount'
-  // };
+
 
   constructor(
     private route: ActivatedRoute,

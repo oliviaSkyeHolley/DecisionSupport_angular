@@ -5,14 +5,20 @@
 
 <!-- The top container div with add step button-->
 <div class="top-container">
-    <button mat-fab extended (click)="addProcessStep()">
+    <button class="pr-addbutton" mat-fab extended (click)="addProcessStep()">
       <mat-icon>add</mat-icon>
       Add Step
     </button>
+    <div class="search-div">
+    <mat-form-field>
+      <mat-icon matPrefix>search</mat-icon>
+      <input  matInput placeholder="Search Process Step" type="search" [(ngModel)]="searchInput" (input)="filterBySearch()">
+  </mat-form-field>
+</div>
 </div>
 <br />
 <!-- Mat Table to display the process steps -->
-<mat-table #table [dataSource]="processSteps" class="mat-elevation-z8">
+<mat-table #table [dataSource]="filteredProcessSteps" class="mat-elevation-z8">
 
     <!-- Step ID Column -->
     <ng-container matColumnDef="id" class="stepid" sticky>
@@ -62,7 +68,7 @@
     <div *matNoDataRow class="noData">
         <img src="/assets/noData.jpg" />
         <p>No Steps Found - Add Step</p>
-        <button class="createbutton" (click)="addProcessStep()">Add Step</button>     
+        <button class="addbutton" (click)="addProcessStep()">Add Step</button>     
     </div>
   
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

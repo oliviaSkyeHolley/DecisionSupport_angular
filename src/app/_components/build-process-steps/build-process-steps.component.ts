@@ -18,10 +18,13 @@ import { Step } from '../../_classes/step';
 import { Process } from '../../_classes/process';
 import { ViewProcessStepDialogComponent } from '../dialog-components/process-dialog/view-process-step-dialog/view-process-step-dialog.component';
 import { AddProcessStepDialogComponent } from '../dialog-components/process-dialog/add-process-step-dialog/add-process-step-dialog.component';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-build-process-steps',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, CommonModule],
+  imports: [MatTableModule, FormsModule, MatFormField, MatInput, MatButtonModule, MatIconModule, CommonModule],
   templateUrl: './build-process-steps.component.html',
   styleUrl: './build-process-steps.component.scss'
 })
@@ -33,6 +36,9 @@ export class BuildProcessStepsComponent {
   processDetails!: Process;
   /** Array to store all process steps retrieved from the backend */
   processSteps: Step[] = [];
+  /** Array to store filtered process steps */
+  filteredProcessSteps: Step[] = [];
+  searchInput: string = "";
   displayedColumns: string[] = ['id', 'description', 'type', 'required','logic', 'actions'];
 
   constructor(private route: ActivatedRoute, private processService: ProcessService, private dialog: MatDialog){
@@ -51,12 +57,26 @@ export class BuildProcessStepsComponent {
       (data) => {
         this.processDetails = data;
         this.processSteps = data.steps;
+        this.filteredProcessSteps = this.processSteps;
       },(error) => {
         // Log any errors encountered while fetching processes
         console.error('Error fetching process details:', error);
       }
     )
   }
+
+    /** Filter the available processes based on the user serach input */
+    filterBySearch(): void {
+      const searchTerm = this.searchInput?.trim().toLowerCase() || '';
+      if (!searchTerm) {
+        //Show all processes when search input is empty
+        this.filteredProcessSteps = this.processSteps; 
+        return;
+      }
+      this.filteredProcessSteps = this.processSteps.filter(processStep => 
+        processStep.description?.toLowerCase().includes(searchTerm)
+      );
+    }
 
   /** Opens AddProcessStepDialog and then request the backend to add the new process step with the provided data. */
   addProcessStep(): void{
@@ -67,7 +87,8 @@ export class BuildProcessStepsComponent {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.processService.postProcessStep(this.processDetails.entityId, result).subscribe({
+        this.processDetails.steps.push(result);
+        this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
           next: (response) => {
             console.log('Successfully added step:', result);
             // Refresh the list after a new process step is added
