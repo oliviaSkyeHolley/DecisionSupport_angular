@@ -23,9 +23,9 @@ a{
 
 /* Active Link */
 a.active{
-    background-color: #143354;
+    background-color: #accbe3;
     color: #ffff;
-    border-radius: 6px;
+    border-radius: 10px;
 }
 
 /* Responsive adjustment */
@@ -38,4 +38,63 @@ a.active{
         padding: 12px 16px;
         font-size: 15px;
     }
+}
+
+
+//Making sure there is some white space
+.menu {
+
+  background-color: white;
+  border-top: 4px;
+  border-bottom: 4px;
+  padding-right: 25px;
+  padding-left: 15px;
+
+}
+
+
+.logoButton{
+  float: left;
+  position: relative;
+  text-align: center;
+  padding: 14px 50px 14px 16px;
+}
+
+/*button{
+  background-color: transparent;
+  color: grey !important;
+  width: 5%;
+  position: relative;
+  top: 10px;
+  border-radius: 5px;
+  float: right;
+  border-style: solid;
+  border: none;
+  font-size: 17px;
+  cursor:pointer;
+}
+
+button:hover {
+  background-color:#accbe3;
+  color: white !important;
+  transition: 0.7s;
+  font-size: 17px;
+  cursor:pointer;
+} */
+
+hr {
+  margin: 30px -20px 10px;
+  border: 5px;
+  border-top: 1px solid #efeded;
+}
+
+img{
+  top: 1px;
+  padding-top: 1px;
+  mix-blend-mode: multiply;
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  padding-right: 150px;
 }
