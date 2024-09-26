@@ -33,13 +33,14 @@ import { Investigation } from '../../_classes/investigation';
 // Quill
 import { NgModule } from '@angular/core';
 import { QuillModule } from 'ngx-quill';
+import {MatTooltip} from "@angular/material/tooltip";
 
 
 
 @Component({
   selector: 'app-investigation',
   standalone: true,
-  imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox], //EditorComponent + FileUploadComponent Deleted to make it work.
+  imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, MatTooltip], //EditorComponent + FileUploadComponent Deleted to make it work.
   templateUrl: './investigation.component.html',
   styleUrl: './investigation.component.scss'
 })
@@ -71,11 +72,11 @@ export class InvestigationComponent implements OnInit {
     private investigationService: InvestigationService,
     private dialog: MatDialog,
     private processService: ProcessService
-   
+
   ) {
     this.investigationId = this.route.snapshot.params['id'];
     this.investigationDetails = this.route.snapshot.params['json_string'];
-    
+
   }
 
   ngOnInit() {
@@ -103,7 +104,7 @@ export class InvestigationComponent implements OnInit {
           this.investigationDetails.steps[0].isVisible = true;
           this.oneStep = this.investigationDetails.steps[0];
           //this.investigationService.setDocumentDetails(this.investigationDetails.entityId, this.investigationDetails.investigationLabel,this.oneStep.id);
- 
+
         }
       },
       (error) => {

@@ -54,6 +54,13 @@
     </mat-cell>
   </ng-container>
 
+  <!-- Display no data available message if no processes available -->
+  <div *matNoDataRow class="noData">
+    <img src="/assets/noData.jpg" />
+    <p>No Process Found - Add Process</p>
+    <button class="addbutton"> + Decision Support </button>
+  </div>
+
 
   <!-- Display the first row of headings. -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

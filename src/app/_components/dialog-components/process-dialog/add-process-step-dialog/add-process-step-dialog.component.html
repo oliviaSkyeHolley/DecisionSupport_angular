@@ -3,17 +3,17 @@
 <form #stepForm="ngForm" (ngSubmit)="save(stepForm)">
   <mat-dialog-content>
     <p>Description</p>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <input matInput [(ngModel)]="formData.description" name="description" placeholder="Description" required>
     </mat-form-field>
-    <p>Required</p>
-    <mat-form-field>
+    <p class="title">Required</p>
+    <mat-form-field appearance="outline">
       <mat-select [(ngModel)]="formData.required" name="required" placeholder="Select Required Status" required>
         <mat-option [value]="'1'">Yes</mat-option>
         <mat-option [value]="'0'">No</mat-option>
       </mat-select>
     </mat-form-field>
-    <p>Element Type</p>
+    <p class="title">Element Type</p>
     <mat-form-field>
       <mat-select [(ngModel)]="formData.type" name="type" placeholder="Select Element Type" required>
         <mat-option *ngFor="let type of type" [value]="type.value">{{ type.label }}</mat-option>
@@ -24,18 +24,18 @@
     <div *ngIf="formData.type === 'radio' || formData.type === 'radio&text' || formData.type === 'checkbox&text' || formData.type === 'checkbox'">
       <p>Options:</p>
       <div *ngFor="let choice of formData.choices; let i = index">
-        <mat-form-field>
+        <mat-form-field class="RadioOp" appearance="outline">
           <input matInput [(ngModel)]="choice.description" placeholder="Option {{ i + 1 }}" required name="choice{{i}}">
           <button mat-icon-button type="button" (click)="removeChoice(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-form-field>
       </div>
-      <button mat-button type="button" (click)="addChoice()">Add Option</button>
+      <button class="addRadio" mat-button type="button" (click)="addChoice()">Add Option</button>
     </div>
 
     <!-- Condition -->
-    <p>Logic:</p>
+    <p class="title">Logic:</p>
     <div *ngFor="let condition of formData.conditions; let i = index">
       <mat-form-field>
         <p>Condition {{ i + 1 }}</p>

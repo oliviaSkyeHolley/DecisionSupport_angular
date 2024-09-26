@@ -1,6 +1,6 @@
 /* Body Styling */
 body {
-    background-color: rgb(243, 243, 243);
+    background-color: white;
     font-family: 'Roboto', sans-serif;
     color: #333;
     margin: 0;
@@ -19,6 +19,8 @@ body {
     border-radius: 8px;
 }
 
+
+
 .top-container h2 {
     font-size: 24px;
     font-weight: 600;
@@ -26,13 +28,15 @@ body {
 
 }
 
+
+
 .createbutton {
-    color: #fff;
-    background-color: #143354;
-    border-radius: 8px;
+  color:#ffff;
+  background-color: #accbe3;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
     padding: 12px 24px;
-    font-size: 16px;
-    font-weight: bold;
     transition: background-color 0.3s ease;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(33, 150, 243, 0.2);
@@ -40,20 +44,26 @@ body {
 }
 
 .createbutton:hover {
-    background-color: #1b4671;
+  color:#ffff;
+  background-color: #7a9bbf;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
 }
 
 /* Table styling */
-.mat-mdc-header-row {
-    background-color: #143354 !important;
-    color: white;
-    border-radius: 10px;
-    font-size: 16px;
+.mat-mdc-header-row{
+  background-color: #7a9bbf !important;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
-.mat-mdc-table {
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(112, 112, 112, 0.1);
+
+.mat-mdc-table{
+  border-radius: 8px;
+  overflow:hidden !important;
 }
 
 .mat-mdc-row:nth-child(even) {
@@ -63,8 +73,8 @@ body {
     background-color: #fff;
 }
 mat-cell {
-    border-bottom: 1px solid #e0e0e0; 
-    padding: 16px; 
+    border-bottom: 1px solid #e0e0e0;
+    padding: 16px;
 }
 mat-cell button {
     background-color: #143354;
@@ -77,17 +87,28 @@ mat-cell button {
     border: none;
     transition: background-color 0.3s ease;
 }
-  
+
 .entityid{
     font-weight: 600;
 }
 
+
 a:link {
-    color: #000000;
-    font-weight: 500;
-    background-color: transparent;
-    text-decoration: none;
-    font-size: 15px;
+  color: #65848b;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #374357;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #586d8a;
+  background-color: transparent;
+  text-decoration: none;
 }
 
 a:hover {
@@ -110,4 +131,34 @@ a:hover {
     font-weight: 500;
     color: rgb(183, 183, 183);
     margin-bottom: 20px;
+}
+
+
+.material-icons{
+  color: #accbe3;
+  cursor:pointer;
+}
+
+.button-container{
+  width: 100%;
+  /* padding-top: 1%; */
+  padding-bottom: 1%;
+  padding-left: 10px;
+  /*background-color: white;*/
+  margin-bottom: 1%;
+  display: inline-flex;
+
+  height: 40px;
+  line-height: 40px;
+
+  float: right;
+}
+
+
+.wrapper{
+  //background-color: white;
+  border-top: 4px;
+  border-bottom: 4px;
+  padding-right: 20px;
+  padding-left: 20px;
 }

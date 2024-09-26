@@ -4,25 +4,28 @@
 -->
 
 <!-- The top container div containing title, filter, create button-->
-<div>
+<div class="wrapper">
     <div class="top-container">
         <div>
             <h2>Process List</h2>
             <p>Create and Manage Process</p>
             <!-- Filter menu to filter the process by their revision status-->
             <mat-select value="All"  (selectionChange)="filterProcessList($event.value)">
+            <mat-select value="All"  (selectionChange)="filterProcessList($event.value)">
                 <mat-option value="All">All</mat-option>
                 <mat-option value="Archived">Archived</mat-option>
                 <mat-option value="Draft">Draft</mat-option>
                 <mat-option value="Published">Published</mat-option>
             </mat-select>
+            </mat-select>
         </div>
         <!-- Create Buttont to create a new process -->
-        <button class="createbutton" (click)="createProcess()">Create Process</button>
+        <button class="createbutton" (click)="createProcess()"> + Process </button>
     </div>
 </div>
 <!-- Mat Table to display the process details-->
-<mat-table #table [dataSource]="filteredProcesses" class="mat-elevation-z8 custom-table">
+<div class="wrapper">
+<mat-table #table [dataSource]="filteredProcesses" class="mat-elevation-z0 custom-table">
 
     <!-- Process Entity ID Column-->
     <ng-container matColumnDef="entityid" sticky >
@@ -58,10 +61,10 @@
     <!-- Actions Column - duplicate, delete, update -->
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <button (click)="duplicateProcess(element)">Duplicate</button>
-            <button (click)="deleteProcess(element.entityId)">Delete</button>
-            <button (click)="updateProcess(element)">Edit</button>
+        <mat-cell class="hovering" *matCellDef="let element">
+          <i class="material-icons" (click)="duplicateProcess(element)">content_copy</i>
+          <i class="material-icons" (click)="deleteProcess(element.entityId)">delete</i>
+          <i class="material-icons" (click)="updateProcess(element)" >edit</i>
         </mat-cell>
     </ng-container>
 
@@ -69,9 +72,10 @@
     <div *matNoDataRow class="noData">
         <img src="/assets/noData.jpg" />
         <p>No Process Found - Add Process</p>
-            <button class="createbutton">Create Process</button>     
+            <button class="createbutton">Create Process</button>
     </div>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+</div>
