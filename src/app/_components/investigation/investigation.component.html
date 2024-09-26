@@ -11,13 +11,17 @@
         <div [ngClass]="{'disabled-step': !step.isVisible}">
           <a  (click)="getStep(step.stepUuid)" [ngClass]="{'active-step': oneStep?.stepUuid === step.stepUuid}">
             <span>
-              <ng-content select="[icon]">
-                <button mat-mini-fab [ngClass]="{'completed-step': step.isCompleted}">{{step.id}}</button>
+               <ng-content select="[icon]">
+                <!-- adding hover to the side bar when closed -->
+                <button mat-mini-fab [ngClass]="{'completed-step': step.isCompleted, 'uncomplete': step}"  [matTooltip]="step.description" matTooltipClass="title-hover"
+                        aria-label="Button that display a tooltip in various positions">{{step.id}}</button>
               </ng-content>
             </span>
             <span class="text-container">
-              <ng-content>
-                <span>Step {{step.id}} - {{step.description}}</span>
+              <ng-content >
+                <!-- hover component -->
+                <span [matTooltip]="step.description" matTooltipClass="title-hover"
+                      aria-label="Button that displays a tooltip in various positions">Step {{step.id}} - {{step.description}}</span>
               </ng-content>
             </span>
           </a>
@@ -28,7 +32,7 @@
 
     <!-- Toggle button as an arrow -->
     <button mat-icon-button class="toggle-button" (click)="collapsed.set(!collapsed())">
-      <mat-icon>{{ !collapsed() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+      <mat-icon [ngStyle]="{'color':'#accbe3'}">{{ !collapsed() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
     </button>
   </mat-sidenav>
   <mat-sidenav-content class="content" [style.margin-left]="sideNavWidth()">
@@ -81,10 +85,10 @@
           <!-- <editor apiKey="r0gpf34f1r14a97ovjgipjiafq78h23ljobqqcamxru11wpd" [(ngModel)]="oneStep.textAnswer" [init]="init" /> -->
           <!-- <app-file-upload></app-file-upload> -->
         </div>
-  
+
         <!-- Checkbox and Text -->
         <br />
-      
+
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
