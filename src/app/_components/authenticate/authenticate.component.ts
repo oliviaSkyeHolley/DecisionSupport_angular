@@ -69,7 +69,6 @@ export class AuthenticateComponent {
   username: string = '';
   password: string = '';
 
-
   constructor(protected authService: AuthService, private router: Router) {}
 
   login(): void {
