@@ -12,6 +12,7 @@ export const environment = {
   duplicateProcessURL: 'http://complaintdrupal.local/rest/process/duplicate',
   patchProcessURL: 'http://complaintdrupal.local/rest/process/patch/',
   archiveProcessURL: 'http://complaintdrupal.local/rest/process/delete/',
+  updateProcessURL: 'http://complaintdrupal.local/rest/process/update/',
 
   //Investigation Endpoints
   getInvestigationURL: 'http://complaintdrupal.local/rest/investigation/get/',

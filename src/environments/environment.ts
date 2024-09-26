@@ -12,6 +12,7 @@ export const environment = {
     duplicateProcessURL: 'http://complaintdrupal.local/rest/process/duplicate',
     patchProcessURL: 'http://complaintdrupal.local/rest/process/patch/',
     archiveProcessURL: 'http://complaintdrupal.local/rest/process/delete/',
+    updateProcessURL: 'http://complaintdrupal.local/rest/process/update/',
 
     //Investigation Endpoints
     getInvestigationURL: 'http://complaintdrupal.local/rest/investigation/get/',
@@ -25,7 +26,7 @@ export const environment = {
     postInvestigationDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/post',
     getInvestigationDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/get/',
     archiveInvestigationDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/delete/',
- 
+
     //Client
     clientId: 'your-client-id',
     clientSecret: 'your-client-secret'
