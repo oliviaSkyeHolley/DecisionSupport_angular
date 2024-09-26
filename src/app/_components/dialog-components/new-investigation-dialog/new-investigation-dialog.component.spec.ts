@@ -10,7 +10,7 @@ describe('NewInvestigationDialogComponent', () => {
     await TestBed.configureTestingModule({
       imports: [NewInvestigationDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(NewInvestigationDialogComponent);
     component = fixture.componentInstance;
