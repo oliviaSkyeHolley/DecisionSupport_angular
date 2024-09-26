@@ -3,16 +3,17 @@
   @description Lists the available investigations. Allows a user to start new investigations based off of a created process.
                   Investigations are refered to on the site as "Decision Support".
 -->
-
-<!-- Heading and New Investigation Button-->
-<div>
-  <div class="wrapper">
-    <h2> Decision Support </h2>
+<div class="wrapper">
+  <div class="top-container">
+    <div>
+      <h2> Decision Support </h2>
+    </div>
+    <!-- Create Buttont to create a new process -->
+    <button class="addbutton" (click)="addInvestigation()"> + Decision Support </button>
   </div>
-
-  <button class="addbutton" (click)="addInvestigation()"> New Decision Support </button>
 </div>
 
+<div class="wrapper">
 <!-- Table of Investigations-->
 <mat-table #table [dataSource]="investigations" class="mat-elevation-z0">
 
@@ -59,5 +60,5 @@
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
 
-
+</div>
 

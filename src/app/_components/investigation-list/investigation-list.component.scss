@@ -5,6 +5,18 @@
 }
 
 
+/* Styling Container for the top section with title and create button */
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
 a:link {
   color: #65848b;
   background-color: transparent;
@@ -31,11 +43,20 @@ a:visited {
   font-size: 18px;
   font-weight: bold;
   border-color: transparent;
-  position: absolute;
-  right: 20px;
-  width: 200px;
-  height: 50px;
-  top: 65px;
+
+ //vertical-align:top;
+ //display: inline-block;
+  // position: absolute;
+  //text-align: center;
+  //right: 20px;
+  //width: 200px;
+  //height: 50px;
+  //top: 150px;
+
+  padding: 12px 24px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(33, 150, 243, 0.2);
 
 }
 
@@ -73,10 +94,11 @@ a{
   left: 150px;
   width: 100%;
   font-size: 35px;
+  //display: inline-block;
 }
 
 .wrapper{
-  background-color: white;
+  //background-color: white;
   border-top: 4px;
   border-bottom: 4px;
   padding-right: 20px;

@@ -18,11 +18,13 @@ import { InvestigationService } from '../../_services/investigation.service';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { NewInvestigationDialogComponent } from '../dialog-components/new-investigation-dialog/new-investigation-dialog.component';
+import {MatOption} from "@angular/material/core";
+import {MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-investigation-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatIconModule, MatTable, MatTableModule],
+  imports: [CommonModule, RouterLink, MatIconModule, MatTable, MatTableModule, MatOption, MatSelect],
   templateUrl: './investigation-list.component.html',
   styleUrl: './investigation-list.component.scss'
 })
