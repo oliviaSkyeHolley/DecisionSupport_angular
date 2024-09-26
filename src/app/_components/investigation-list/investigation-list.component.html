@@ -6,7 +6,7 @@
 
 <!-- Heading and New Investigation Button-->
 <div>
-  <div class="top-container">
+  <div class="wrapper">
     <h2> Decision Support </h2>
   </div>
 
@@ -14,7 +14,7 @@
 </div>
 
 <!-- Table of Investigations-->
-<mat-table #table [dataSource]="investigations" class="mat-elevation-z8">
+<mat-table #table [dataSource]="investigations" class="mat-elevation-z0">
 
   <!-- ID# Column -->
   <ng-container matColumnDef="investigationId" sticky>
@@ -47,13 +47,17 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
 
-    <mat-cell *matCellDef="let element">
-      <button (click)="archiveInvestigation(element.entityId)"> Archive </button>
-      <button> Rename </button>
+    <mat-cell class="hovering" *matCellDef="let element">
+      <i class="material-icons" (click)="archiveInvestigation(element.entityId)" >unarchive</i>
+      <!--  <i class="material-icons" (click)="updateInvestigation(element)" >drive_file_rename_outline</i> -->
     </mat-cell>
   </ng-container>
+
 
   <!-- Display the first row of headings. -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+
+
+
