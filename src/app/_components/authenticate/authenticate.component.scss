@@ -1,40 +1,76 @@
-// Style for everything.
-.div-wrapper{
-    margin: auto;
-    width: 50%;
-    padding: 8% 0 0;
-    margin-left: 35%;
-    margin-top: -5%;
+@use '@angular/material' as mat;
+@include mat.core();
+/*@use '@angular/material-experimental' as matx; */
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
-// Style for login/out window
-.div-container{
-    position: relative;
-    z-index: 1;
-    background-color: #fff;
-    max-width: 360px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-    padding: 10%;
+img{
+  top: 5px;
+  top-padding: 0%;
 }
+
+.div-wrapper{
+  margin: auto;
+  width: 50%;
+  padding: 8% 0 0;
+  margin-left: 30%;
+  margin-top: -10%;
+}
+.div-container{
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+  max-width: 360px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  padding: 10%;
+
+}
+
+:host ::ng-deep .mdc-text-field--outlined{
+  --mdc-outlined-text-field-container-shape: 15px;
+
+}
+
 
 .username-input{
-    width: 100%;
-}
+  width: 100%;
 
+}
 .password-input{
-    width: 100%;
+  width: 100%;
 }
-
-// Login and logout button
 button{
-    background-color: #2196F3;
-    color: #fff !important;
-    width: 30%;
+  background-color: #accbe3;
+  color: #fff !important;
+  width: 30%;
+  font-size: 20px;
+  border-radius: 5px;
+
 }
 
-// Header used at top of page.
+button:hover{
+  background-color: #7a9bbf;
+}
+
+
 h2{
-    font-style: bold;
-}   
+  font-style: bold;
+  font-size: 35px;
+
+}
+
+.login{
+  font-style: bold;
+  font-size: 35px;
+  text-align: center;
+
+}
+
+
+p{
+  font-size: 20px;
+}
