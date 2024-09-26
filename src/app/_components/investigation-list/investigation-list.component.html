@@ -3,64 +3,70 @@
   @description Lists the available investigations. Allows a user to start new investigations based off of a created process.
                   Investigations are refered to on the site as "Decision Support".
 -->
-
-<!-- Heading and New Investigation Button-->
-<div>
+<div class="wrapper">
   <div class="top-container">
-    <h2> Decision Support </h2>
-    <button class="addbutton" (click)="addInvestigation()"> New Decision Support </button>
+    <div>
+      <h2> Decision Support </h2>
+    </div>
+    <!-- Create Buttont to create a new process -->
+    <button class="addbutton" (click)="addInvestigation()"> Add Decision Support </button>
   </div>
+</div>
 
+<div class="wrapper">
+  <!-- Table of Investigations-->
+  <mat-table #table [dataSource]="investigations" class="mat-elevation-z0">
+
+    <!-- ID# Column -->
+    <ng-container matColumnDef="investigationId" sticky>
+      <mat-header-cell *matHeaderCellDef> ID# </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.entityId}} </mat-cell>
+    </ng-container>
+
+    <!-- Title of Investigation Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- Title is a link to the investigation's page with the link domain.host/support/:entityId -->
+        <a [routerLink]="['/support', element.entityId]"> {{element.label}} </a>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Process Type Column -->
+    <ng-container matColumnDef="processId">
+      <mat-header-cell *matHeaderCellDef> Process Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.processId}} </mat-cell>
+    </ng-container>
+
+    <!-- Creation Time Column -->
+    <ng-container matColumnDef="createdTime">
+      <mat-header-cell *matHeaderCellDef> Created Time </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.createdTime}} </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+
+      <mat-cell class="hovering" *matCellDef="let element">
+        <i class="material-icons" (click)="archiveInvestigation(element.entityId)" >unarchive</i>
+        <i class="material-icons"  >drive_file_rename_outline</i>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Display no data available message if no processes available -->
+    <div *matNoDataRow class="noData">
+      <img src="/assets/noData.jpg" />
+      <p>No Process Found - Add Process</p>
+      <button class="addbutton"> Add Decision Support </button>
+    </div>
+
+
+    <!-- Display the first row of headings. -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 
 </div>
 
-<!-- Table of Investigations-->
-<mat-table #table [dataSource]="investigations" class="mat-elevation-z8">
 
-  <!-- ID# Column -->
-  <ng-container matColumnDef="investigationId" sticky>
-    <mat-header-cell *matHeaderCellDef> ID# </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.entityId}} </mat-cell>
-  </ng-container>
-
-  <!-- Title of Investigation Column -->
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <!-- Title is a link to the investigation's page with the link domain.host/support/:entityId -->
-      <a [routerLink]="['/support/', element.entityId]"> {{element.label}} </a>
-    </mat-cell>
-  </ng-container>
-
-  <!-- Process Type Column -->
-  <ng-container matColumnDef="processId">
-    <mat-header-cell *matHeaderCellDef> Process Type </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.processId}} </mat-cell>
-  </ng-container>
-
-  <!-- Creation Time Column -->
-  <ng-container matColumnDef="createdTime">
-    <mat-header-cell *matHeaderCellDef> Created Time </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.createdTime}} </mat-cell>
-  </ng-container>
-
-  <!-- Actions Column -->
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-
-    <mat-cell *matCellDef="let element">
-      <button (click)="archiveInvestigation(element.entityId)"> Archive </button>
-      <button> Rename </button>
-    </mat-cell>
-  </ng-container>
-
-  <!-- Display no data available message if no investigation available -->
-  <div *matNoDataRow class="noData">
-    <img src="/assets/noData.jpg" />
-    <p>No Data Found - Create new decision support</p>
-    <button class="addbutton" (click)="addInvestigation()">New Decision Support</button>
-  </div>
-  <!-- Display the first row of headings. -->
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
