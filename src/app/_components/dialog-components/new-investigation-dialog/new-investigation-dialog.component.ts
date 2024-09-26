@@ -2,7 +2,7 @@
  * @whatItDoes This dialog components recieves input from the user to generate a new investigation.
  *
  * @description There are two inputs: the name of the user, and the type of process the investigation is following.
- *  
+ *
  */
 
 import { Component, OnInit } from '@angular/core';
