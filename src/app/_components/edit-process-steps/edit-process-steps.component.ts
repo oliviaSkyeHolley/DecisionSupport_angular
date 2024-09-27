@@ -7,17 +7,18 @@
  * For each process steps the following action is available: Edit a process step (done by clicking on the edit button), Delete a process step and Rearrange the process steps
  * and save the step order changes
  */
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { ProcessService } from '../../_services/process.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop'; 
+import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Step } from '../../_classes/step';
 import { Process } from '../../_classes/process';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditProcessStepDialogComponent } from '../dialog-components/process-dialog/edit-process-step-dialog/edit-process-step-dialog.component';
 @Component({
   selector: 'app-edit-process-steps',
@@ -28,103 +29,138 @@ import { EditProcessStepDialogComponent } from '../dialog-components/process-dia
 })
 export class EditProcessStepsComponent {
   @ViewChild(MatTable, { static: true }) table!: MatTable<Step>;
-
+  /** Inject Mat snack bar  */
+  private snackBar = inject(MatSnackBar);
   /** Id of the process */
   processId: string;
   /** Process object to store the process details retrieved from the backend */
   processDetails!: Process;
   /** Array to store all process steps retrieved from the backend */
   processSteps: Step[] = [];
-  displayedColumns: string[] = ['id', 'description', 'type', 'required','logic', 'actions'];
+  /** Table Columns to be displayed */
+  displayedColumns: string[] = ['id', 'description', 'type', 'required', 'logic', 'actions'];
+  /** Detect Changes in step order */
   changeDetected = false;
 
-  constructor(private route: ActivatedRoute, private processService: ProcessService, private dialog: MatDialog){
-    /** Set the process ID from the route */
+  constructor(private route: ActivatedRoute, private processService: ProcessService, private dialog: MatDialog) {
+    /** Get and set the process ID from the route */
     this.processId = this.route.snapshot.params['id'];
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     /** Fetch the process steps when the component loads */
-    this.getProcessDetail();
+    this.getProcessSteps();
   }
 
   /** Fetch the available process steps from the backend and update the array objects */
-  getProcessDetail(): void{
+  getProcessSteps(): void {
     this.processService.getProcessSteps(this.processId).subscribe(
       (data) => {
         this.processDetails = data;
         this.processSteps = data.steps;
-      },(error) => {
+        // Log Success message
+        console.log("Successfully fetched process details ")
+      }, (error) => {
         // Log any errors encountered while fetching processes
         console.error('Error fetching process details:', error);
+        //Display error message in snack bar
+        this.snackBar.open('Error Fetching Process Details - Try Again', 'Ok', {
+          duration: 2000
+        });
       }
     )
   }
+
+  /** Method to handle the drop event when the user drag and drop a step */
   drop(event: CdkDragDrop<string>) {
+    //Record the prevoius index of the step
     const previousIndex = this.processSteps.findIndex(d => d === event.item.data);
     const movedStep = this.processSteps[previousIndex];
+    // Make the change in processStep array
     moveItemInArray(this.processSteps, previousIndex, event.currentIndex);
     this.processSteps.forEach((step, index) => {
-      step.id = index + 1; 
+      step.id = index + 1;
     });
     this.changeDetected = true;
     this.table.renderRows();
-}
+  }
+
   /** Opens EditProcessStepDialog and then request the backend to update the process step with the updated data. */
-  openEditDialog(step:Step){
+  openEditDialog(step: Step) {
     const dialogRef = this.dialog.open(EditProcessStepDialogComponent, {
       width: '60%',
       data: { step: step, stepsData: this.processSteps }
     });
-  
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
+        // Find the updated step index and update the step in processDetails array
         const index = this.processDetails.steps.findIndex(step => step.stepUuid == result.stepUuid);
         this.processDetails.steps[index] = result;
         this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
           next: (response) => {
-            console.log('Successfully updated step:', result.id);
             // Refresh the list after a process step is updated
-            this.getProcessDetail();
+            this.getProcessSteps();
+            // Log success message           
+            console.log('Successfully updated step');
+            this.snackBar.open('Updated Step Successfully', 'Ok', {
+              duration: 1000
+            });
           },
           error: (err) => {
             // Log any errors encountered while updating process step.
             console.error('Error updating step:', err);
+            this.snackBar.open('Error Updating Step - Try Again', 'Ok', {
+              duration: 2000
+            });
           }
         });
-      }
-      
-    });
-  }
-  /** Requests the backend to save the changes made in the process step order */
-  saveChanges(){
-    this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
-      next: (response) => {
-        console.log('Successfully deleted step:', this.processDetails);
-        // Refresh the list after a new process step is added
-        this.getProcessDetail();
-      },
-      error: (err) => {
-        // Log any errors encountered while adding process step.
-        console.error('Error adding step:', err);
       }
     });
   }
 
-  
-  deleteStep(uuid: any): void{
-    const index = this.processDetails.steps.findIndex(step => step.stepUuid == uuid);
-    this.processDetails.steps.splice(index);
-    console.log(this.processDetails.steps)
+  /** Requests the backend to save the changes made in the process step order */
+  saveChanges() {
     this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
       next: (response) => {
-        console.log('Successfully deleted step:', this.processDetails);
         // Refresh the list after a new process step is added
-        this.getProcessDetail();
+        this.getProcessSteps();
+        // Log the success message
+        console.log('Successfully svaed step');
+        this.snackBar.open('Successfully Saved Changes ', 'Ok', {
+          duration: 1000
+        });
       },
       error: (err) => {
         // Log any errors encountered while adding process step.
-        console.error('Error adding step:', err);
+        console.error('Error saving step:', err);
+        this.snackBar.open('Error Saving Changes - Try Again', 'Ok', {
+          duration: 2000
+        });
+      }
+    });
+  }
+
+  /** Delete the step from the object array and request the backend to save the changes */
+  deleteStep(uuid: any): void {
+    // FInd the deleted step Index and remove the step from array
+    const index = this.processDetails.steps.findIndex(step => step.stepUuid == uuid);
+    this.processDetails.steps.splice(index);
+    this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
+      next: (response) => {
+        // Log Success Message
+        console.log('Successfully deleted step');
+        this.snackBar.open('Deleted Step Successfully', 'Ok', {
+          duration: 1000
+        });
+        // Refresh the list after a new process step is added
+        this.getProcessSteps();
+      },
+      error: (err) => {
+        // Log any errors encountered while adding process step.
+        console.error('Error deleting step:', err);
+        this.snackBar.open('Error Deleting Step - Try Again', 'Ok', {
+          duration: 2000
+        });
       }
     });
   }

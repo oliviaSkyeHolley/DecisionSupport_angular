@@ -1,12 +1,14 @@
+/** Styling Dialog contents **/
 .mat-dialog-content {
-    width: 100%; 
-  }
-.dialog-title{
+    width: 100%;
+}
+
+.dialog-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.uuid{
+.uuid {
     float: right;
 }

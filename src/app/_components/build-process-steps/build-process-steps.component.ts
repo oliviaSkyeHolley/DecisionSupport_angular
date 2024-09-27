@@ -6,7 +6,7 @@
  * The tables has columns: "ID, Description, Type, Required, Logic, Actions"
  * For each process steps the following action is available: View a process step (done by clicking on the view button)
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
@@ -21,6 +21,7 @@ import { AddProcessStepDialogComponent } from '../dialog-components/process-dial
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-build-process-steps',
   standalone: true,
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './build-process-steps.component.scss'
 })
 export class BuildProcessStepsComponent {
-
+  /** Inject mat snack bar */
+  private snackBar = inject(MatSnackBar);
   /** Id of the process */
   processId: string;
   /** Process object to store the process details retrieved from the backend */
@@ -38,17 +40,34 @@ export class BuildProcessStepsComponent {
   processSteps: Step[] = [];
   /** Array to store filtered process steps */
   filteredProcessSteps: Step[] = [];
+  /** Default search input string */
   searchInput: string = "";
+  /** Table columns to be displayed */
   displayedColumns: string[] = ['id', 'description', 'type', 'required','logic', 'actions'];
 
   constructor(private route: ActivatedRoute, private processService: ProcessService, private dialog: MatDialog){
-    /** Set the process ID from the route */
+    /** Get and set the process ID from the route */
     this.processId = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void{
     /** Fetch the process steps when the component loads */
     this.getProcessDetail();
+    this.checkLocalStorage();
+  }
+
+  checkLocalStorage(): void{
+    let unsavedData = localStorage.getItem("unsavedStepData")
+    if(unsavedData){
+     
+      let f = JSON.parse(unsavedData);
+    
+      if(f.processId == this.processId){
+        console.log(f.processId)
+        this.addProcessStep();
+      }
+
+    }
   }
 
   /** Fetch the available process steps from the backend and update the array objects */
@@ -58,6 +77,8 @@ export class BuildProcessStepsComponent {
         this.processDetails = data;
         this.processSteps = data.steps;
         this.filteredProcessSteps = this.processSteps;
+        // Log success message
+        console.log("Successfully fetched process details")
       },(error) => {
         // Log any errors encountered while fetching processes
         console.error('Error fetching process details:', error);
@@ -73,6 +94,7 @@ export class BuildProcessStepsComponent {
         this.filteredProcessSteps = this.processSteps; 
         return;
       }
+      // FIlter process based on search input
       this.filteredProcessSteps = this.processSteps.filter(processStep => 
         processStep.description?.toLowerCase().includes(searchTerm)
       );
@@ -82,21 +104,28 @@ export class BuildProcessStepsComponent {
   addProcessStep(): void{
     const dialogRef = this.dialog.open(AddProcessStepDialogComponent, {
       width: '80%',
-      data: this.processSteps
+      data:{steps:this.processSteps, processId: this.processId }
+
     });
-  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.processDetails.steps.push(result);
         this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
           next: (response) => {
+            // Log Success Message
             console.log('Successfully added step:', result);
+            this.snackBar.open('New Step Added', 'Ok',{
+              duration: 1000
+            });
             // Refresh the list after a new process step is added
             this.getProcessDetail();
           },
           error: (err) => {
             // Log any errors encountered while adding process step.
             console.error('Error adding step:', err);
+            this.snackBar.open('Error Adding Step - Try Again', 'Ok',{
+              duration: 2000
+            });
           }
         });
       }

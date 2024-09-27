@@ -13,7 +13,8 @@ export class ProcessList {
     revisionCreationTime: string,
     revisionStatus: string,
     createdTime: string,
-    updatedTime: string
+    updatedTime: string,
+    enabled: boolean
   ) {
     this.label = label;
     this.entityId = entityId;
@@ -21,6 +22,7 @@ export class ProcessList {
     this.revisionStatus = revisionStatus;
     this.createdTime = createdTime;
     this.updatedTime = updatedTime;
+    this.enabled = enabled;
   }
   /**
    * The title of the Process
@@ -51,4 +53,9 @@ export class ProcessList {
   * Time when the Process was updated.
   */
   updatedTime: string;
+
+  /**
+   * Is process enabled or disabled
+   */
+  enabled: boolean;
 }    

@@ -76,7 +76,7 @@
     <div *matNoDataRow class="noData">
         <img src="/assets/noData.jpg" />
         <p>No Process Found - Add Process</p>
-            <button class="createbutton">Create Process</button>     
+            <button class="createbutton" (click)="createProcess()">Create Process</button>     
     </div>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -37,7 +37,7 @@
       <p>{{oneStep.description}}</p>
 
       <!-- Radio & Text Boxes -->
-      <div *ngIf="oneStep.displayType === 'radio&text'">
+      <div *ngIf="oneStep.type === 'radio&text'">
         <mat-radio-group  [(ngModel)]="oneStep.answer"  (change)="onRadioChange($event, oneStep)">
           <div *ngFor="let choices of oneStep?.choices; let j = index" class="steps">
             <span class="form-control">
@@ -53,7 +53,7 @@
       </div>
 
       <!-- Radio -->
-      <div *ngIf="oneStep.displayType === 'radio'">
+      <div *ngIf="oneStep.type === 'radio'">
         <mat-radio-group [(ngModel)]="oneStep.answer"  (ngModelChange)="onRadioChange($event, oneStep)">
           <div *ngFor="let choices of oneStep?.choices; let j = index" class="steps">
             <span class="form-control">
@@ -64,7 +64,7 @@
       </div>
 
         <!-- Checkbox and Text -->
-        <div *ngIf="oneStep.displayType === 'checkbox&text'">
+        <div *ngIf="oneStep.type === 'checkbox&text'">
           <div *ngFor="let choice of oneStep?.choices; let j = index">
             <span class="form-control">
               <mat-checkbox
@@ -78,6 +78,7 @@
           </div>
           <br />
           <b> Please provide further details. </b><i> Optional </i><br /><br />
+          <quill-editor [(ngModel)]="oneStep.textAnswer"></quill-editor>
           <!-- <editor apiKey="r0gpf34f1r14a97ovjgipjiafq78h23ljobqqcamxru11wpd" [(ngModel)]="oneStep.textAnswer" [init]="init" /> -->
           <!-- <app-file-upload></app-file-upload> -->
         </div>
