@@ -18,13 +18,13 @@ import { Step } from '../../_classes/step';
 import { Process } from '../../_classes/process';
 import { ViewProcessStepDialogComponent } from '../dialog-components/process-dialog/view-process-step-dialog/view-process-step-dialog.component';
 import { AddProcessStepDialogComponent } from '../dialog-components/process-dialog/add-process-step-dialog/add-process-step-dialog.component';
-import { MatFormField } from '@angular/material/form-field';
+import {MatFormField, MatPrefix} from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-build-process-steps',
   standalone: true,
-  imports: [MatTableModule, FormsModule, MatFormField, MatInput, MatButtonModule, MatIconModule, CommonModule],
+    imports: [MatTableModule, FormsModule, MatFormField, MatInput, MatButtonModule, MatIconModule, CommonModule, MatPrefix],
   templateUrl: './build-process-steps.component.html',
   styleUrl: './build-process-steps.component.scss'
 })
@@ -70,10 +70,10 @@ export class BuildProcessStepsComponent {
       const searchTerm = this.searchInput?.trim().toLowerCase() || '';
       if (!searchTerm) {
         //Show all processes when search input is empty
-        this.filteredProcessSteps = this.processSteps; 
+        this.filteredProcessSteps = this.processSteps;
         return;
       }
-      this.filteredProcessSteps = this.processSteps.filter(processStep => 
+      this.filteredProcessSteps = this.processSteps.filter(processStep =>
         processStep.description?.toLowerCase().includes(searchTerm)
       );
     }
@@ -84,7 +84,7 @@ export class BuildProcessStepsComponent {
       width: '80%',
       data: this.processSteps
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.processDetails.steps.push(result);

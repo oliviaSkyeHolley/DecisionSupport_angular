@@ -85,7 +85,7 @@ mat-cell {
     border-bottom: 1px solid #e0e0e0;
     padding: 16px;
 }
-
+/*
 mat-cell button {
   background-color: #accbe3;
   color: #fff;
@@ -97,6 +97,12 @@ mat-cell button {
   border: none;
   transition: background-color 0.3s ease;
 }
+*/
+
+.searchIcon{
+  color: black;
+}
+
 
 .entityid{
     font-weight: 600;
@@ -143,12 +149,30 @@ a:visited {
     margin-bottom: 20px;
 }
 
-
-
-.material-icons{
-  color: #accbe3;
-  cursor:pointer;
+.iconButton{
+  background-color: #accbe3;
+  color: #fff;
+  border-radius: 6px;
+  margin-right: 10px;
+  padding: 8px 8px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
 }
+
+.iconButton:hover{
+  background-color: #7a9bbf;
+  color: #fff;
+  border-radius: 6px;
+  margin-right: 10px;
+  padding: 8px 8px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+
+
 
 .button-container{
   width: 100%;

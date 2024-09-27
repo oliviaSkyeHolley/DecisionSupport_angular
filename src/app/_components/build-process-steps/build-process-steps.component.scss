@@ -24,13 +24,24 @@ mat-cell button {
     background-color: #accbe3;
     color: #fff;
     border-radius: 6px;
-    padding: 8px 16px;
-    font-size: 14px;
     margin-right: 10px;
+    padding: 8px 8px;
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
 }
+
+mat-cell button:hover {
+  background-color: #7a9bbf;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 8px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
 
 .stepid {
     font-weight: 600;
@@ -51,6 +62,8 @@ mat-cell button {
 
 .search-div mat-form-field {
     width: 400px;
+    height: 80px;
+    top: 600px;
     flex: 1;
 }
 
@@ -86,6 +99,12 @@ mat-cell button {
     box-shadow: none;
     border: none;
 }
+
+.viewButton{
+
+}
+
+
 
 .createbutton:hover {
     background-color: #7a9bbf;
