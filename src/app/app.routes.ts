@@ -5,10 +5,12 @@ import {InvestigationListComponent} from './_components/investigation-list/inves
 import {AuthGuard} from './_services/auth.guard';
 import { ManageProcessComponent } from './_components/manage-process/manage-process.component';
 import { InvestigationComponent } from './_components/investigation/investigation.component';
+import {HomeComponent} from "./_components/home/home.component";
 
 
 export const appRoutes: Routes = [
     { path: 'login', component: AuthenticateComponent},
+     { path: 'home', component: HomeComponent},
     { path: 'process', component:ProcessListComponent, canActivate: [AuthGuard]},
     { path: 'process/:id',component:ManageProcessComponent, canActivate: [AuthGuard]},
     //{ path: 'process/:id/update', canActivate: [AuthGuard]},
