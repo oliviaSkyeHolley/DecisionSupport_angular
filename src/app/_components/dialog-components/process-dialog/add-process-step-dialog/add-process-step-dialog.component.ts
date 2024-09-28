@@ -45,28 +45,33 @@ export class AddProcessStepDialogComponent {
   /** Array Object to store filtered step data */
   filteredStepsData: Step[] = [];
 
-  constructor(private uuidService: UuidService, public dialogRef: MatDialogRef<AddProcessStepDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:{steps: any[], processId: any}) {
+  constructor(private uuidService: UuidService, public dialogRef: MatDialogRef<AddProcessStepDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:{steps: any[], processId: any, processName: any}) {
     this.filteredStepsData = data.steps.filter(step => step.type !== "textbox");
-
-    let choice:string|null= localStorage.getItem("unsavedStepData");
-    if (choice) {
-     this.formData = JSON.parse(choice); // Parse only if valid
-    } else {
-      this.formData.choices = []; 
-    }
-
+    this.checkUnsavedData();
   }
 
-  addDescription(): void {
+  // Check Local storage for unsaved data
+  checkUnsavedData(): void{
+    const unsavedData = localStorage.getItem("unsavedStepData");
+    // If unsaved data exist load the data to form
+    if (unsavedData) {
+     this.formData = JSON.parse(unsavedData); 
+     this.formData.conditions.forEach((condition: any, index: number) => {
+      this.updateStepConditionChoices(condition.stepUuid, index);
+    });
+    }
+  }
+
+  /** Add data to Local Storage when user inputs any data in form */
+  addDataToLocalStorage(): void {
     this.unsavedData = {
       "processId": this.data.processId,
+      "processName": this.data.processName,
        ...this.formData
     };
     localStorage.setItem("unsavedStepData", JSON.stringify(this.unsavedData))
-
   }
 
-  
   /** Add choice method to add a choice to a process step with a unique choice id*/
   addChoice() {
     this.formData.choices.push({

@@ -5,17 +5,17 @@
 
 <!-- Mat Dialog with form -->
 <h2 mat-dialog-title>Add Step</h2>
-<form #stepForm="ngForm" (ngSubmit)="save(stepForm)" (change)="addDescription()">
+<form #stepForm="ngForm" (ngSubmit)="save(stepForm)">
   <mat-dialog-content>
     <!-- Process Step Description -->
     <p>Description</p>
     <mat-form-field>
-      <input matInput [(ngModel)]="formData.description" name="description" placeholder="Description"  required>
+      <input matInput [(ngModel)]="formData.description" name="description" placeholder="Description" (ngModelChange)="addDataToLocalStorage()" required>
     </mat-form-field>
     <!-- Process Step Required Status-->
     <p>Required</p>
     <mat-form-field>
-      <mat-select [(ngModel)]="formData.required" name="required" placeholder="Select Required Status" required>
+      <mat-select [(ngModel)]="formData.required" name="required" placeholder="Select Required Status" (ngModelChange)="addDataToLocalStorage()"  required>
         <mat-option [value]="'1'">Yes</mat-option>
         <mat-option [value]="'0'">No</mat-option>
       </mat-select>
@@ -23,7 +23,7 @@
     <!-- Process Step Type-->
     <p>Element Type</p>
     <mat-form-field>
-      <mat-select [(ngModel)]="formData.type" name="type" placeholder="Select Element Type" required>
+      <mat-select [(ngModel)]="formData.type" name="type" placeholder="Select Element Type" (ngModelChange)="addDataToLocalStorage()"  required>
         <mat-option *ngFor="let type of type" [value]="type.value">{{ type.label }}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -33,7 +33,7 @@
       <p>Options:</p>
       <div *ngFor="let choice of formData.choices; let i = index">
         <mat-form-field>
-          <input matInput [(ngModel)]="choice.description" placeholder="Option {{ i + 1 }}" required name="choice{{i}}">
+          <input matInput [(ngModel)]="choice.description" placeholder="Option {{ i + 1 }}"  name="choice{{i}}" (ngModelChange)="addDataToLocalStorage()" required>
           <!-- Remove Choice -->
           <button mat-icon-button type="button" (click)="removeChoice(i)">
             <mat-icon>delete</mat-icon>
@@ -50,14 +50,14 @@
       <!-- Condition Step description -->
       <mat-form-field>
         <p>Condition {{ i + 1 }}</p>
-        <mat-select [(ngModel)]="condition.stepUuid" name="conditionStep{{i}}" (selectionChange)="updateStepConditionChoices(condition.stepUuid, i)" placeholder="Select Step" required>
+        <mat-select [(ngModel)]="condition.stepUuid" name="conditionStep{{i}}" (selectionChange)="updateStepConditionChoices(condition.stepUuid, i)" placeholder="Select Step" (ngModelChange)="addDataToLocalStorage()"  required>
           <mat-option *ngFor="let step of filteredStepsData" [value]="step.stepUuid">{{ step.id }}. {{ step.description }}</mat-option>
         </mat-select>
       </mat-form-field>
       <!-- Condition Step Value-->
       <mat-form-field>
         <p>Value is</p>
-        <mat-select [(ngModel)]="condition.choiceUuid" name="conditionChoice{{i}}" placeholder="Select Value" required>
+        <mat-select [(ngModel)]="condition.choiceUuid" name="conditionChoice{{i}}" placeholder="Select Value" (ngModelChange)="addDataToLocalStorage()"  required>
           <mat-option *ngFor="let choice of condition.stepChoices" [value]="choice.choiceUuid">{{ choice.description }}</mat-option>
         </mat-select>
         <!-- Remove Condition -->

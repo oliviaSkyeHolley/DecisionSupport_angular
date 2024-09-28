@@ -34,6 +34,8 @@ export class BuildProcessStepsComponent {
   private snackBar = inject(MatSnackBar);
   /** Id of the process */
   processId: string;
+  /** Name of the process */
+  processName: string;
   /** Process object to store the process details retrieved from the backend */
   processDetails!: Process;
   /** Array to store all process steps retrieved from the backend */
@@ -43,68 +45,69 @@ export class BuildProcessStepsComponent {
   /** Default search input string */
   searchInput: string = "";
   /** Table columns to be displayed */
-  displayedColumns: string[] = ['id', 'description', 'type', 'required','logic', 'actions'];
+  displayedColumns: string[] = ['id', 'description', 'type', 'required', 'logic', 'actions'];
 
-  constructor(private route: ActivatedRoute, private processService: ProcessService, private dialog: MatDialog){
+  constructor(private route: ActivatedRoute, private processService: ProcessService, private dialog: MatDialog) {
     /** Get and set the process ID from the route */
     this.processId = this.route.snapshot.params['id'];
+    this.processName = "Process";
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     /** Fetch the process steps when the component loads */
     this.getProcessDetail();
-    this.checkLocalStorage();
   }
 
-  checkLocalStorage(): void{
-    let unsavedData = localStorage.getItem("unsavedStepData")
-    if(unsavedData){
-     
-      let f = JSON.parse(unsavedData);
-    
-      if(f.processId == this.processId){
-        console.log(f.processId)
+  // Check unsaved step data in local storage
+  checkUnsavedData(): void {
+    const unsavedData = localStorage.getItem("unsavedStepData");
+    // If unsaved data exist check the process id and display the add step dialog
+    if (unsavedData) {
+      const formattedData = JSON.parse(unsavedData);
+      if (formattedData.processId == this.processId) {
         this.addProcessStep();
       }
-
     }
   }
 
   /** Fetch the available process steps from the backend and update the array objects */
-  getProcessDetail(): void{
+  getProcessDetail(): void {
     this.processService.getProcessSteps(this.processId).subscribe(
       (data) => {
         this.processDetails = data;
         this.processSteps = data.steps;
         this.filteredProcessSteps = this.processSteps;
+        this.processName = this.processDetails.label;
         // Log success message
         console.log("Successfully fetched process details")
-      },(error) => {
+        // Check the local storage for unsaved data
+        this.checkUnsavedData();
+      }, (error) => {
         // Log any errors encountered while fetching processes
         console.error('Error fetching process details:', error);
       }
     )
   }
 
-    /** Filter the available processes based on the user serach input */
-    filterBySearch(): void {
-      const searchTerm = this.searchInput?.trim().toLowerCase() || '';
-      if (!searchTerm) {
-        //Show all processes when search input is empty
-        this.filteredProcessSteps = this.processSteps; 
-        return;
-      }
-      // FIlter process based on search input
-      this.filteredProcessSteps = this.processSteps.filter(processStep => 
-        processStep.description?.toLowerCase().includes(searchTerm)
-      );
+  /** Filter the available processes based on the user serach input */
+  filterBySearch(): void {
+    const searchTerm = this.searchInput?.trim().toLowerCase() || '';
+    if (!searchTerm) {
+      //Show all processes when search input is empty
+      this.filteredProcessSteps = this.processSteps;
+      return;
     }
+    // FIlter process based on search input
+    this.filteredProcessSteps = this.processSteps.filter(processStep =>
+      processStep.description?.toLowerCase().includes(searchTerm)
+    );
+  }
 
   /** Opens AddProcessStepDialog and then request the backend to add the new process step with the provided data. */
-  addProcessStep(): void{
+  addProcessStep(): void {
     const dialogRef = this.dialog.open(AddProcessStepDialogComponent, {
       width: '80%',
-      data:{steps:this.processSteps, processId: this.processId }
+      data: { steps: this.processSteps, processId: this.processId, processName: this.processName }
 
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -114,16 +117,18 @@ export class BuildProcessStepsComponent {
           next: (response) => {
             // Log Success Message
             console.log('Successfully added step:', result);
-            this.snackBar.open('New Step Added', 'Ok',{
+            this.snackBar.open('New Step Added', 'Ok', {
               duration: 1000
             });
+            //Remove temp data in local storage
+            localStorage.removeItem("unsavedStepData")
             // Refresh the list after a new process step is added
             this.getProcessDetail();
           },
           error: (err) => {
             // Log any errors encountered while adding process step.
             console.error('Error adding step:', err);
-            this.snackBar.open('Error Adding Step - Try Again', 'Ok',{
+            this.snackBar.open('Error Adding Step - Try Again', 'Ok', {
               duration: 2000
             });
           }
@@ -131,8 +136,8 @@ export class BuildProcessStepsComponent {
       }
     });
   }
-/** Opens ViewProcessDialog to display the process step details*/
-  openViewDetailDialog(step: Step): void{
+  /** Opens ViewProcessDialog to display the process step details*/
+  openViewDetailDialog(step: Step): void {
     const dialogRef = this.dialog.open(ViewProcessStepDialogComponent, {
       width: '60%',
       data: { step: step, stepsData: this.processSteps }

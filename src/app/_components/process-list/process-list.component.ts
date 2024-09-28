@@ -10,7 +10,7 @@
 
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router} from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { ProcessList } from '../../_classes/process-list';
 import { ProcessService } from '../../_services/process.service';
@@ -26,6 +26,8 @@ import { DeleteProcessDialogComponent } from '../dialog-components/process-dialo
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UnsavedStepAlertDialogComponent } from '../dialog-components/process-dialog/unsaved-step-alert-dialog/unsaved-step-alert-dialog.component';
+
 @Component({
   selector: 'app-process-list',
   standalone: true,
@@ -46,13 +48,33 @@ export class ProcessListComponent {
   /** Table Columns */
   displayedColumns: string[] = ['entityid', 'label', 'revisionStatus', 'createdTime', 'updatedTime', 'actions'];
 
-  constructor(private processService: ProcessService, private dialog: MatDialog) { }
+  constructor(private processService: ProcessService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
-    /** Fetch the list of processes when the component loads */
+    /** Fetch the list of processes and check for unsaved data when the component loads */
     this.getProcessList();
+    this.checkUnsavedData();
   }
+  
+  /** Check for unSaved data and alert the user if data exist */
+  checkUnsavedData(): void{
+    //Get Data from local Storage
+    const unsavedData = localStorage.getItem("unsavedStepData");
+    //If data exist alert the user
+    if(unsavedData){
+      let formattedData = JSON.parse(unsavedData);
+      //Open Alert Dialog
+      const dialogRef = this.dialog.open(UnsavedStepAlertDialogComponent,{width: '800px', data: {unSavedData: formattedData}});
+      dialogRef.afterClosed().subscribe(result =>{
+        if(result){
+          //If the user want to continue. Navigate the user to the desired page
+          this.router.navigate(['/process/', formattedData.processId]);
+        }
+      })
 
+    }
+  }
+  
   /** Fetch the available processes from the backend and update the array objects */
   getProcessList(): void {
     this.processService.getProcessList().subscribe(
