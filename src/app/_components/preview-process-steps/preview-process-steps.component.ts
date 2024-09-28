@@ -1,3 +1,9 @@
+/**
+ * @whatItDoes This Component gives the preview of the process steps.
+ * @description
+ *  It's accessible from the "Preview" tab.
+ *  Each Step will be displayed based on its type.
+ */
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from "@angular/common";
@@ -16,29 +22,33 @@ import { QuillModule } from 'ngx-quill';
   styleUrl: './preview-process-steps.component.scss'
 })
 export class PreviewProcessStepsComponent {
-
+  /** ID of the process */
   processId: string;
+  /** Process Object to store the process details retrieved from the backend */
   processDetails!: Process;
+  /** Array to store all process steps retrieved from the backend */
   processSteps: Step[] = [];
 
-
-  constructor(
-    private route: ActivatedRoute,
-    private processService: ProcessService,
-  ) {
+  constructor(private route: ActivatedRoute,private processService: ProcessService) {
+    /** Get and set the process id from the route */
     this.processId = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void{
-    this.getProcessDetail();
+    /** Fetch the process steps when the component loads */
+    this.getProcessSteps();
   }
 
-  getProcessDetail(): void{
+  /** Fetch the available process steps from the backend and update the array objects */
+  getProcessSteps(): void{
     this.processService.getProcessSteps(this.processId).subscribe(
       (data) => {
         this.processDetails = data;
         this.processSteps = data.steps;
+        // Log the success message
+        console.log('Sucessfully Fetched Process Details');
       },(error) => {
+        // Log any errors encountered while fetching process details
         console.error('Error fetching process details:', error);
       }
     )

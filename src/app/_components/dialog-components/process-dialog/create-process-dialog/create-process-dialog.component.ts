@@ -1,3 +1,9 @@
+/**
+ * @whatItDoes This Dialog Component displays a dialog with form inputs to create a new process.
+ *
+ * @description
+ * The user can fill form fields(name, revision Status) and create a new process.
+ */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -16,8 +22,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './create-process-dialog.component.scss'
 })
 export class CreateProcessDialogComponent {
-
+  /** Declare Form Group */
   form: FormGroup;
+  /** Set the Revision Status Values */
   revisionStatus: RevisionStatus[] = [
     { value: 'Archived', label: 'Archived' },
     { value: 'Draft', label: 'Draft' },
@@ -25,24 +32,30 @@ export class CreateProcessDialogComponent {
   ];
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<CreateProcessDialogComponent>) {
+    // Initialize the form group elements.
     this.form = this.fb.group({
       label: [''],
       revision_status: ['Draft']
     });
   }
 
+  /** When user closes the dialog */
   close(): void {
+    // Close the dialog and reset the form fields.
     this.dialogRef.close();
     this.form.reset();
   }
 
+  /** When user clicks the save button */
   save(): void {
+    // Check is form valid and submit the form if its valid
     if (this.form.valid) {
       this.dialogRef.close(this.form.value);
     } 
   }
 }
 
+/** Interface for revision status */
 interface RevisionStatus {
   value: string;
   label: string;
