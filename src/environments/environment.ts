@@ -9,7 +9,7 @@ export const environment = {
   getProcessURL: 'http://decisionsupportdrupal.local/rest/process/get/',
   getProcessListURL: 'http://decisionsupportdrupal.local/rest/process/list',
   postProcessURL: 'http://decisionsupportdrupal.local/rest/process/post',
-  duplicateProcessURL:  'https://decisionsupportdrupal/rest/process/duplicate',
+  duplicateProcessURL: 'http://decisionsupportdrupal.local/rest/process/duplicate',
   patchProcessURL: 'http://decisionsupportdrupal.local/rest/process/patch/',
   updateProcessURL:'http://decisionsupportdrupal.local/rest/process/update/',
   archiveProcessURL: 'http://decisionsupportdrupal.local/rest/process/delete/',
