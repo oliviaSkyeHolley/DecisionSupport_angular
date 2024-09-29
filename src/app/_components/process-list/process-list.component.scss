@@ -1,0 +1,133 @@
+/* Body Styling */
+body {
+    background-color: rgb(243, 243, 243);
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styling Container for the top section with title and create button */
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.top-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #143354;
+
+}
+
+.createbutton {
+    color: #fff;
+    background-color: #143354;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.2);
+    border: none;
+}
+
+.createbutton:hover {
+    background-color: #1b4671;
+}
+
+.filter-div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.filter-div mat-select, 
+.filter-div mat-form-field {
+    width: 200px; 
+}
+
+.filter-div mat-form-field {
+    flex: 1; 
+}
+
+/* Table styling */
+.mat-mdc-header-row {
+    background-color: #143354 !important;
+    color: white;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.mat-mdc-table {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(112, 112, 112, 0.1);
+}
+
+.mat-mdc-row:nth-child(even) {
+    background-color: #f0f0f1;
+}
+.mat-mdc-row:nth-child(odd) {
+    background-color: #fff;
+}
+mat-cell {
+    border-bottom: 1px solid #e0e0e0; 
+    padding: 16px; 
+}
+mat-cell button {
+    background-color: #143354;
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.mat-column-label {
+    flex: 0 0 20%;
+}
+  
+.entityid{
+    font-weight: 600;
+}
+
+a:link {
+    color: #000000;
+    font-weight: 500;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+a:hover {
+    color: #374357;
+    background-color: transparent;
+    text-decoration: none;
+    }
+
+/* No Data Styling */
+.noData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10%;
+}
+
+.noData p {
+    font-weight: 500;
+    color: rgb(183, 183, 183);
+    margin-bottom: 20px;
+}
