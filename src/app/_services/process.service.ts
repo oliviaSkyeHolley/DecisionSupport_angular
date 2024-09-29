@@ -43,7 +43,7 @@ export class ProcessService {
   
   archiveProcess(processId:string): Observable<any>{
     const headers = this.authService.getHeaders();
-    return this.http.delete<Process>(`${environment.archiveProcessURL}${processId}`,{headers}); // should this still be have 'delete' or are do we just need to patch: visible = 'no'?
+    return this.http.patch<Process>(`${environment.archiveProcessURL}${processId}`,{headers}); 
   }
 
   //Step Functions: GET POST PATCH DELETE
@@ -53,25 +53,10 @@ export class ProcessService {
     return this.http.get<Process>(`${environment.getProcessURL}${processId}?_format=json`, { headers });
   }
 
-  postProcessStep(processId: number, stepData: any): Observable<any> {
+  updateProcessStep(processId: number, stepData: any): Observable<any> {
     const headers = this.authService.getHeaders();
-    return this.http.patch<Process>(`${environment.patchProcessURL}${processId}`, stepData, {headers});
+    return this.http.patch<Process>(`${environment.updateProcessURL}${processId}`, stepData, {headers});
   }
 
-  patchProcessStep(processId:string, stepUuid: string, stepData: any): Observable<any> {
-    const headers = this.authService.getHeaders();
-    const url = `${environment.patchProcessURL.replace('{processId}', processId).replace('{stepUuid}', stepUuid)}`;
-    return this.http.patch<Process>(url, stepData, {headers});
-  }
 
-  patchProcessStepOrder(processId:string, stepsData: any): Observable<any> {
-      const headers = this.authService.getHeaders();
-      return this.http.patch<Process>(`${environment.patchProcessURL}${processId}`, stepsData, {headers});
-  }
-  
-  deleteProcessStep(processId:string, stepUuid: string): Observable<any>{
-    const headers = this.authService.getHeaders();
-    const url = `${environment.patchProcessURL.replace('{processId}', processId).replace('{stepUuid}', stepUuid)}`;
-    return this.http.patch<Process>(url, {headers});
-  }
 }

@@ -8,9 +8,10 @@
 <div>
   <div class="top-container">
     <h2> Decision Support </h2>
+    <button class="addbutton" (click)="addInvestigation()"> New Decision Support </button>
   </div>
 
-  <button class="addbutton" (click)="addInvestigation()"> New Decision Support </button>
+
 </div>
 
 <!-- Table of Investigations-->
@@ -27,7 +28,7 @@
     <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <!-- Title is a link to the investigation's page with the link domain.host/support/:entityId -->
-      <a [routerLink]="['/support', element.entityId]"> {{element.label}} </a>
+      <a [routerLink]="['/support/', element.entityId]"> {{element.label}} </a>
     </mat-cell>
   </ng-container>
 
@@ -53,6 +54,12 @@
     </mat-cell>
   </ng-container>
 
+  <!-- Display no data available message if no investigation available -->
+  <div *matNoDataRow class="noData">
+    <img src="/assets/noData.jpg" />
+    <p>No Data Found - Create new decision support</p>
+    <button class="addbutton" (click)="addInvestigation()">New Decision Support</button>
+  </div>
   <!-- Display the first row of headings. -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

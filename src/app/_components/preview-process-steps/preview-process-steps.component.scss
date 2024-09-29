@@ -1,3 +1,4 @@
+/* Preview Container Styling */
 *{
     font-size: 16px;
 }
@@ -15,4 +16,20 @@ h1{
     padding: 2%;
     border-radius: 10px;
    
+}
+
+/* No Data Styling */
+.noData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10%;
+}
+
+.noData p {
+    font-weight: 500;
+    color: rgb(183, 183, 183);
+    margin-bottom: 20px;
 }

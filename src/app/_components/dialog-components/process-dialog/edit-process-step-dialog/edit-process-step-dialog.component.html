@@ -1,11 +1,18 @@
-<h2 mat-dialog-title>Edit Step</h2>
+<!--
+  @component Edit Process Step Dialog Component
+  @description Dialog with prefilled form fields of a existing process step and action to update a process step.
+-->
 
+<!-- Mat Dialog with form -->
+<h2 mat-dialog-title>Edit Step</h2>
 <form #stepForm="ngForm" (ngSubmit)="save(stepForm)">
   <mat-dialog-content>
+    <!-- Process Step Description -->
     <p>Description</p>
     <mat-form-field>
       <input matInput [(ngModel)]="formData.description" name="description" placeholder="Description" required>
     </mat-form-field>
+    <!-- Process Step Required Status-->
     <p>Required</p>
     <mat-form-field>
       <mat-select [(ngModel)]="formData.required" name="required" placeholder="Select Required Status" required>
@@ -13,6 +20,7 @@
         <mat-option [value]="'0'">No</mat-option>
       </mat-select>
     </mat-form-field>
+    <!-- Process Step Type-->
     <p>Element Type</p>
     <mat-form-field>
       <mat-select [(ngModel)]="formData.type" name="type" placeholder="Select Element Type" required>
@@ -20,44 +28,52 @@
       </mat-select>
     </mat-form-field>
 
-    <!-- Radio options -->
-    <div *ngIf="formData.type === 'radio' || formData.type === 'radio&text' || formData.type === 'checkbox&text' || formData.type === 'checkbox'">
+    <!-- Add/Remove Process Step Choices if the step type radio/checkbox -->
+    <div
+      *ngIf="formData.type === 'radio' || formData.type === 'radio&text' || formData.type === 'checkbox&text' || formData.type === 'checkbox'">
       <p>Options:</p>
       <div *ngFor="let choice of formData.choices; let i = index">
-        <mat-form-field >
+        <mat-form-field>
           <input matInput [(ngModel)]="choice.description" placeholder="Option {{ i + 1 }}" required name="choice{{i}}">
+          <!-- Remove Choice -->
           <button mat-icon-button type="button" (click)="removeChoice(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-form-field>
       </div>
+      <!-- Add Choice -->
       <button mat-button type="button" (click)="addChoice()">Add Option</button>
     </div>
 
-    <!-- Condition -->
+    <!-- Process Step Condition -->
     <p>Logic:</p>
     <div *ngFor="let condition of formData.conditions; let i = index">
+      <!-- Condition Step description -->
       <mat-form-field>
         <p>Condition {{ i + 1 }}</p>
-        <mat-select [(ngModel)]="condition.stepUuid" name="conditionStep{{i}}" (selectionChange)="updateStepChoices(condition.stepUuid, i)" placeholder="Select Step" required>
-          <mat-option *ngFor="let step of filteredStepsData" [value]="step.stepUuid">{{ step.id }}. {{ step.description }}</mat-option>
+        <mat-select [(ngModel)]="condition.stepUuid" name="conditionStep{{i}}"
+          (selectionChange)="updateStepConditionChoices(condition.stepUuid, i)" placeholder="Select Step" required>
+          <mat-option *ngFor="let step of filteredStepsData" [value]="step.stepUuid">{{ step.id }}. {{ step.description}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <!-- Condition Step Value-->
       <mat-form-field>
         <p>Value is</p>
         <mat-select [(ngModel)]="condition.choiceUuid" name="conditionChoice{{i}}" placeholder="Select Value" required>
-          <mat-option *ngFor="let choice of condition.stepChoices" [value]="choice.choiceUuid">{{ choice.description }}</mat-option>
+          <mat-option *ngFor="let choice of condition.stepChoices" [value]="choice.choiceUuid">{{ choice.description}}</mat-option>
         </mat-select>
+        <!-- Remove Condition -->
         <button mat-icon-button type="button" (click)="removeCondition(i)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-form-field>
     </div>
+    <!-- Add Condition -->
     <button mat-button type="button" (click)="addCondition()">Add Condition</button>
   </mat-dialog-content>
-
+  <!-- Dialog Actions - Close & Update-->
   <mat-dialog-actions>
     <button mat-button (click)="close()">Close</button>
-    <button mat-button color="primary" type="submit" [disabled]="stepForm.invalid">Create</button>
+    <button mat-button color="primary" type="submit" [disabled]="stepForm.invalid">Update</button>
   </mat-dialog-actions>
 </form>

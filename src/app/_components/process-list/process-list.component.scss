@@ -43,6 +43,22 @@ body {
     background-color: #1b4671;
 }
 
+.filter-div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.filter-div mat-select, 
+.filter-div mat-form-field {
+    width: 200px; 
+}
+
+.filter-div mat-form-field {
+    flex: 1; 
+}
+
 /* Table styling */
 .mat-mdc-header-row {
     background-color: #143354 !important;
@@ -76,6 +92,10 @@ mat-cell button {
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
+}
+
+.mat-column-label {
+    flex: 0 0 20%;
 }
   
 .entityid{
