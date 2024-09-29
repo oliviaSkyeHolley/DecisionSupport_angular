@@ -9,45 +9,37 @@ import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../_services/auth.service';
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { InvestigationService } from '../../_services/investigation.service';
-import { ProcessService } from '../../_services/process.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
-//import { EditorComponent } from '@tinymce/tinymce-angular';
-import { Step } from '../../_classes/step';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatDivider } from '@angular/material/divider';
-//import { FileUploadComponent } from '../file-upload/file-upload.component';
-import { Investigation } from '../../_classes/investigation';
-
-// Quill
-import { NgModule } from '@angular/core';
 import { QuillModule } from 'ngx-quill';
-
-
+import { Step } from '../../_classes/step';
+import { Investigation } from '../../_classes/investigation';
+import { InvestigationService } from '../../_services/investigation.service';
+import { ProcessService } from '../../_services/process.service';
+import { AuthService } from '../../_services/auth.service';
+import { DocumentUploadService } from '../../_services/document-upload.service';
+import { DocumentUploadComponent } from '../document-upload/document-upload.component';
 
 @Component({
   selector: 'app-investigation',
   standalone: true,
-  imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox], //EditorComponent + FileUploadComponent Deleted to make it work.
+  imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, DocumentUploadComponent],
   templateUrl: './investigation.component.html',
   styleUrl: './investigation.component.scss'
 })
 
 export class InvestigationComponent implements OnInit {
-
-
-
   investigation: Investigation | undefined;
   investigationId: string;
   investigationDetails: any;
@@ -162,7 +154,6 @@ export class InvestigationComponent implements OnInit {
     if (choice.selected) {
       this.updateSteps();
     }
-
   }
 
   getChoiceLabel(choiceUuid: any) {
@@ -195,6 +186,4 @@ export class InvestigationComponent implements OnInit {
     }
     return false;
   }
-
-
 }

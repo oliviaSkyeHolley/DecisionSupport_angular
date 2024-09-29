@@ -11,13 +11,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../_services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { InvestigationList } from '../../_classes/investigation-list';
-import { InvestigationService } from '../../_services/investigation.service';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { NewInvestigationDialogComponent } from '../dialog-components/new-investigation-dialog/new-investigation-dialog.component';
+import { AuthService } from '../../_services/auth.service';
+import { InvestigationList } from '../../_classes/investigation-list';
+import { InvestigationService } from '../../_services/investigation.service';
+import { NewInvestigationDialogComponent } from '../dialog-components/investigation-dialog/new-investigation-dialog/new-investigation-dialog.component';
+import { RenameInvestigationDialogComponent } from '../dialog-components/investigation-dialog/rename-investigation-dialog/rename-investigation-dialog.component';
 
 @Component({
   selector: 'app-investigation-list',
@@ -69,7 +70,7 @@ export class InvestigationListComponent {
             this.getInvestigations();
           },
           error: (err) => {
-            console.error('Error adding report: ', err);
+            console.error('Error adding investigation: ', err);
           }
         });
       }
@@ -86,5 +87,27 @@ export class InvestigationListComponent {
         console.error('Error fetching reports: ', err)
       }
     })
+  }
+
+  // Submit's a new name for an investigation.
+  renameInvestigation(id: string): void {
+    // Open the rename investigation dialog component
+    const dialogRef = this.dialog.open(RenameInvestigationDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => { //result = the new name
+      if (result) {
+        this.investigationService.patchInvestigation(id, null).subscribe({  // Need to edit the patch investigation function to accept "name" as a third parameter
+          next: (response) => {
+            console.log('Successfully renamed investigation: ', result);
+            this.getInvestigations();
+          },
+          error: (err) => {
+            console.error('Error adding investigation: ', err);
+          }
+        });
+      }
+    });
   }
 }

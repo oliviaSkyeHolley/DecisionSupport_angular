@@ -14,7 +14,7 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class FileUploadService {
+export class DocumentUploadService {
   private uploadUrl = environment.fileUploadURL;
   private createEntityUrl = environment.postInvestigationDocumentsURL;
   filename!:string;
