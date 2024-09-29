@@ -14,8 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { ProcessService } from '../../../_services/process.service';
-import { ProcessList } from '../../../_classes/process-list';
+import { ProcessService } from '../../../../_services/process.service';
+import { ProcessList } from '../../../../_classes/process-list';
 
 @Component({
   selector: 'app-new-investigation-dialog',
