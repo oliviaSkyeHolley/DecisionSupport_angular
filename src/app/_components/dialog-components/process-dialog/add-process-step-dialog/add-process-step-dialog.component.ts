@@ -25,6 +25,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add-process-step-dialog.component.scss'
 })
 export class AddProcessStepDialogComponent {
+  /** Array Object to store filtered step data */
+  filteredStepsData: Step[] = [];
   /** Declare Form Data */
   formData: any = {
     description: '',
@@ -33,7 +35,7 @@ export class AddProcessStepDialogComponent {
     choices: [],
     conditions: []
   };
-  unsavedData: any  = {};
+  unsavedData: any = {};
   /** Set the Display Type Values */
   type: DisplayType[] = [
     { value: 'radio', label: 'Radio' },
@@ -42,23 +44,24 @@ export class AddProcessStepDialogComponent {
     { value: 'checkbox&text', label: 'Checkbox & Text' },
     { value: 'textbox', label: 'Textbox' }
   ];
-  /** Array Object to store filtered step data */
-  filteredStepsData: Step[] = [];
 
-  constructor(private uuidService: UuidService, public dialogRef: MatDialogRef<AddProcessStepDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:{steps: any[], processId: any, processName: any}) {
+  constructor(private uuidService: UuidService, public dialogRef: MatDialogRef<AddProcessStepDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { steps: any[], processId: any, processName: any }) {
     this.filteredStepsData = data.steps.filter(step => step.type !== "textbox");
     this.checkUnsavedData();
   }
 
   // Check Local storage for unsaved data
-  checkUnsavedData(): void{
+  checkUnsavedData(): void {
     const unsavedData = localStorage.getItem("unsavedStepData");
     // If unsaved data exist load the data to form
     if (unsavedData) {
-     this.formData = JSON.parse(unsavedData); 
-     this.formData.conditions.forEach((condition: any, index: number) => {
-      this.updateStepConditionChoices(condition.stepUuid, index);
-    });
+      const formattedData = JSON.parse(unsavedData);
+      if (formattedData.processId == this.data.processId) {
+        this.formData = formattedData;
+        this.formData.conditions.forEach((condition: any, index: number) => {
+          this.updateStepConditionChoices(condition.stepUuid, index);
+        });
+      }
     }
   }
 
@@ -67,7 +70,7 @@ export class AddProcessStepDialogComponent {
     this.unsavedData = {
       "processId": this.data.processId,
       "processName": this.data.processName,
-       ...this.formData
+      ...this.formData
     };
     localStorage.setItem("unsavedStepData", JSON.stringify(this.unsavedData))
   }

@@ -45,7 +45,7 @@
       <p>{{oneStep.description}}</p>
 
       <!-- STEP TYPE: Radio and Text Box -->
-      <div *ngIf="oneStep.displayType === 'radio&text'">
+      <div *ngIf="oneStep.type === 'radio&text'">
         <mat-radio-group  [(ngModel)]="oneStep.answer"  (change)="onRadioChange($event, oneStep)">
           <div *ngFor="let choices of oneStep?.choices; let j = index" class="steps">
             <span class="form-control">
@@ -62,7 +62,7 @@
       </div>
 
       <!-- STEP TYPE: Radio -->
-      <div *ngIf="oneStep.displayType === 'radio'">
+      <div *ngIf="oneStep.type === 'radio'">
         <mat-radio-group [(ngModel)]="oneStep.answer"  (ngModelChange)="onRadioChange($event, oneStep)">
           <div *ngFor="let choices of oneStep?.choices; let j = index" class="steps">
             <span class="form-control">
@@ -73,7 +73,7 @@
       </div>
 
       <!-- STEP TYPE: Checkbox and Text Box -->
-      <div *ngIf="oneStep.displayType === 'checkbox&text'">
+      <div *ngIf="oneStep.type === 'checkbox&text'">
         <div *ngFor="let choice of oneStep?.choices; let j = index">
           <span class="form-control">
             <!-- Display the checkboxes-->
@@ -95,7 +95,7 @@
       </div>
   
       <!-- STEP TYPE: Checkbox -->
-      <div *ngIf="oneStep.displayType === 'checkbox&text'">
+      <div *ngIf="oneStep.type === 'checkbox&text'">
         <div *ngFor="let choice of oneStep?.choices; let j = index">
           <span class="form-control">
             <!-- Display the checkboxes-->
@@ -111,7 +111,7 @@
       </div>
 
       <!-- STEP TYPE: Text Box -->
-      <div *ngIf="oneStep.displayType === 'checkbox&text'">
+      <div *ngIf="oneStep.type === 'checkbox&text'">
         <b>Please provide further details.</b><i>Optional</i><br /><br />
         <quill-editor [(ngModel)]="oneStep.textAnswer"></quill-editor>
         <app-document-upload></app-document-upload>

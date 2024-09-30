@@ -20,6 +20,7 @@ import { Step } from '../../_classes/step';
 import { Process } from '../../_classes/process';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditProcessStepDialogComponent } from '../dialog-components/process-dialog/edit-process-step-dialog/edit-process-step-dialog.component';
+import { DeleteProcessStepDialogComponent } from '../dialog-components/process-dialog/delete-process-step-dialog/delete-process-step-dialog.component';
 @Component({
   selector: 'app-edit-process-steps',
   standalone: true,
@@ -125,7 +126,7 @@ export class EditProcessStepsComponent {
         // Refresh the list after a new process step is added
         this.getProcessSteps();
         // Log the success message
-        console.log('Successfully svaed step');
+        console.log('Successfully saved step');
         this.snackBar.open('Successfully Saved Changes ', 'Ok', {
           duration: 1000
         });
@@ -144,24 +145,49 @@ export class EditProcessStepsComponent {
   deleteStep(uuid: any): void {
     // FInd the deleted step Index and remove the step from array
     const index = this.processDetails.steps.findIndex(step => step.stepUuid == uuid);
-    this.processDetails.steps.splice(index);
-    this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
-      next: (response) => {
-        // Log Success Message
-        console.log('Successfully deleted step');
-        this.snackBar.open('Deleted Step Successfully', 'Ok', {
-          duration: 1000
-        });
-        // Refresh the list after a new process step is added
-        this.getProcessSteps();
-      },
-      error: (err) => {
-        // Log any errors encountered while adding process step.
-        console.error('Error deleting step:', err);
-        this.snackBar.open('Error Deleting Step - Try Again', 'Ok', {
-          duration: 2000
-        });
+    if (index != null) {
+      const dependantSteps = this.processDetails.steps.filter(step =>
+        step.conditions.filter(condition => condition.stepUuid === uuid).length > 0);
+
+      const dialogRef = this.dialog.open(DeleteProcessStepDialogComponent, {
+        width: '40%',
+        data: { dependantSteps: dependantSteps }
+      });
+      dialogRef.afterClosed().subscribe((result: any) => {
+        if (result) {
+          for (let dependantStep of dependantSteps) {
+            for (let step of this.processDetails.steps) {
+              // Check if dependantStep's stepUuid matches with step's stepUuid
+              if (dependantStep.stepUuid === step.stepUuid) {
+                // Filter out the condition where the stepUuid matches dependantStep
+                step.conditions = step.conditions.filter(condition => condition.stepUuid !== dependantStep.stepUuid);
+              }
+            }
+          }
+          this.processDetails.steps.splice(index, 1);
+          let newId = 1 ;
+          this.processDetails.steps.forEach(step => step.id = newId++);
+          this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
+            next: (response) => {
+              // Log Success Message
+              console.log('Successfully deleted step');
+              this.snackBar.open('Deleted Step Successfully', 'Ok', {
+                duration: 1000
+              });
+              // Refresh the list after a new process step is added
+              this.getProcessSteps();
+            },
+            error: (err) => {
+              // Log any errors encountered while adding process step.
+              console.error('Error deleting step:', err);
+              this.snackBar.open('Error Deleting Step - Try Again', 'Ok', {
+                duration: 2000
+              });
+            }
+          });
+        }
       }
-    });
+      );
+    } 
   }
 }
