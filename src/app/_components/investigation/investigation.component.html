@@ -33,11 +33,17 @@
           </div>
         </mat-nav-list>
 
-    <!-- Toggle button as an arrow -->
+    <!-- Toggle button as an arrow
     <button mat-icon-button class="toggle-button" (click)="collapsed.set(!collapsed())">
       <mat-icon [ngStyle]="{'color':'#accbe3'}">{{ !collapsed() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
-    </button>
+    </button> -->
+
+        <!-- Toggle button as an arrow -->
+        <button mat-icon-button class="toggle-button" (click)="collapsed.set(!collapsed())">
+          <mat-icon  [ngStyle]="{'color':'#accbe3'}">{{ !collapsed() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        </button>
   </mat-sidenav>
+
   <mat-sidenav-content class="content" [style.margin-left]="sideNavWidth()">
     <div *ngIf="oneStep">
       <h2>Step {{oneStep.id}} </h2>
