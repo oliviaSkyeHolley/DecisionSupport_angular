@@ -6,14 +6,14 @@
     <mat-form-field appearance="outline">
       <input matInput [(ngModel)]="formData.description" name="description" placeholder="Description" required>
     </mat-form-field>
-    <p class="title">Required</p>
+    <p>Required</p>
     <mat-form-field appearance="outline">
       <mat-select [(ngModel)]="formData.required" name="required" placeholder="Select Required Status" required>
         <mat-option [value]="'1'">Yes</mat-option>
         <mat-option [value]="'0'">No</mat-option>
       </mat-select>
     </mat-form-field>
-    <p class="title">Element Type</p>
+    <p>Element Type</p>
     <mat-form-field appearance="outline">
       <mat-select [(ngModel)]="formData.type" name="type" placeholder="Select Element Type" required>
         <mat-option *ngFor="let type of type" [value]="type.value">{{ type.label }}</mat-option>
@@ -31,19 +31,19 @@
           </button>
         </mat-form-field>
       </div>
-      <button class="addRadio" mat-button type="button" (click)="addChoice()">Add Option</button>
+      <button class="add" mat-button type="button" (click)="addChoice()">Add Option</button>
     </div>
 
     <!-- Condition -->
-    <p class="title">Logic:</p>
+    <p>Logic:</p>
     <div *ngFor="let condition of formData.conditions; let i = index">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <p>Condition {{ i + 1 }}</p>
         <mat-select [(ngModel)]="condition.stepUuid" name="conditionStep{{i}}" (selectionChange)="updateStepChoices(condition.stepUuid, i)" placeholder="Select Step" required>
           <mat-option *ngFor="let step of filteredStepsData" [value]="step.stepUuid">{{ step.id }}. {{ step.description }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <p>Value is</p>
         <mat-select [(ngModel)]="condition.choiceUuid" name="conditionChoice{{i}}" placeholder="Select Value" required>
           <mat-option *ngFor="let choice of condition.stepChoices" [value]="choice.choiceUuid">{{ choice.description }}</mat-option>
@@ -53,11 +53,11 @@
         </button>
       </mat-form-field>
     </div>
-    <button mat-button type="button" (click)="addCondition()">Add Condition</button>
+    <button class="add" mat-button type="button" (click)="addCondition()">Add Condition</button>
   </mat-dialog-content>
 
   <mat-dialog-actions>
-    <button mat-button (click)="close()">Close</button>
-    <button mat-button color="primary" type="submit" [disabled]="stepForm.invalid">Create</button>
+    <button class="closeButton" mat-button (click)="close()">Close</button>
+    <button class="createButton" mat-button color="primary" type="submit" [disabled]="stepForm.invalid">Create</button>
   </mat-dialog-actions>
 </form>
