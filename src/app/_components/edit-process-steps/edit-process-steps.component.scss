@@ -1,0 +1,62 @@
+/* Table styling */
+.mat-mdc-header-row {
+    background-color: #143354 !important;
+    color: white;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.mat-mdc-table {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(112, 112, 112, 0.1);
+}
+
+.mat-mdc-row:nth-child(even) {
+    background-color: #f0f0f1;
+}
+.mat-mdc-row:nth-child(odd) {
+    background-color: #fff;
+}
+mat-cell {
+    border-bottom: 1px solid #e0e0e0; 
+    padding: 16px; 
+}
+mat-cell button {
+    background-color: #143354;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.save-button{
+    background-color: #fff;
+}
+.stepid{
+    font-weight: 600;
+}
+
+.mat-column-description{
+    flex: 0 0 40%;
+}
+
+/* No Data Styling */
+.noData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10%;
+}
+
+.noData p {
+    font-weight: 500;
+    color: rgb(183, 183, 183);
+    margin-bottom: 20px;
+}
+
+

@@ -1,0 +1,41 @@
+/* Menu Bar */
+mat-toolbar{
+    background-color: #ffff;
+    padding: 10px 24px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 8px rgba(143, 143, 143, 0.1);
+}
+
+/* Menubar Links */
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 19px;
+    padding: 14px 24px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 450;
+    display: inline-block;
+}
+
+/* Active Link */
+a.active{
+    background-color: #143354;
+    color: #ffff;
+    border-radius: 6px;
+}
+
+/* Responsive adjustment */
+@media screen and (max-width: 768px) {
+    mat-toolbar {
+        padding: 0 16px;
+    }
+
+    a {
+        padding: 12px 16px;
+        font-size: 15px;
+    }
+}
