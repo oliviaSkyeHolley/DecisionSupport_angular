@@ -14,7 +14,7 @@
       </mat-select>
     </mat-form-field>
     <p class="title">Element Type</p>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-select [(ngModel)]="formData.type" name="type" placeholder="Select Element Type" required>
         <mat-option *ngFor="let type of type" [value]="type.value">{{ type.label }}</mat-option>
       </mat-select>
