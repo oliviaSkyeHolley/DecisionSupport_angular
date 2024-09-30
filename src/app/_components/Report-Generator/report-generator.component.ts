@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {MenuComponent} from "../menu/menu.component";
-import {NgIf, NgOptimizedImage} from "@angular/common";
+import {NgIf} from "@angular/common";
 import { AuthService } from '../../_services/auth.service';
 import { RouterLink } from '@angular/router';
 
@@ -10,10 +10,9 @@ import { RouterLink } from '@angular/router';
   imports: [
     MenuComponent,
     NgIf,
-    RouterLink,
-    NgOptimizedImage
+    RouterLink
   ],
-  templateUrl: './home.component.html',
+  templateUrl: './report-generator.component.html',
   /* template: `
      <section>
        <form>
@@ -22,10 +21,10 @@ import { RouterLink } from '@angular/router';
        </form>
      </section>
  `, */
-  styleUrl: './home.component.scss'
+  styleUrl: './report-generator.component.scss'
 })
 
-export class HomeComponent {
+export class ReportGeneratorComponent {
 
 }
 /*export class AuthenticateComponent {
