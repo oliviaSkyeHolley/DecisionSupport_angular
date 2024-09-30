@@ -7,8 +7,8 @@
   transform: translateY(-50%);
   background-color: white;
   border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  box-shadow: none;
+  z-index: 1;
 }
 
 .toggle-button mat-icon {
@@ -67,6 +67,7 @@ mat-sidenav {
 
 .uncomplete{
   background-color: #7a9bbf;
+  color: white;
 }
 
 
@@ -89,35 +90,6 @@ mat-sidenav {
 
 .disabled-step .text-container {
   color: gray;
-}
-
-.continue {
-  background-color: #7a9bbf;
-  color: #fff !important;
-  width: 30%;
-}
-
-.continue{
-  color:#ffff;
-  background-color: #accbe3;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  border-color: transparent;
-  position: absolute;
-  right: 15px;
-  width: 200px;
-  height: 50px;
-}
-
-.continue:hover{
-  color:#ffff;
-  background-color: #7a9bbf;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  border-color: transparent;
-  font-color: white;
 }
 
 .btn-primary {
