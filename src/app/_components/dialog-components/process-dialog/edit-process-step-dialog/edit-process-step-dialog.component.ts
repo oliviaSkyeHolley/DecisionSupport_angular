@@ -108,6 +108,10 @@ export class EditProcessStepDialogComponent {
       const updatedStep = {
         id: this.data.step.id,
         stepUuid: this.data.step.stepUuid,
+        answer: '',
+        textAnswer: '',
+        isVisible: false,
+        isCompleted: false,
         ...this.formData
       };
       this.dialogRef.close(updatedStep);

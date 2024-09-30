@@ -135,6 +135,25 @@ export class BuildProcessStepsComponent {
         });
       }
     });
+    // If user clicks outside the dialog box check the unsaveddata and remove it if its empty
+    dialogRef.backdropClick().subscribe(() => {
+      const unsavedData = localStorage.getItem("unsavedStepData");
+      //If data exist alert the user
+      if (unsavedData) {
+        let formattedData = JSON.parse(unsavedData);
+        // Check if all fields are empty or contain no data
+        const isDataEmpty =
+          (!formattedData.description || formattedData.description.trim() === "") &&
+          (!formattedData.required || formattedData.required.trim() === "") &&
+          (!formattedData.type || formattedData.type.trim() === "") &&
+          (!formattedData.choices || formattedData.choices.length === 0) &&
+          (!formattedData.conditions || formattedData.conditions.length === 0);
+        if (isDataEmpty) {
+          //if all the fields are remove the item for storage
+          localStorage.removeItem("unsavedStepData");
+        }
+      }
+    });
   }
   /** Opens ViewProcessDialog to display the process step details*/
   openViewDetailDialog(step: Step): void {

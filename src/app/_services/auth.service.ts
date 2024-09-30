@@ -57,7 +57,6 @@ export class AuthService {
     if (this.csrfToken) {
       return of(this.csrfToken);
     }
-    console.log("CSRF: ", this.csrfToken)
     const url = environment.csrfTokenUrl;
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authToken}`
@@ -70,7 +69,6 @@ export class AuthService {
       }),
       catchError(this.handleError)
     );
-    console.log("CSRF: ", this.csrfToken)
   }
 
   setTokens(accessToken: string, refreshToken: string): void {

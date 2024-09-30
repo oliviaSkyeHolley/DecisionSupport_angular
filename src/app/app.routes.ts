@@ -8,11 +8,11 @@ import { InvestigationComponent } from './_components/investigation/investigatio
 
 
 export const appRoutes: Routes = [
-    { path: 'login', component: AuthenticateComponent},
+    { path: 'user/login', component: AuthenticateComponent},
     { path: 'process', component:ProcessListComponent, canActivate: [AuthGuard]},
     { path: 'process/:id',component:ManageProcessComponent, canActivate: [AuthGuard]},
     //{ path: 'process/:id/update', canActivate: [AuthGuard]},
     { path: 'support', component: InvestigationListComponent, canActivate: [AuthGuard]},
     { path: 'support/:id', component: InvestigationComponent, canActivate: [AuthGuard]},
-    { path: '**', redirectTo: 'login' }
+    { path: '**', redirectTo: 'user/login' }
 ];
