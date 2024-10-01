@@ -43,6 +43,7 @@ export class InvestigationService {
 
   archiveInvestigation(investigationId:string): Observable<any>{
     const headers = this.authService.getHeaders();
+    console.log(`${environment.archiveInvestigationURL}${investigationId}`);
     return this.http.delete<Investigation>(`${environment.archiveInvestigationURL}${investigationId}`, { headers });
   }
 }

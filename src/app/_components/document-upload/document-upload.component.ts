@@ -10,11 +10,16 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { DocumentUploadService } from '../../_services/document-upload.service';
 import { DocumentService } from '../../_services/document.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'app-document-upload',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatButtonModule, MatIconModule, MatDivider],
   templateUrl: './document-upload.component.html',
   styleUrl: './document-upload.component.scss'
 })
@@ -22,6 +27,7 @@ export class DocumentUploadComponent {
   selectedFile: File | null = null;
   uploadResponse: string | null = null;
   documentList: any[] = [];
+  filteredDocumentList: any[] = [];
 
   constructor(private documentUploadService: DocumentUploadService, private documentService: DocumentService) { }
 
@@ -29,6 +35,7 @@ export class DocumentUploadComponent {
     this.getDocumentList();
 
   }
+
   onFileSelect(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files?.length) {
@@ -83,10 +90,27 @@ export class DocumentUploadComponent {
 
   getDocumentList(): void {
     this.documentUploadService.getDocumentlist(this.documentService.getInvestigationId()).subscribe({
-      next: (data) => this.documentList = data,
+      next: (data) => {
+        this.documentList = data;
+        
+        const stepId = this.documentService.getStepId();
+        this.filteredDocumentList = this.documentList.filter(d => d.stepId == stepId);
+        console.log("Doc:", this.documentList);
+        console.log(this.filteredDocumentList);
+      },
       error: (err) => console.error('Error fetching reports', err)
     });
+  }
 
-    console.log(this.documentList)
+  deleteDocument(fileId: string):void{
+    this.documentUploadService.archiveInvestigationDocument(fileId).subscribe({
+      next: (response) =>{
+        console.log('Successfully archived investigation document ', fileId);
+        this.getDocumentList();
+      },
+      error: (err) =>{
+        console.error('Error archiving investigation document', err);
+      }
+    })
   }
 }
