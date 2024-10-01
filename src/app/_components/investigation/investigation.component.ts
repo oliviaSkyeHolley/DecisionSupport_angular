@@ -5,16 +5,13 @@
  *  This component takes the JSON string from the backend and renders a form to be filled out.
  */
 
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,8 +25,8 @@ import { Investigation } from '../../_classes/investigation';
 import { InvestigationService } from '../../_services/investigation.service';
 import { ProcessService } from '../../_services/process.service';
 import { AuthService } from '../../_services/auth.service';
-import { DocumentUploadService } from '../../_services/document-upload.service';
 import { DocumentUploadComponent } from '../document-upload/document-upload.component';
+import { DocumentService } from '../../_services/document.service';
 
 @Component({
   selector: 'app-investigation',
@@ -40,20 +37,18 @@ import { DocumentUploadComponent } from '../document-upload/document-upload.comp
 })
 
 export class InvestigationComponent implements OnInit {
-  investigation: Investigation | undefined;
+  // Variables: Rendering of the form. 
+  investigation: Investigation | undefined; // Object of the investigation.
   investigationId: string;
   investigationDetails: any;
   processJson: any;
   selectedValue: any;
-  //init: EditorComponent['init'] = {
-  //  plugins: 'lists link image table code help wordcount'
-  //};
 
-  //Ruban's variables
-  collapsed = signal(false);
-  sideNavWidth = computed(() => this.collapsed() ? '65px' : '350px');
-  oneStep: any;
-  userChoices: Map<string, string> = new Map();
+  // Variables: Sidebar and Logic
+  collapsed = signal(false); // Is the side bar collapsed? (boolean)
+  sideNavWidth = computed(() => this.collapsed() ? '65px' : '350px'); // Width of the Side Navigation Bar
+  oneStep: any; // Holds the step that is being currently completed.
+  userChoices: Map<string, string> = new Map(); // Map holding the user's choices for a textbox or checkbox.
   editorContent: any;
 
   constructor(
@@ -62,7 +57,8 @@ export class InvestigationComponent implements OnInit {
     private authService: AuthService,
     private investigationService: InvestigationService,
     private dialog: MatDialog,
-    private processService: ProcessService
+    private processService: ProcessService,
+    private documentService: DocumentService
    
   ) {
     this.investigationId = this.route.snapshot.params['id'];
@@ -94,7 +90,7 @@ export class InvestigationComponent implements OnInit {
         if (this.investigationDetails.steps) {
           this.investigationDetails.steps[0].isVisible = true;
           this.oneStep = this.investigationDetails.steps[0];
-          //this.investigationService.setDocumentDetails(this.investigationDetails.entityId, this.investigationDetails.investigationLabel,this.oneStep.id);
+          this.documentService.setDocumentDetails(this.investigationDetails.entityId, this.investigationDetails.investigationLabel,this.oneStep.id);
  
         }
       },
@@ -103,8 +99,6 @@ export class InvestigationComponent implements OnInit {
       }
     );
   }
-
-  // -- DIVIDER Ruban's methods below
 
   getStep(stepUuid: string) {
     for (const step of this.investigationDetails.steps) {

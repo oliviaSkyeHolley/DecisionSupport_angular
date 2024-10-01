@@ -36,12 +36,13 @@ export class InvestigationService {
   patchInvestigation(investigationId: string, newSteps: any): Observable<Investigation> {
     console.log(investigationId);
     console.log(`${environment.patchInvestigationURL}${investigationId}`);
-    const headers =this.authService.getHeaders();
+    console.log("Content of the patch: ", newSteps);
+    const headers = this.authService.getHeaders();
     return this.http.patch<Investigation>(`${environment.patchInvestigationURL}${investigationId}`, newSteps, { headers });
   }
 
   archiveInvestigation(investigationId:string): Observable<any>{
-    const headers =this.authService.getHeaders();
+    const headers = this.authService.getHeaders();
     return this.http.delete<Investigation>(`${environment.archiveInvestigationURL}${investigationId}`, { headers });
   }
 }
