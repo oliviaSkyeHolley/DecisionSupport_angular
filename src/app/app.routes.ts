@@ -15,7 +15,7 @@ export const appRoutes: Routes = [
     { path: 'Report-Generator', component: ReportGeneratorComponent},
     { path: 'process', component:ProcessListComponent, canActivate: [AuthGuard]},
     { path: 'process/:id',component:ManageProcessComponent, canActivate: [AuthGuard]},
-    { path: 'process/:id/update', canActivate: [AuthGuard]},
+    //{ path: 'process/:id/update', canActivate: [AuthGuard]},
     { path: 'support', component: InvestigationListComponent, canActivate: [AuthGuard]},
     { path: 'support/:id', component: InvestigationComponent, canActivate: [AuthGuard]},
     { path: '**', redirectTo: 'user/login' }
