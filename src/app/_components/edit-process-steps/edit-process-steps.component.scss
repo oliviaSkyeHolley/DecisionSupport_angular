@@ -1,0 +1,73 @@
+/* Table styling */
+
+.mat-mdc-header-row{
+  background-color: #7a9bbf !important;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+
+}
+
+
+
+.mat-mdc-table{
+  border-radius: 8px;
+  overflow:hidden !important;
+  background-color: white !important;
+  box-shadow: none;
+}
+
+mat-cell {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 16px;
+}
+mat-cell button {
+    background-color: #accbe3;
+    color: #fff;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    box-shadow: none;
+    transition: background-color 0.3s ease;
+}
+
+mat-cell button:hover {
+  background-color: #7a9bbf;
+  color: #fff;
+  border-radius: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+  transition: background-color 0.3s ease;
+}
+
+.save-button{
+    background-color: #fff;
+}
+.stepid{
+    font-weight: 600;
+}
+
+.mat-column-description{
+    flex: 0 0 40%;
+}
+
+/* No Data Styling */
+.noData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10%;
+}
+
+.noData p {
+    font-weight: 500;
+    color: rgb(183, 183, 183);
+    margin-bottom: 20px;
+}
+
+

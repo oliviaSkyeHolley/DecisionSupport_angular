@@ -1,0 +1,26 @@
+
+
+.fadeIn {
+  animation: fadeIn 5s;
+  display: block;
+  margin-left: -15;
+  margin-right: auto;
+  width: 50%;
+  float:left;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+h2 {
+  float:right;
+  font-size: 35px;
+}
+
+.container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 5px;
+}
