@@ -39,8 +39,9 @@ export class NewInvestigationDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //fills the processId array with the currently available processes.
+    //fills the processId array with the currently available processes (i.e. ones that have the Published revision status).
     this.processService.getProcessList().subscribe((processes: ProcessList[]) => {
+      processes = processes.filter(process => process.revisionStatus == 'Published');
       this.processId = processes.map(process => ({
         value: process.entityId,
         label: process.label

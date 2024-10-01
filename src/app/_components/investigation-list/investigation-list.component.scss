@@ -81,7 +81,16 @@ a:visited {
 
 }
 
-
+.mat-mdc-row:nth-child(even) {
+  background-color: #F0F0F1;
+}
+.mat-mdc-row:nth-child(odd) {
+  background-color: #fff;
+}
+mat-cell {
+  border-bottom: 1px solid #E0E0E0;
+  padding: 16px;
+}
 
 .mat-mdc-table{
   border-radius: 8px;
