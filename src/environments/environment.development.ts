@@ -19,7 +19,7 @@ export const environment = {
   getInvestigationListURL: 'http://complaintdrupal.local/rest/investigation/list',
   postInvestigationURL: 'http://complaintdrupal.local/rest/investigation/post',
   patchInvestigationURL: 'http://complaintdrupal.local/rest/investigation/update/',
-  archiveInvestigationURL: 'http://complaintdrupal.local/rest/investigation/delete/{investigationId}',
+  archiveInvestigationURL: 'http://complaintdrupal.local/rest/investigation/delete/',
 
   //Document Upload Endpoints
   fileUploadURL: 'http://complaintdrupal.local/file/upload/investigation_documents/_/file',

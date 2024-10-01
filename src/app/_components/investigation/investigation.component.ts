@@ -5,7 +5,7 @@
  *  This component takes the JSON string from the backend and renders a form to be filled out.
  */
 
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
@@ -39,6 +39,7 @@ import {MatTooltip} from "@angular/material/tooltip";
 
 export class InvestigationComponent implements OnInit {
   // Variables: Rendering of the form. 
+  @ViewChild(DocumentUploadComponent) documentUploadComponent!: DocumentUploadComponent;
   investigation: Investigation | undefined; // Object of the investigation.
   investigationId: string;
   investigationDetails: any;
@@ -105,7 +106,8 @@ export class InvestigationComponent implements OnInit {
     for (const step of this.investigationDetails.steps) {
       if (step && step.stepUuid == stepUuid) {
         this.oneStep = step;
-        //this.investigationService.setDocumentDetails(this.investigationDetails.entityId, this.investigationDetails.label,this.oneStep.id);
+        this.documentService.setDocumentDetails(this.investigationDetails.entityId, this.investigationDetails.label,this.oneStep.id);
+        this.documentUploadComponent.getDocumentList();
         this.investigation = new Investigation(this.oneStep.entityId, this.oneStep.investigationLabel, this.oneStep.investigationId);
 
       }
@@ -167,6 +169,7 @@ export class InvestigationComponent implements OnInit {
       step.isVisible = this.checkVisibility(step);
     }
   }
+
   checkVisibility(step: any): boolean {
     //if there are no conditions, the step is always visible
     if (!step.conditions || step.conditions.length === 0 || step.isCompleted === true) {
@@ -180,5 +183,12 @@ export class InvestigationComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  checkRequiredStatus(step: any): boolean{
+    if(step.required == 0){
+      return false;
+    }
+    return true;
   }
 }

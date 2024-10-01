@@ -52,9 +52,13 @@ export class DocumentUploadService {
     return this.http.post(this.createEntityUrl, postData, {headers});
   }
 
+  archiveInvestigationDocument(fileId: string){
+    const headers =this.authService.getHeaders();
+    return this.http.patch<any[]>(`${environment.archiveInvestigationDocumentsURL}${fileId}`, {headers});
+  }
+
   getDocumentlist(investigationId:string){
     const headers =this.authService.getHeaders();
     return this.http.get<any[]>(`${environment.getInvestigationDocumentsURL}${investigationId}`, {headers});
   }
-
 }
