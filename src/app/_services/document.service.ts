@@ -6,14 +6,12 @@
  */
 
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class InvestigationService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+export class DocumentService {
+  constructor() {}
 
   investigationId!: string; //linked investigation 
   label!: string; //name of doucment

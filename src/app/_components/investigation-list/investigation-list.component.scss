@@ -59,7 +59,7 @@ a:visited {
 
 .addbutton{
   color:#ffff;
-  background-color: #accbe3;
+  background-color: #143354;
   border-radius: 10px;
   font-size: 18px;
   font-weight: bold;
@@ -74,14 +74,23 @@ a:visited {
 }
 
 .mat-mdc-header-row{
-  background-color: #7a9bbf !important;
+  background-color: #143354 !important;
   color: white;
   border-radius: 10px;
   font-size: 16px;
 
 }
 
-
+.mat-mdc-row:nth-child(even) {
+  background-color: #F0F0F1;
+}
+.mat-mdc-row:nth-child(odd) {
+  background-color: #fff;
+}
+mat-cell {
+  border-bottom: 1px solid #E0E0E0;
+  padding: 16px;
+}
 
 .mat-mdc-table{
   border-radius: 8px;

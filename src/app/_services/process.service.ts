@@ -43,7 +43,7 @@ export class ProcessService {
   
   archiveProcess(processId:string): Observable<any>{
     const headers = this.authService.getHeaders();
-    return this.http.delete<Process>(`${environment.archiveProcessURL}${processId}`,{headers}); // should this still be have 'delete' or are do we just need to patch: visible = 'no'?
+    return this.http.patch<Process>(`${environment.archiveProcessURL}${processId}`,{headers}); 
   }
 
   //Step Functions: GET POST PATCH DELETE

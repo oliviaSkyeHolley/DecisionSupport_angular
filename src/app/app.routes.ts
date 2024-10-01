@@ -10,7 +10,7 @@ import {ReportGeneratorComponent} from "./_components/Report-Generator/report-ge
 
 
 export const appRoutes: Routes = [
-    { path: 'login', component: AuthenticateComponent},
+    { path: 'user/login', component: AuthenticateComponent},
     { path: 'home', component: HomeComponent},
     { path: 'Report-Generator', component: ReportGeneratorComponent},
     { path: 'process', component:ProcessListComponent, canActivate: [AuthGuard]},
@@ -18,5 +18,5 @@ export const appRoutes: Routes = [
     //{ path: 'process/:id/update', canActivate: [AuthGuard]},
     { path: 'support', component: InvestigationListComponent, canActivate: [AuthGuard]},
     { path: 'support/:id', component: InvestigationComponent, canActivate: [AuthGuard]},
-    { path: '**', redirectTo: 'login' }
+    { path: '**', redirectTo: 'user/login' }
 ];

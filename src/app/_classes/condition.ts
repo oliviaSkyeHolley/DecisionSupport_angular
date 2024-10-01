@@ -8,11 +8,10 @@
 
 export class Condition{
 
-    constructor(conditionId:string, stepUuid: string, choiceUuid: string, priority: string){
+    constructor(conditionId:string, stepUuid: string, choiceUuid: string){
         this.conditionId = conditionId;
         this.stepUuid = stepUuid;
         this.choiceUuid = choiceUuid;
-        this.priority = priority;
     }
     /**
      * represents the id of a condition
@@ -28,10 +27,5 @@ export class Condition{
      * represents a choice using its unique identifier(uuid)
      */
     choiceUuid: string;
-    
-    /**
-     * decides the priority of the conditions(1,2,3...)
-     */
-    priority: string;
     
 }

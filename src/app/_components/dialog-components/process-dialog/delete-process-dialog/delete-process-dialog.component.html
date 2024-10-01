@@ -1,8 +1,13 @@
+<!--
+  @component Delete Process Dialog Component
+  @description Dialog with confirmation message and actions to delete a process.
+-->
+
+<!-- Mat Dialog with Mesaage and action buttons -->
 <h2 mat-dialog-title>Delete Process</h2>
 <mat-dialog-content>
     <p>Are you sure you want to delete this process?</p>
 </mat-dialog-content>
-
 <mat-dialog-actions>
     <button class="closeButton" mat-button (click)="close()">Cancel</button>
     <button class="binButton" mat-button color="primary" (click)="ok()">Delete</button>

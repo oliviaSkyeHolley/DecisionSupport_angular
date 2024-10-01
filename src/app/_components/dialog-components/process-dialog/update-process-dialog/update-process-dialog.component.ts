@@ -1,3 +1,9 @@
+/**
+ * @whatItDoes This Dialog Component displays a dialog with form inputs to update a existing process.
+ *
+ * @description
+ * The form will be prefilled with the existing process details. The user can make changes and update the process.
+ */
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -16,16 +22,18 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './update-process-dialog.component.scss'
 })
 export class UpdateProcessDialogComponent {
-
+  /** Declare Form Group */
   form: FormGroup;
+  /** Set the Revision Status Values */
   revisionStatus: RevisionStatus[] = [
     { value: 'Archived', label: 'Archived' },
     { value: 'Draft', label: 'Draft' },
     { value: 'Published', label: 'Published' }
   ];
 
-  constructor( private fb: FormBuilder,public dialogRef: MatDialogRef<UpdateProcessDialogComponent>,
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<UpdateProcessDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+    // Inject the existing process details into form group elements
     this.form = this.fb.group({
       label: [this.data.process.label],
       revision_status: [this.data.process.revisionStatus],
@@ -33,13 +41,18 @@ export class UpdateProcessDialogComponent {
     });
   }
 
+  /** When user closes the dialog */
   close(): void {
+    // Close the dialog and reset the form fields.
     this.dialogRef.close(null);
     this.form.reset();
-    }
+  }
 
-  onSave(): void {
+  /** When user clicks the update button */
+  onUpdate(): void {
+    // Check is form valid and submit the form if its valid
     if (this.form.valid) {
+      // Build the complte process structure
       const updatedProcess = {
         ...this.data,
         label: this.form.value.label,
@@ -51,6 +64,7 @@ export class UpdateProcessDialogComponent {
   }
 }
 
+/** Interface for revision status */
 interface RevisionStatus {
   value: string;
   label: string;

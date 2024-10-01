@@ -14,8 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { ProcessService } from '../../../_services/process.service';
-import { ProcessList } from '../../../_classes/process-list';
+import { ProcessService } from '../../../../_services/process.service';
+import { ProcessList } from '../../../../_classes/process-list';
 
 @Component({
   selector: 'app-new-investigation-dialog',
@@ -39,8 +39,9 @@ export class NewInvestigationDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //fills the processId array with the currently available processes.
+    //fills the processId array with the currently available processes (i.e. ones that have the Published revision status).
     this.processService.getProcessList().subscribe((processes: ProcessList[]) => {
+      processes = processes.filter(process => process.revisionStatus == 'Published');
       this.processId = processes.map(process => ({
         value: process.entityId,
         label: process.label

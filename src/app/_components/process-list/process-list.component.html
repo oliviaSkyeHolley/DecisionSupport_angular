@@ -79,12 +79,12 @@
     </mat-cell>
   </ng-container>
 
-  <!-- Display no data available message if no processes available -->
-  <div *matNoDataRow class="noData">
-    <img src="/assets/noData.jpg" />
-    <p>No Process Found - Add Process</p>
-    <button class="createbutton">Create Process</button>
-  </div>
+    <!-- Display no data available message if no processes available -->
+    <div *matNoDataRow class="noData">
+        <img src="/assets/noData.jpg" />
+        <p>No Process Found - Add Process</p>
+            <button class="createbutton" (click)="createProcess()">Create Process</button>     
+    </div>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

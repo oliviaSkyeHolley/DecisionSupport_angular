@@ -1,11 +1,18 @@
+<!--
+  @component Duplicate Process Dialog Component
+  @description Dialog with prefilled form fields of a existing process and action to  create a new duplicated process.
+-->
 
+<!-- Mat Dialog with form -->
 <h2 mat-dialog-title>Duplicate Process</h2>
-<form [formGroup]="form" (ngSubmit)="onSave()">
+<form [formGroup]="form" (ngSubmit)="onDuplicate()">
   <mat-dialog-content>
+    <!-- Title-->
     <p>Title</p>
     <mat-form-field appearance="outline">
       <input matInput formControlName="label" placeholder="Title" required>
     </mat-form-field>
+    <!-- Revision Status -->
     <p>Revision Status</p>
     <mat-form-field appearance="outline">
       <mat-select formControlName="revision_status" placeholder="Select Revision Status" required>
@@ -13,7 +20,7 @@
       </mat-select>
     </mat-form-field>
   </mat-dialog-content>
-
+  <!-- DIalog Actions- Close & Duplicate-->
   <mat-dialog-actions>
     <button class="closeButton" mat-button (click)="close()">Close</button>
     <button class="createButton" mat-button color="primary" type="submit" [disabled]="form.invalid">Duplicate</button>
