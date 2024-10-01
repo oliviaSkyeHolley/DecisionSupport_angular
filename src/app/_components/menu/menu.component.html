@@ -8,7 +8,7 @@
     <a [routerLink]="['/home']" [ngClass]="{'active': isActive('/home')}">Home</a>
     <a [routerLink]="['/process']" [ngClass]="{'active': isActive('/process')}">Process Builder</a>
     <a [routerLink]="['/support']" [ngClass]="{'active': isActive('/support')}">Decision Support</a>
-    <a [routerLink]="['/generate/report']" [ngClass]="{'active': isActive('/generate/report')}">Generate Report</a>
+    <a [routerLink]="['/Report-Generator']" [ngClass]="{'active': isActive('/Report-Generator')}">Generate Report</a>
     <button (click)="logout()" *ngIf="authService.isLoggedIn()">Logout</button>
   </mat-toolbar>
 </div>
