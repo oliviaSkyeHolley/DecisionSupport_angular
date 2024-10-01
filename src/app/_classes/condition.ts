@@ -8,7 +8,7 @@
 
 export class Condition{
 
-    constructor(conditionId:string, stepUuid: string, choiceUuid: string){
+    constructor(conditionId:number, stepUuid: string, choiceUuid: string){
         this.conditionId = conditionId;
         this.stepUuid = stepUuid;
         this.choiceUuid = choiceUuid;
@@ -16,7 +16,7 @@ export class Condition{
     /**
      * represents the id of a condition
      */
-    conditionId: string;
+    conditionId: number;
     
     /**
      * determines the step using its unique identifier(uuid)

@@ -124,7 +124,7 @@ export class ProcessListComponent {
 
   /** Opens CreateProcessDialog and then request the backend to create a new process with the provided data. */
   createProcess(): void {
-    const dialogRef = this.dialog.open(CreateProcessDialogComponent, { width: '400px' });
+    const dialogRef = this.dialog.open(CreateProcessDialogComponent, { width: '450px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.processService.postProcess(result).subscribe({

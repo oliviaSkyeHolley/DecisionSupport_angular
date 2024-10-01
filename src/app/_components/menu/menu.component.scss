@@ -1,5 +1,5 @@
-/* Menu Bar */
-mat-toolbar{
+/* Toolbar */
+mat-toolbar {
   background-color: #ffff;
   padding: 10px 24px;
   height: 80px;
@@ -9,8 +9,15 @@ mat-toolbar{
   box-shadow: 0 4px 8px rgba(143, 143, 143, 0.1);
 }
 
+/* Container for navigation links */
+.nav-links {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
 /* Menubar Links */
-a{
+a {
   text-decoration: none;
   color: black;
   font-size: 16px;
@@ -22,7 +29,7 @@ a{
 }
 
 /* Active Link */
-a.active{
+a.active {
   background-color: #143354;
   color: #ffff;
   border-radius: 10px;
@@ -40,68 +47,49 @@ a.active{
   }
 }
 
-
-//Making sure there is some white space
+/* Menu Container */
 .menu {
-
   background-color: white;
   border-top: 4px;
   border-bottom: 4px;
   padding-right: 25px;
   padding-left: 15px;
-
 }
 
-
-.logoButton{
+/* Logo */
+.logoButton {
   float: left;
   position: relative;
   text-align: center;
   padding: 14px 50px 14px 16px;
 }
 
-button{
+/* Logout Button */
+button {
   background-color: transparent;
   color: grey !important;
-  width: 5%;
-  position: relative;
-  left: 350px;
-  // top: 10px;
+  width: auto;
   text-align: center;
   border-radius: 5px;
-  float: right;
-  border-style: solid;
   border: none;
   font-size: 17px;
-  cursor:pointer;
+  cursor: pointer;
+  margin-left: auto;
 }
 
 button:hover {
-  background-color:#accbe3;
+  background-color: #accbe3;
   color: white !important;
   transition: 0.7s;
   font-size: 17px;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-hr {
-  margin: 30px -20px 10px;
-  border: 5px;
-  border-top: 1px solid #efeded;
-}
-
-img{
+/* Image Style */
+img {
   padding-top: 1px;
   mix-blend-mode: multiply;
-
-
   position: absolute;
-  // padding-right: 300px;
-
-  //position: relative;
   left: -10px;
   top: -22px;
-  //text-align: center;
-  //float: left;
-  //cursor:pointer;
 }

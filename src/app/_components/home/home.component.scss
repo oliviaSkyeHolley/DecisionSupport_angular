@@ -3,10 +3,7 @@
 .fadeIn {
   animation: fadeIn 5s;
   display: block;
-  margin-left: -15;
-  margin-right: auto;
-  width: 50%;
-  float:left;
+  margin-left: 5%;
 }
 @keyframes fadeIn {
   0% { opacity: 0; }
@@ -14,7 +11,7 @@
 }
 
 h2 {
-  float:right;
+
   font-size: 35px;
 }
 

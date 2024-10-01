@@ -23,7 +23,7 @@ body {
 .top-container h2 {
     font-size: 24px;
     font-weight: 600;
-    color: #7a9bbf;
+    color: #143354;
 
 }
 
@@ -79,11 +79,15 @@ body {
   overflow:hidden !important;
 }
 
-
-
+.mat-mdc-row:nth-child(even) {
+  background-color: #ebebeb;
+}
+.mat-mdc-row:nth-child(odd) {
+  background-color: #fff;
+}
 mat-cell {
-    border-bottom: 1px solid #e0e0e0;
-    padding: 16px;
+  border-bottom: 1px solid #E0E0E0;
+  padding: 16px;
 }
 /*
 mat-cell button {
@@ -155,7 +159,7 @@ a:visited {
 }
 
 .iconButton{
-  background-color: #accbe3;
+  background-color: #143354;
   color: #fff;
   border-radius: 6px;
   margin-right: 10px;

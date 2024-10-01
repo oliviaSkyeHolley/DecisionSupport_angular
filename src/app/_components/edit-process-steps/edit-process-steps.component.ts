@@ -142,12 +142,11 @@ export class EditProcessStepsComponent {
   }
 
   /** Delete the step from the object array and request the backend to save the changes */
-  deleteStep(uuid: any): void {
+  deleteStep(stepUuid: any): void {
     // FInd the deleted step Index and remove the step from array
-    const index = this.processDetails.steps.findIndex(step => step.stepUuid == uuid);
+    const index = this.processDetails.steps.findIndex(step => step.stepUuid == stepUuid);
     if (index != null) {
-      const dependantSteps = this.processDetails.steps.filter(step =>
-        step.conditions.filter(condition => condition.stepUuid === uuid).length > 0);
+      const dependantSteps = this.processDetails.steps.filter(step => step.conditions.filter(condition => condition.stepUuid === stepUuid).length > 0);
 
       const dialogRef = this.dialog.open(DeleteProcessStepDialogComponent, {
         width: '40%',
@@ -155,16 +154,10 @@ export class EditProcessStepsComponent {
       });
       dialogRef.afterClosed().subscribe((result: any) => {
         if (result) {
-          for (let dependantStep of dependantSteps) {
-            for (let step of this.processDetails.steps) {
-              // Check if dependantStep's stepUuid matches with step's stepUuid
-              if (dependantStep.stepUuid === step.stepUuid) {
-                // Filter out the condition where the stepUuid matches dependantStep
-                step.conditions = step.conditions.filter(condition => condition.stepUuid !== dependantStep.stepUuid);
-              }
-            }
-          }
+          this.deleteCondition(dependantSteps, stepUuid);
+          // Remove the step
           this.processDetails.steps.splice(index, 1);
+          //Generate new id for steps
           let newId = 1 ;
           this.processDetails.steps.forEach(step => step.id = newId++);
           this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
@@ -189,5 +182,21 @@ export class EditProcessStepsComponent {
       }
       );
     } 
+  }
+
+  /** When deleting a step remove the condition dependency with other steps  */
+  deleteCondition(dependantSteps: any, stepUuid: any):void{
+    for (let dependantStep of dependantSteps) {
+      for (let step of this.processDetails.steps) {
+        // Check if dependantStep's stepUuid matches with step's stepUuid
+        if (dependantStep.stepUuid === step.stepUuid) {
+          // Filter out the condition where the stepUuid matches dependantStep
+          step.conditions = step.conditions.filter(condition => condition.stepUuid !== stepUuid);
+          let newId = 1 ;
+          this.processDetails.steps.forEach(step => step.conditions.forEach(condition => condition.conditionId  = newId++));
+        }
+      }
+    }
+
   }
 }

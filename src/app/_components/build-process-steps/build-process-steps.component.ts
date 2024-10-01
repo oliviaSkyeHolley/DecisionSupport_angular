@@ -116,7 +116,7 @@ export class BuildProcessStepsComponent {
         this.processService.updateProcessStep(this.processDetails.entityId, this.processDetails).subscribe({
           next: (response) => {
             // Log Success Message
-            console.log('Successfully added step:', result);
+            console.log('Successfully added step');
             this.snackBar.open('New Step Added', 'Ok', {
               duration: 1000
             });
