@@ -3,6 +3,9 @@ import {MenuComponent} from "../menu/menu.component";
 import {NgIf} from "@angular/common";
 import { AuthService } from '../../_services/auth.service';
 import { RouterLink } from '@angular/router';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import {InvestigationList} from "../../_classes/investigation-list";
+
 
 @Component({
   selector: 'app-home',
@@ -10,9 +13,11 @@ import { RouterLink } from '@angular/router';
   imports: [
     MenuComponent,
     NgIf,
-    RouterLink
+    RouterLink,
+    MatTable,
+    MatTableModule,
   ],
-  templateUrl: './report-generator.component.html',
+  templateUrl: './ReportGenerator.component.html',
   /* template: `
      <section>
        <form>
@@ -21,10 +26,13 @@ import { RouterLink } from '@angular/router';
        </form>
      </section>
  `, */
-  styleUrl: './report-generator.component.scss'
+  styleUrl: './ReportGenerator.component.scss'
 })
 
 export class ReportGeneratorComponent {
+
+  investigations: ReportGenerator[] = []; // Create an array of InvestigationList objects.
+  displayedColumns: string[] = ['ReportGeneratorId', 'name', 'processId', 'createdTime', 'actions']; // machine names for the table's columns.
 
 }
 /*export class AuthenticateComponent {

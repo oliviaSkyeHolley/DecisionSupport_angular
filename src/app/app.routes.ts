@@ -6,7 +6,7 @@ import {AuthGuard} from './_services/auth.guard';
 import { ManageProcessComponent } from './_components/manage-process/manage-process.component';
 import { InvestigationComponent } from './_components/investigation/investigation.component';
 import {HomeComponent} from "./_components/home/home.component";
-import {ReportGeneratorComponent} from "./_components/Report-Generator/report-generator.component";
+import {ReportGeneratorComponent} from "./_components/ReportGenerator/ReportGenerator.component";
 
 
 export const appRoutes: Routes = [

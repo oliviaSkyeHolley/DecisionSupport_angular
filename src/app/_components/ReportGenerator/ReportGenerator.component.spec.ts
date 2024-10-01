@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportGeneratorComponent } from './report-generator.component';
+import { ReportGeneratorComponent } from './ReportGenerator.component';
 //for the home page
 describe('ReportGeneratorComponent', () => {
     let component: ReportGeneratorComponent;
