@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuComponent } from './menu.component';
-
-describe('MenuComponent', () => {
-  let component: MenuComponent;
-  let fixture: ComponentFixture<MenuComponent>;
+import { HomeComponent } from './home.component';
+//for the home page
+describe('HomeComponent', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MenuComponent]
+      imports: [HomeComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(MenuComponent);
+    fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -21,4 +21,3 @@ describe('MenuComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

@@ -27,11 +27,12 @@ import { ProcessService } from '../../_services/process.service';
 import { AuthService } from '../../_services/auth.service';
 import { DocumentUploadComponent } from '../document-upload/document-upload.component';
 import { DocumentService } from '../../_services/document.service';
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-investigation',
   standalone: true,
-  imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, DocumentUploadComponent],
+  imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, MatTooltip, DocumentUploadComponent],
   templateUrl: './investigation.component.html',
   styleUrl: './investigation.component.scss'
 })
@@ -63,7 +64,7 @@ export class InvestigationComponent implements OnInit {
   ) {
     this.investigationId = this.route.snapshot.params['id'];
     this.investigationDetails = this.route.snapshot.params['json_string'];
-    
+
   }
 
   ngOnInit() {
@@ -91,7 +92,7 @@ export class InvestigationComponent implements OnInit {
           this.investigationDetails.steps[0].isVisible = true;
           this.oneStep = this.investigationDetails.steps[0];
           this.documentService.setDocumentDetails(this.investigationDetails.entityId, this.investigationDetails.investigationLabel,this.oneStep.id);
- 
+
         }
       },
       (error) => {

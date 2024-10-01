@@ -1,22 +1,18 @@
 /* Table styling */
-.mat-mdc-header-row {
-    background-color: #143354 !important;
-    color: white;
-    border-radius: 10px;
-    font-size: 16px;
+
+.mat-mdc-header-row{
+  background-color: #7a9bbf !important;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+
 }
 
-.mat-mdc-table {
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(112, 112, 112, 0.1);
-}
-
-.mat-mdc-row:nth-child(even) {
-    background-color: #f0f0f1;
-}
-
-.mat-mdc-row:nth-child(odd) {
-    background-color: #fff;
+.mat-mdc-table{
+  border-radius: 8px;
+  overflow:hidden !important;
+  background-color: white !important;
+  box-shadow: none;
 }
 
 mat-cell {
@@ -25,16 +21,27 @@ mat-cell {
 }
 
 mat-cell button {
-    background-color: #143354;
+    background-color: #accbe3;
     color: #fff;
     border-radius: 6px;
-    padding: 8px 16px;
-    font-size: 14px;
     margin-right: 10px;
+    padding: 8px 8px;
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
 }
+
+mat-cell button:hover {
+  background-color: #7a9bbf;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 8px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
 
 .stepid {
     font-weight: 600;
@@ -54,8 +61,10 @@ mat-cell button {
 }
 
 .search-div mat-form-field {
-    width: 400px; 
-    flex: 1; 
+    width: 400px;
+    height: 80px;
+    top: 600px;
+    flex: 1;
 }
 
 
@@ -80,21 +89,43 @@ mat-cell button {
 /** Create Button Styling */
 .addbutton {
     color: #fff;
-    background-color: #143354;
-    border-radius: 8px;
+    background-color: #accbe3;
+    border-radius: 10px;
     padding: 12px 24px;
     font-size: 16px;
     font-weight: bold;
     transition: background-color 0.3s ease;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.2);
+    box-shadow: none;
     border: none;
 }
 
+.viewButton{
+
+}
+
+
+
 .createbutton:hover {
-    background-color: #1b4671;
+    background-color: #7a9bbf;
 }
 
 .pr-addbutton {
-    background-color: #fff;
+    background-color: #accbe3;
+    color: white;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.pr-addbutton:hover {
+  background-color: #7a9bbf;
+  color: white;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+
+:host ::ng-deep .mdc-text-field--outlined{
+  --mdc-outlined-text-field-container-shape: 15px;
+
 }

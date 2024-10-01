@@ -9,12 +9,12 @@
     <mat-dialog-content>
         <!-- Title -->
         <p>Title</p>
-        <mat-form-field>
+        <mat-form-field appearance="outline" >
             <input matInput formControlName="label" placeholder="Title" required>
         </mat-form-field>
         <!-- Revision Status -->
         <p>Revision Status</p>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-select formControlName="revision_status" placeholder="Select Revision Status">
                 <mat-option *ngFor="let status of revisionStatus" [value]="status.value">{{ status.label }}</mat-option>
             </mat-select>
@@ -22,7 +22,7 @@
     </mat-dialog-content>
     <!-- DIalog Actions- Close & Save-->
     <mat-dialog-actions>
-        <button mat-button (click)="close()">Close</button>
-        <button mat-button color="primary" type="submit" [disabled]="form.invalid">Create</button>
+        <button class="closeButton" mat-button (click)="close()">Close</button>
+        <button class="createButton" mat-button color="primary" type="submit" [disabled]="form.invalid">Create</button>
     </mat-dialog-actions>
 </form>

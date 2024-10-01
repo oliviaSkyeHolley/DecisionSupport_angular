@@ -40,22 +40,21 @@
           </button>
         </mat-form-field>
       </div>
-      <!-- Add Choice -->
-      <button mat-button type="button" (click)="addChoice()">Add Option</button>
+      <button class="add" mat-button type="button" (click)="addChoice()">Add Option</button>
     </div>
 
     <!-- Process Step Condition -->
     <p>Logic:</p>
     <div *ngFor="let condition of formData.conditions; let i = index">
       <!-- Condition Step description -->
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <p>Condition {{ i + 1 }}</p>
         <mat-select [(ngModel)]="condition.stepUuid" name="conditionStep{{i}}" (selectionChange)="updateStepConditionChoices(condition.stepUuid, i)" placeholder="Select Step" (ngModelChange)="addDataToLocalStorage()"  required>
           <mat-option *ngFor="let step of filteredStepsData" [value]="step.stepUuid">{{ step.id }}. {{ step.description }}</mat-option>
         </mat-select>
       </mat-form-field>
       <!-- Condition Step Value-->
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <p>Value is</p>
         <mat-select [(ngModel)]="condition.choiceUuid" name="conditionChoice{{i}}" placeholder="Select Value" (ngModelChange)="addDataToLocalStorage()"  required>
           <mat-option *ngFor="let choice of condition.stepChoices" [value]="choice.choiceUuid">{{ choice.description }}</mat-option>
@@ -67,11 +66,11 @@
       </mat-form-field>
     </div>
     <!-- Add Condition -->
-    <button mat-button type="button" (click)="addCondition()">Add Condition</button>
+    <button class="add" mat-button type="button" (click)="addCondition()">Add Condition</button>
   </mat-dialog-content>
   <!-- Dialog Actions - Close & Create-->
   <mat-dialog-actions>
-    <button mat-button (click)="close()">Close</button>
-    <button mat-button color="primary" type="submit" [disabled]="stepForm.invalid">Create</button>
+    <button class="closeButton" mat-button (click)="close()">Close</button>
+    <button class="createButton" mat-button color="primary" type="submit" [disabled]="stepForm.invalid">Create</button>
   </mat-dialog-actions>
 </form>

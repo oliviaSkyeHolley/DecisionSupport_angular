@@ -2,7 +2,7 @@
   @component Manage Process Component
   @description Lists three tabs Build, Edit, Preview and allows user to navigate to each tab.
 -->
-
+<div class="wrapper">
 <!-- The top container div containing title, tab group-->
 <div class="top-container">
     <div class="header">
@@ -25,4 +25,6 @@
     <ng-container *ngIf="selectedTabIndex === 1"><app-edit-process-steps></app-edit-process-steps></ng-container>
     <!-- Display the preview process component when the selectedTabIndex is 2 -->
     <ng-container *ngIf="selectedTabIndex === 2"><app-preview-process-steps></app-preview-process-steps></ng-container>
+</div>
+
 </div>

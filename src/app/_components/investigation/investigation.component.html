@@ -16,7 +16,8 @@
             <!-- Round number display icon (goes green when step is completed) -->
             <span>
               <ng-content select="[icon]">
-                <button mat-mini-fab [ngClass]="{'completed-step': step.isCompleted}">{{step.id}}</button>
+                <button mat-mini-fab [ngClass]="{'completed-step': step.isCompleted, 'uncomplete': step}"  [matTooltip]="step.description" matTooltipClass="title-hover"
+                        aria-label="Button that display a tooltip in various positions">{{step.id}}</button>
               </ng-content>
             </span>
             <!-- Text describing step (number + text) -->
@@ -25,16 +26,21 @@
                 <span>Step {{step.id}} - {{step.description}}</span>
               </ng-content>
             </span>
-          </a>
-          <mat-divider></mat-divider>
-        </div>
-      </div>
-    </mat-nav-list>
+              </a>
+              <mat-divider></mat-divider>
+            </div>
+          </div>
+        </mat-nav-list>
 
     <!-- Sidebar extension/retraction toggle button as an arrow -->
     <button mat-icon-button class="toggle-button" (click)="collapsed.set(!collapsed())">
-      <mat-icon>{{ !collapsed() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
-    </button>
+      <mat-icon [ngStyle]="{'color':'#accbe3'}">{{ !collapsed() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+    </button> -->
+
+        <!-- Toggle button as an arrow -->
+        <button mat-icon-button class="toggle-button" (click)="collapsed.set(!collapsed())">
+          <mat-icon  [ngStyle]="{'color':'#accbe3'}">{{ !collapsed() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        </button>
   </mat-sidenav>
 
   <!-- Loop for each step of the process. -->

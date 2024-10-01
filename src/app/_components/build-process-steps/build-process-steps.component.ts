@@ -18,14 +18,14 @@ import { Step } from '../../_classes/step';
 import { Process } from '../../_classes/process';
 import { ViewProcessStepDialogComponent } from '../dialog-components/process-dialog/view-process-step-dialog/view-process-step-dialog.component';
 import { AddProcessStepDialogComponent } from '../dialog-components/process-dialog/add-process-step-dialog/add-process-step-dialog.component';
-import { MatFormField } from '@angular/material/form-field';
+import {MatFormField, MatPrefix} from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-build-process-steps',
   standalone: true,
-  imports: [MatTableModule, FormsModule, MatFormField, MatInput, MatButtonModule, MatIconModule, CommonModule],
+    imports: [MatTableModule, FormsModule, MatFormField, MatInput, MatButtonModule, MatIconModule, CommonModule, MatPrefix],
   templateUrl: './build-process-steps.component.html',
   styleUrl: './build-process-steps.component.scss'
 })

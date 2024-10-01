@@ -5,13 +5,17 @@ import {InvestigationListComponent} from './_components/investigation-list/inves
 import {AuthGuard} from './_services/auth.guard';
 import { ManageProcessComponent } from './_components/manage-process/manage-process.component';
 import { InvestigationComponent } from './_components/investigation/investigation.component';
+import {HomeComponent} from "./_components/home/home.component";
+import {ReportGeneratorComponent} from "./_components/Report-Generator/report-generator.component";
 
 
 export const appRoutes: Routes = [
     { path: 'user/login', component: AuthenticateComponent},
+    { path: 'home', component: HomeComponent},
+    { path: 'Report-Generator', component: ReportGeneratorComponent},
     { path: 'process', component:ProcessListComponent, canActivate: [AuthGuard]},
     { path: 'process/:id',component:ManageProcessComponent, canActivate: [AuthGuard]},
-    //{ path: 'process/:id/update', canActivate: [AuthGuard]},
+    { path: 'process/:id/update', canActivate: [AuthGuard]},
     { path: 'support', component: InvestigationListComponent, canActivate: [AuthGuard]},
     { path: 'support/:id', component: InvestigationComponent, canActivate: [AuthGuard]},
     { path: '**', redirectTo: 'user/login' }
