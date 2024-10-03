@@ -15,11 +15,11 @@ export const environment = {
   archiveProcessURL: 'http://complaintdrupal.local/rest/process/delete/',
 
   //Investigation Endpoints
-  getInvestigationURL: 'http://complaintdrupal.local/rest/investigation/get/',
-  getInvestigationListURL: 'http://complaintdrupal.local/rest/investigation/list',
-  postInvestigationURL: 'http://complaintdrupal.local/rest/investigation/post',
-  patchInvestigationURL: 'http://complaintdrupal.local/rest/investigation/update/',
-  archiveInvestigationURL: 'http://complaintdrupal.local/rest/investigation/delete/',
+  getInvestigationURL: 'http://complaintdrupal.local/rest/support/get/',
+  getInvestigationListURL: 'http://complaintdrupal.local/rest/support/list',
+  postInvestigationURL: 'http://complaintdrupal.local/rest/support/post',
+  patchInvestigationURL: 'http://complaintdrupal.local/rest/support/update/',
+  archiveInvestigationURL: 'http://complaintdrupal.local/rest/support/archive/',
 
   //Document Upload Endpoints
   fileUploadURL: 'http://complaintdrupal.local/file/upload/investigation_documents/_/file',
