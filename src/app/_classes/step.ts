@@ -44,7 +44,7 @@ export class Step {
     type: string;
 
     /**
-     * Determines a step is required to complete the investigation or not (0 - no, 1 -yes)
+     * Determines a step is required to complete the decision support or not (0 - no, 1 -yes)
      */
     required: string;
 

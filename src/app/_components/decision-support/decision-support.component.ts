@@ -1,5 +1,5 @@
 /**
- * @whatItDoes Where 'decision support' happens. The investigation component carries out a process and records the result.
+ * @whatItDoes Where 'decision support' happens. The decision support component carries out a process and records the result.
  *
  * @description
  *  This component takes the JSON string from the backend and renders a form to be filled out.
@@ -7,10 +7,8 @@
 
 import { Component, OnInit, signal, computed, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { MatDialog } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,94 +19,89 @@ import { MatListModule } from '@angular/material/list';
 import { MatDivider } from '@angular/material/divider';
 import { QuillModule } from 'ngx-quill';
 import { Step } from '../../_classes/step';
-import { Investigation } from '../../_classes/investigation';
-import { InvestigationService } from '../../_services/investigation.service';
-import { ProcessService } from '../../_services/process.service';
+import { DecisionSupport } from '../../_classes/decision-support';
+import { DecisionSupportService } from '../../_services/decision-support.service';
 import { AuthService } from '../../_services/auth.service';
 import { DocumentUploadComponent } from '../document-upload/document-upload.component';
 import { DocumentService } from '../../_services/document.service';
-import {MatTooltip} from "@angular/material/tooltip";
+import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
-  selector: 'app-investigation',
+  selector: 'app-decision-support',
   standalone: true,
   imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, MatTooltip, DocumentUploadComponent],
-  templateUrl: './investigation.component.html',
-  styleUrl: './investigation.component.scss'
+  templateUrl: './decision-support.component.html',
+  styleUrl: './decision-support.component.scss'
 })
 
-export class InvestigationComponent implements OnInit {
+export class DecisionSupportComponent implements OnInit {
   // Variables: Rendering of the form. 
   @ViewChild(DocumentUploadComponent) documentUploadComponent!: DocumentUploadComponent;
-  investigation: Investigation | undefined; // Object of the investigation.
-  investigationId: string;
-  investigationDetails: any;
+  decisionSupport: DecisionSupport | undefined; // Object of the decision support.
+  decisionSupportId: string;
+  decisionSupportDetails: any;
   processJson: any;
-  selectedValue: any;
-
-  // Variables: Sidebar and Logic
   collapsed = signal(false); // Is the side bar collapsed? (boolean)
   sideNavWidth = computed(() => this.collapsed() ? '65px' : '350px'); // Width of the Side Navigation Bar
-  oneStep: any; // Holds the step that is being currently completed.
-  userChoices: Map<string, string> = new Map(); // Map holding the user's choices for a textbox or checkbox.
-  editorContent: any;
+  oneStep: any; // Holds the step that is currently selected.
+  userChoices: Map<string, string> = new Map(); // Map holding the user's choices for a radiobutton or checkbox.
+  editorContent: any; // content of the quill enditor
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
     private authService: AuthService,
-    private investigationService: InvestigationService,
-    private dialog: MatDialog,
-    private processService: ProcessService,
+    private decisionSupportService: DecisionSupportService,
     private documentService: DocumentService
    
   ) {
-    this.investigationId = this.route.snapshot.params['id'];
-    this.investigationDetails = this.route.snapshot.params['json_string'];
+    this.decisionSupportId = this.route.snapshot.params['id'];
+    this.decisionSupportDetails = this.route.snapshot.params['json_string'];
 
   }
 
   ngOnInit() {
-    console.log('In an Investigation.');
-    this.getInvestigationDetail();
+    console.log('In an Decision Support.');
+    this.getDecisionSupportDetail();
   }
 
   onSave() {
     // Handle the form submission logic here
-    console.log('Form submitted:', this.investigationDetails);
-    this.investigationService.patchInvestigation(this.investigationDetails.entityId, this.investigationDetails).subscribe(
+    console.log('Form submitted:', this.decisionSupportDetails);
+    this.decisionSupportService.patchDecisionSupport(this.decisionSupportDetails.entityId, this.decisionSupportDetails).subscribe(
       (error) => {
-        console.error('Error saving investigation answers:', error)
+        console.error('Error saving decision support answers:', error)
       }
     );
   }
 
-  getInvestigationDetail(): void {
-    console.log('Calling Investigation Details!');
-    const headers = this.authService.getHeaders();
-    this.investigationService.getInvestigation(this.investigationId, headers).subscribe(
+  // Initialises the Decision Support
+  getDecisionSupportDetail(): void {
+    console.log('Calling Decision Support Details!');
+    const headers = this.authService.getHeaders(); // authenticates...
+    this.decisionSupportService.getDecisionSupport(this.decisionSupportId, headers).subscribe(
       (data) => {
-        this.investigationDetails = data;
-        if (this.investigationDetails.steps) {
-          this.investigationDetails.steps[0].isVisible = true;
-          this.oneStep = this.investigationDetails.steps[0];
-          this.documentService.setDocumentDetails(this.investigationDetails.entityId, this.investigationDetails.investigationLabel,this.oneStep.id);
+        this.decisionSupportDetails = data;
+        if (this.decisionSupportDetails.steps) {
+          this.decisionSupportDetails.steps[0].isVisible = true;
+          this.oneStep = this.decisionSupportDetails.steps[0];
+          this.documentService.setDocumentDetails(this.decisionSupportDetails.entityId, this.decisionSupportDetails.decisionSupportLabel,this.oneStep.id);
 
         }
       },
       (error) => {
-        console.error('Error fetching investigation details:', error);
+        console.error('Error fetching decision support details:', error);
       }
     );
   }
 
+  // Puts the Step of the id you passed into oneStep.
   getStep(stepUuid: string) {
-    for (const step of this.investigationDetails.steps) {
+    for (const step of this.decisionSupportDetails.steps) {
       if (step && step.stepUuid == stepUuid) {
         this.oneStep = step;
-        this.documentService.setDocumentDetails(this.investigationDetails.entityId, this.investigationDetails.label,this.oneStep.id);
+        this.documentService.setDocumentDetails(this.decisionSupportDetails.entityId, this.decisionSupportDetails.label,this.oneStep.id);
         this.documentUploadComponent.getDocumentList();
-        this.investigation = new Investigation(this.oneStep.entityId, this.oneStep.investigationLabel, this.oneStep.investigationId);
+        this.decisionSupport = new DecisionSupport(this.oneStep.entityId, this.oneStep.decisionSupportLabel, this.oneStep.decisionSupportId);
 
       }
     }
@@ -121,11 +114,11 @@ export class InvestigationComponent implements OnInit {
     step.isCompleted = true;
 
     var currentindex = step.id;
-    for (currentindex; currentindex < this.investigationDetails.steps.length; currentindex++) {
-      this.investigationDetails.steps[currentindex].isVisible = false;
-      this.userChoices.delete(this.investigationDetails.steps[currentindex].stepUuid);
-      this.investigationDetails.steps[currentindex].isCompleted = false;
-      this.investigationDetails.steps[currentindex].answer = "";
+    for (currentindex; currentindex < this.decisionSupportDetails.steps.length; currentindex++) {
+      this.decisionSupportDetails.steps[currentindex].isVisible = false;
+      this.userChoices.delete(this.decisionSupportDetails.steps[currentindex].stepUuid);
+      this.decisionSupportDetails.steps[currentindex].isCompleted = false;
+      this.decisionSupportDetails.steps[currentindex].answer = "";
     }
     //determine the next step based on conditions
     this.updateSteps();
@@ -141,11 +134,11 @@ export class InvestigationComponent implements OnInit {
     step.answer = selectedChoices.map(c => c.description).join(', ');
 
     var currentindex = step.id;
-    for (currentindex; currentindex < this.investigationDetails.steps.length; currentindex++) {
-      this.investigationDetails.steps[currentindex].isVisible = false;
-      this.userChoices.delete(this.investigationDetails.steps[currentindex].stepUuid);
-      this.investigationDetails.steps[currentindex].isCompleted = false;
-      this.investigationDetails.steps[currentindex].answer = "";
+    for (currentindex; currentindex < this.decisionSupportDetails.steps.length; currentindex++) {
+      this.decisionSupportDetails.steps[currentindex].isVisible = false;
+      this.userChoices.delete(this.decisionSupportDetails.steps[currentindex].stepUuid);
+      this.decisionSupportDetails.steps[currentindex].isCompleted = false;
+      this.decisionSupportDetails.steps[currentindex].answer = "";
     }
     //determine the next step based on conditions
     if (choice.selected) {
@@ -153,8 +146,9 @@ export class InvestigationComponent implements OnInit {
     }
   }
 
+  // Returns the description of a choice (in other words, the value next to a single radio button or checkbox).
   getChoiceLabel(choiceUuid: any) {
-    for (const step of this.investigationDetails.steps) {
+    for (const step of this.decisionSupportDetails.steps) {
       for (const choice of step.choices) {
         if (choice.choiceUuid == choiceUuid) {
           return choice.description;
@@ -164,12 +158,14 @@ export class InvestigationComponent implements OnInit {
     return "";
   }
 
+  // Updates the form, specifically what steps should be visilbe and therefore accessible at any time.
   updateSteps() {
-    for (const step of this.investigationDetails.steps) {
+    for (const step of this.decisionSupportDetails.steps) {
       step.isVisible = this.checkVisibility(step);
     }
   }
 
+  // Checks whether a step should be visible and accessible or greyed out and unaccessible.
   checkVisibility(step: any): boolean {
     //if there are no conditions, the step is always visible
     if (!step.conditions || step.conditions.length === 0 || step.isCompleted === true) {
@@ -185,6 +181,7 @@ export class InvestigationComponent implements OnInit {
     return false;
   }
 
+  // Returns whether a step is required.
   checkRequiredStatus(step: any): boolean{
     if(step.required == 0){
       return false;

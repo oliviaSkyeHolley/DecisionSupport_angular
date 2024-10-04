@@ -1,12 +1,12 @@
 /**
- * @whatItDoes Represents a single Investigation retrieved from the backend to be listed in an array.
+ * @whatItDoes Represents a single Decision Support retrieved from the backend to be listed in an array.
  * 
  * @description
- *  Stores the data of a single Investigation retrieved from the list of Investigations.
+ *  Stores the data of a single Decision Support retrieved from the list of Decision Supports.
  *
 */
 
-export class InvestigationList {
+export class DecisionSupportList {
     constructor(
       label: string,
       entityId: number,
@@ -36,12 +36,12 @@ export class InvestigationList {
     revisionCreationTime: string;
   
     /**
-     * Determines the linked process (i.e. the type of process that the investigation is following).
+     * Determines the linked process (i.e. the type of process that the decision support is following).
      */
     processId: number;
   
     /**
-     * Time when the investigation was created
+     * Time when the decision support was created
      */
     createdTime:string;
   }

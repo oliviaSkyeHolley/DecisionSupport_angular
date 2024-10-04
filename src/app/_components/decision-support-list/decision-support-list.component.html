@@ -1,0 +1,71 @@
+<!--
+  @component DecisionSupportList Component
+  @description Lists the available decision supports. Allows a user to start new decision supports based off of a created process.
+-->
+<div class="wrapper">
+    <div class="top-container">
+      <div>
+        <h2> Decision Support </h2>
+      </div>
+      <!-- Create Buttont to create a new process -->
+      <button class="addbutton" (click)="addDecisionSupport()"> Add Decision Support </button>
+    </div>
+  </div>
+  
+  <div class="wrapper">
+    <!-- Table of Decision Supports-->
+    <mat-table #table [dataSource]="decisionSupports" class="mat-elevation-z0">
+  
+      <!-- ID# Column -->
+      <ng-container matColumnDef="decisionSupportId" sticky>
+        <mat-header-cell *matHeaderCellDef> ID# </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.entityId}} </mat-cell>
+      </ng-container>
+  
+      <!-- Title of Decision Support Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <!-- Title is a link to the decision support's page with the link domain.host/support/:entityId -->
+          <a [routerLink]="['/support', element.entityId]"> {{element.label}} </a>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Process Type Column -->
+      <ng-container matColumnDef="processId">
+        <mat-header-cell *matHeaderCellDef> Process Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.processId}} </mat-cell>
+      </ng-container>
+  
+      <!-- Creation Time Column -->
+      <ng-container matColumnDef="createdTime">
+        <mat-header-cell *matHeaderCellDef> Created Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.createdTime}} </mat-cell>
+      </ng-container>
+  
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions (Functionality Coming Soon) </mat-header-cell>
+        <mat-cell class="hovering" *matCellDef="let element">
+          <button class="iconButton"><i class="material-icons" (click)="archiveDecisionSupport(element.entityId)" >unarchive</i></button>
+          <button class="iconButton"><i class="material-icons"  >drive_file_rename_outline</i></button>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Display no data available message if no processes available -->
+      <div *matNoDataRow class="noData">
+        <img src="/assets/noData.jpg" />
+        <p>No Process Found - Add Process</p>
+        <button class="addbutton"> Add Decision Support </button>
+      </div>
+  
+  
+      <!-- Display the first row of headings. -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+  </div>
+  
+  
+  

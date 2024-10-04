@@ -2,7 +2,7 @@
 * @whatItDoes Holds a series of steps to form a Process!
  *
  * @description
- *  Processes are built by the program and the steps they contain followed by investigations!
+ *  Processes are built by the program and the steps they contain followed by decision supports!
  *
 */
 

@@ -14,18 +14,18 @@ export const environment = {
   updateProcessURL:'http://complaintdrupal.local/rest/process/update/',
   archiveProcessURL: 'http://complaintdrupal.local/rest/process/delete/',
 
-  //Investigation Endpoints
-  getInvestigationURL: 'http://complaintdrupal.local/rest/support/get/',
-  getInvestigationListURL: 'http://complaintdrupal.local/rest/support/list',
-  postInvestigationURL: 'http://complaintdrupal.local/rest/support/post',
-  patchInvestigationURL: 'http://complaintdrupal.local/rest/support/update/',
-  archiveInvestigationURL: 'http://complaintdrupal.local/rest/support/archive/',
+  //Decision Support Endpoints
+  getDecisionSupportURL: 'http://complaintdrupal.local/rest/support/get/',
+  getDecisionSupportListURL: 'http://complaintdrupal.local/rest/support/list',
+  postDecisionSupportURL: 'http://complaintdrupal.local/rest/support/post',
+  patchDecisionSupportURL: 'http://complaintdrupal.local/rest/support/update/',
+  archiveDecisionSupportURL: 'http://complaintdrupal.local/rest/support/archive/',
 
   //Document Upload Endpoints
   fileUploadURL: 'http://complaintdrupal.local/file/upload/investigation_documents/_/file',
-  postInvestigationDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/post',
-  getInvestigationDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/get/',
-  archiveInvestigationDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/delete/',
+  postDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/post',
+  getDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/get/',
+  archiveDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/delete/',
 
   //Client
   clientId: 'your-client-id',

@@ -1,19 +1,19 @@
 <!--
-  @component NewInvestigationDialog Component
-  @description A component that pops up and recieves the name and process type of a new investigation.
+  @component NewDecisionSupportDialog Component
+  @description A component that pops up and recieves the name and process type of a new DecisionSupport.
 -->
 
 <h2 mat-dialog-title> Decision Support </h2>
 
 <form [formGroup]="form" (ngSubmit)="save()">
   <mat-dialog-content>
-    <!-- Collecting name of the investigation -->
+    <!-- Collecting name of the DecisionSupport -->
     <p> Title </p>
     <mat-form-field appearance="outline">
       <input matInput formControlName="name" placeholder="Title" required>
     </mat-form-field>
 
-    <!-- Collecting process type of the investigation -->
+    <!-- Collecting process type of the DecisionSupport -->
     <p> What process will you follow? </p>
     <mat-form-field appearance="outline">
       <mat-select formControlName="process_id" placeholder="Select Process">

@@ -1,12 +1,12 @@
 /**
- * @whatItDoes Allows the user to upload documents to an investigation.
+ * @whatItDoes Allows the user to upload documents to a decision support.
  *
  * @description
  *  Provides functions for handling the uploading and display of documents.
  *  Uploaded documents cannnot be accessed after uploading, only their names displayed.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { DocumentUploadService } from '../../_services/document-upload.service';
 import { DocumentService } from '../../_services/document.service';
@@ -56,8 +56,8 @@ export class DocumentUploadComponent {
         // Extract the fid from the response
         const fileFid = response?.fid?.[0]?.value;
         if (fileFid) {
-          // Proceed to create the investigation document entity in the backend.
-          this.createInvestigationDocument(fileFid);
+          // Proceed to create the decision support document entity in the backend.
+          this.createDecisionSupportDocument(fileFid);
         } else {
           console.error('File fid not found in the response');
           this.uploadResponse = 'File upload successful, but file fid is missing.';
@@ -70,15 +70,15 @@ export class DocumentUploadComponent {
     });
   }
 
-  createInvestigationDocument(fid: string): void {
+  createDecisionSupportDocument(fid: string): void {
     const label = this.documentService.getLabel();
     const notes = 'This is a test document';
     const stepId = this.documentService.getStepId();  
-    const investigationId = this.documentService.getInvestigationId();
+    const decisionSupportId = this.documentService.getDecisionSupportId();
 
-    this.documentUploadService.createInvestigationDocument(fid, label, notes, stepId, investigationId).subscribe({
+    this.documentUploadService.createDecisionSupportDocument(fid, label, notes, stepId, decisionSupportId).subscribe({
       next: (response) => {
-        console.log('Investigation document creation complete:', response);
+        console.log('Decision Support document creation complete:', response);
         this.uploadResponse = `Upload and entity creation successful: ${JSON.stringify(response)}`;
       },
       error: (err) => {
@@ -89,7 +89,7 @@ export class DocumentUploadComponent {
   }
 
   getDocumentList(): void {
-    this.documentUploadService.getDocumentlist(this.documentService.getInvestigationId()).subscribe({
+    this.documentUploadService.getDocumentlist(this.documentService.getDecisionSupportId()).subscribe({
       next: (data) => {
         this.documentList = data;
         
@@ -103,13 +103,13 @@ export class DocumentUploadComponent {
   }
 
   deleteDocument(fileId: string):void{
-    this.documentUploadService.archiveInvestigationDocument(fileId).subscribe({
+    this.documentUploadService.archiveDecisionSupportDocument(fileId).subscribe({
       next: (response) =>{
-        console.log('Successfully archived investigation document ', fileId);
+        console.log('Successfully archived decision support document ', fileId);
         this.getDocumentList();
       },
       error: (err) =>{
-        console.error('Error archiving investigation document', err);
+        console.error('Error archiving decision support document', err);
       }
     })
   }
