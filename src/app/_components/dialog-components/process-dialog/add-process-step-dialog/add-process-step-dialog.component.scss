@@ -1,4 +1,3 @@
-/** Styling for mat dialog and form field */
 .mat-dialog-content {
   width: 100%;
 }
@@ -37,7 +36,7 @@ mat-form-field {
 }
 
 .add{
-  background-color: #143354;
+  background-color: #accbe3;
   color: white !important;
 }
 
@@ -54,6 +53,10 @@ mat-form-field {
   background-color: #7a9bbf;
 }
 
+.mat-icon{
+  color: #accbe3;
+
+}
 /*working here right now*/
 :host ::ng-deep .mdc-text-field--outlined {
   --mdc-outlined-text-field-container-shape: 10px;
@@ -63,7 +66,7 @@ mat-form-field {
 }
 
 //:host ::ng-deep .mdc-text-field--filled{
- // background-color: #accbe3;
+// background-color: #accbe3;
 //}
 
 
