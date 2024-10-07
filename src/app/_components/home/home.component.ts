@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {MenuComponent} from "../menu/menu.component";
-import {NgIf, NgOptimizedImage} from "@angular/common";
+import { MenuComponent } from "../menu/menu.component";
+import { NgIf, NgOptimizedImage } from "@angular/common";
 import { AuthService } from '../../_services/auth.service';
 import { RouterLink } from '@angular/router';
 
@@ -38,7 +38,7 @@ export class HomeComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (res) => {
         this.authService.setTokens(res.access_token, res.refresh_token);
-        this.router.navigate(['/investigation/list']);
+        this.router.navigate(['/support']);
       },
       error: (err) => {
         console.error('Login error', err);

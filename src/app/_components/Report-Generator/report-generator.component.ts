@@ -37,7 +37,7 @@ export class ReportGeneratorComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (res) => {
         this.authService.setTokens(res.access_token, res.refresh_token);
-        this.router.navigate(['/investigation/list']);
+        this.router.navigate(['/support']);
       },
       error: (err) => {
         console.error('Login error', err);

@@ -1,7 +1,7 @@
 /**
- * @whatItDoes Is a dialog box which recieves input from the user to rename an investigation.
+ * @whatItDoes Is a dialog box which recieves input from the user to rename an decision support.
  *
- * @description There is only one input: "What will you rename the investigation to?"
+ * @description There is only one input: "What will you rename the decision support to?"
  *  
  */
 
@@ -12,20 +12,20 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-rename-investigation-dialog',
+  selector: 'app-rename-decision-support-dialog',
   standalone: true,
   imports: [MatDialogContent, MatFormField, MatDialogActions, ReactiveFormsModule],
-  templateUrl: './rename-investigation-dialog.component.html',
-  styleUrl: './rename-investigation-dialog.component.scss'
+  templateUrl: './rename-decision-support-dialog.component.html',
+  styleUrl: './rename-decision-support-dialog.component.scss'
 })
 
-export class RenameInvestigationDialogComponent {
+export class RenameDecisionSupportDialogComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RenameInvestigationDialogComponent>)
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RenameDecisionSupportDialogComponent>)
   {
     this.form = this.fb.group({
-      name: [''], // holds the new name of the investigation.
+      name: [''], // holds the new name of the decision-support.
     });
   }
 

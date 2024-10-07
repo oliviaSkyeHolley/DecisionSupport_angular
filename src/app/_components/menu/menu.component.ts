@@ -9,8 +9,8 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatToolbar } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
-import {NgIf, NgOptimizedImage} from "@angular/common";
-import {AuthService} from "../../_services/auth.service";
+import { NgIf, NgOptimizedImage } from "@angular/common";
+import { AuthService } from "../../_services/auth.service";
 
 
 

@@ -1,8 +1,8 @@
 /**
- * @whatItDoes Provides a service for managing documents uploaded during investigations.
+ * @whatItDoes Provides a service for managing documents uploaded during decision supports.
  *
  * @description
- *  Each document is associated with a linked investigation, has a name, and has been attatched to a specific step. Getters and a general set are available.
+ *  Each document is associated with a linked decision support, has a name, and has been attatched to a specific step. Getters and a general set are available.
  */
 
 import {Injectable} from '@angular/core';
@@ -13,18 +13,18 @@ import {Injectable} from '@angular/core';
 export class DocumentService {
   constructor() {}
 
-  investigationId!: string; //linked investigation 
+  decisionSupportId!: string; //linked decision support 
   label!: string; //name of doucment
   stepId!: string; //step the document was uploaded to
 
-  setDocumentDetails(investigationId: string, label: string, stepId: string){
-    this.investigationId = investigationId;
+  setDocumentDetails(decisionSupportId: string, label: string, stepId: string){
+    this.decisionSupportId = decisionSupportId;
     this.label = label;
     this.stepId = stepId;
   }
 
-  getInvestigationId(): string{
-    return this.investigationId;
+  getDecisionSupportId(): string{
+    return this.decisionSupportId;
   }
   getLabel(): string{
     return this.label;

@@ -1,8 +1,8 @@
 /**
- * @whatItDoes Provides a service for uploading documents during investigations.
+ * @whatItDoes Provides a service for uploading documents during decision supports.
  *
  * @description
- *  This service handles the uploading of files, creating investigation documents, and retrieving document lists associated with investigations.
+ *  This service handles the uploading of files, creating decision support documents, and retrieving document lists associated with decision supports.
  */
 
 import {Injectable} from '@angular/core';
@@ -16,7 +16,7 @@ import {environment} from "../../environments/environment";
 })
 export class DocumentUploadService {
   private uploadUrl = environment.fileUploadURL;
-  private createEntityUrl = environment.postInvestigationDocumentsURL;
+  private createEntityUrl = environment.postDecisionSupportDocumentsURL;
   filename!:string;
 
   constructor(private http: HttpClient, private authService: AuthService) {
@@ -36,7 +36,7 @@ export class DocumentUploadService {
     });
   }
 
-  createInvestigationDocument(fid: string, label: string, notes: string, stepId: string, investigationId: string): Observable<any> {
+  createDecisionSupportDocument(fid: string, label: string, notes: string, stepId: string, decisionSupportId: string): Observable<any> {
     const headers = this.authService.getPOSTFileUploadHeaders()
       .set('Content-Type', 'application/json');
 
@@ -44,7 +44,7 @@ export class DocumentUploadService {
       label: this.filename,
       notes,
       stepId,
-      investigationId,
+      decisionSupportId,
       fid,
       visible: true
     };
@@ -52,13 +52,13 @@ export class DocumentUploadService {
     return this.http.post(this.createEntityUrl, postData, {headers});
   }
 
-  archiveInvestigationDocument(fileId: string){
+  archiveDecisionSupportDocument(fileId: string){
     const headers =this.authService.getHeaders();
-    return this.http.patch<any[]>(`${environment.archiveInvestigationDocumentsURL}${fileId}`, {headers});
+    return this.http.patch<any[]>(`${environment.archiveDecisionSupportDocumentsURL}${fileId}`, {headers});
   }
 
-  getDocumentlist(investigationId:string){
+  getDocumentlist(decisionSupportId:string){
     const headers =this.authService.getHeaders();
-    return this.http.get<any[]>(`${environment.getInvestigationDocumentsURL}${investigationId}`, {headers});
+    return this.http.get<any[]>(`${environment.getDecisionSupportDocumentsURL}${decisionSupportId}`, {headers});
   }
 }

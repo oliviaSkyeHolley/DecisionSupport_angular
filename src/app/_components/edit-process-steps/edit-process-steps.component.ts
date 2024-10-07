@@ -7,7 +7,7 @@
  * For each process steps the following action is available: Edit a process step (done by clicking on the edit button), Delete a process step and Rearrange the process steps
  * and save the step order changes
  */
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
