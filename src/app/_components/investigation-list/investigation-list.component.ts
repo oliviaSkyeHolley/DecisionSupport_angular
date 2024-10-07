@@ -48,20 +48,20 @@ export class InvestigationListComponent {
     });
   }
 
-  // Opens NewInvestigationDialogComponent and then tells the backend to create a new investigation.
+  // Opens NewReportDialogComponent and then tells the backend to create a new investigation.
   addInvestigation(): void {
     const dialogRef = this.dialog.open(NewInvestigationDialogComponent, {
       width: '400px'
     });
 
-    // Recieves result from NewInvestigationDialogComponent...
+    // Recieves result from NewReportDialogComponent...
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        
+
         const formattedData = {
           label: result.name,
           process_id: result.process_id,
-          json_string: JSON.stringify({ name: result.name }) 
+          json_string: JSON.stringify({ name: result.name })
         }
         // ... and posts it to the backend!
         this.investigationService.postInvestigation(formattedData).subscribe({

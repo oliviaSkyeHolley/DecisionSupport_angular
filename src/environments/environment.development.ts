@@ -15,17 +15,19 @@ export const environment = {
   archiveProcessURL: 'http://decisiondrupal.local/rest/process/delete/',
 
   //Investigation Endpoints
-  getInvestigationURL: 'http://decisiondrupal.local/rest/investigation/get/',
-  getInvestigationListURL: 'http://decisiondrupal.local/rest/investigation/list',
-  postInvestigationURL: 'http://decisiondrupal.local/rest/investigation/post',
-  patchInvestigationURL: 'http://decisiondrupal.local/rest/investigation/update/',
-  archiveInvestigationURL: 'http://decisiondrupal.local/rest/investigation/delete/',
+  getInvestigationURL: 'http://decisiondrupal.local/rest/decision_support/get/',
+  getInvestigationListURL: 'http://decisiondrupal.local/rest/decision_support/list',
+  postInvestigationURL: 'http://decisiondrupal.local/rest/decision_support/post',
+  patchInvestigationURL: 'http://decisiondrupal.local/rest/decision_support/update/',
+  archiveInvestigationURL: 'http://decisiondrupal.local/rest/decision_support/delete/',
+  getDecisionSupportReportListURL: 'http://decisiondrupal.local/rest/decision_support/list',
+  getDecisionSupportReportURL: 'http://decisiondrupal.local/rest/decision_support/get/',
 
   //Document Upload Endpoints
   fileUploadURL: 'http://decisiondrupal.local/file/upload/investigation_documents/_/file',
-  postInvestigationDocumentsURL: 'http://decisiondrupal.local/rest/investigation/document/post',
-  getInvestigationDocumentsURL: 'http://decisiondrupal.local/rest/investigation/document/get/',
-  archiveInvestigationDocumentsURL: 'http://decisiondrupal.local/rest/investigation/document/delete/',
+  postInvestigationDocumentsURL: 'http://decisiondrupal.local/rest/decision_support/document/post',
+  getInvestigationDocumentsURL: 'http://decisiondrupal.local/rest/decision_support/document/get/',
+  archiveInvestigationDocumentsURL: 'http://decisiondrupal.local/rest/decision_support/document/delete/',
 
   //Client
   clientId: 'your-client-id',
