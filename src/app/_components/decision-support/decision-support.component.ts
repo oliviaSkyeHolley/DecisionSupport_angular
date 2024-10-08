@@ -103,7 +103,7 @@ export class DecisionSupportComponent implements OnInit {
         this.oneStep = step;
         this.documentService.setDocumentDetails(this.decisionSupportDetails.entityId, this.decisionSupportDetails.label,this.oneStep.id);
         this.documentUploadComponent.getDocumentList();
-        this.decisionSupport = new DecisionSupport(this.oneStep.entityId, this.oneStep.decisionSupportLabel, this.oneStep.decisionSupportId);
+        // this.decisionSupport = new DecisionSupport(this.oneStep.entityId, this.oneStep.decisionSupportLabel, this.oneStep.decisionSupportId, this.oneStep.isCompleted);
 
       }
     }
@@ -113,6 +113,7 @@ export class DecisionSupportComponent implements OnInit {
   onRadioChange(event: any, step: Step) {
     //store the choice in userChoices
     this.userChoices.set(step.stepUuid, event.value);
+    step.answerLabel = this.getChoiceLabel(event.value);
     step.isCompleted = true;
 
     var currentindex = step.id;
