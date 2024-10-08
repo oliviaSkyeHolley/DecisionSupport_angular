@@ -7,7 +7,7 @@
       <div>
         <h2> Decision Support </h2>
       </div>
-      <!-- Create Buttont to create a new process -->
+      <!-- Create Button to create a new process -->
       <button class="addbutton" (click)="addDecisionSupport()"> Add Decision Support </button>
     </div>
   </div>
@@ -41,6 +41,12 @@
       <ng-container matColumnDef="createdTime">
         <mat-header-cell *matHeaderCellDef> Created Time </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.createdTime}} </mat-cell>
+      </ng-container>
+
+      <!-- Updated Time Column -->
+      <ng-container matColumnDef="updatedTime">
+        <mat-header-cell *matHeaderCellDef> Last Updated Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.updatedTime}} </mat-cell>
       </ng-container>
   
     <!-- Actions Column -->
