@@ -1,19 +1,16 @@
 
-<mat-accordion>
-  <mat-expansion-panel (opened) = "panelOpenState = true"
-                       (closed) = "panelOpenState = false">
-  <mat-expansion-panel-header>
-  <mat-panel-title>
-    {{panelOpenState ? 'Hide' : 'Show'}} The Report File
-  </mat-panel-title>
-  </mat-expansion-panel-header>
-    <iframe
-      frameborder="0"
-      height="450"
-      width="450">
-    </iframe>
-  </mat-expansion-panel>
-</mat-accordion>
+<div class="wrapper">
+  <div class="top-container">
+    <h2 class="Tile">......Report</h2>
+    <button class="download" (click)="downloadJson()"> Download Report </button>
+  </div>
+    <div class="report-container" *ngFor="let support of decisionSupportDetails">
+      <p><b>Q{{support.id}}: {{support.description	}}</b> <br/>
+         <b>Answer:</b> {{support.answerLabel	}} <br/>
+         <b>Additional Explanation:</b> {{support.textAnswer	}} <br/> </p>
+    </div>
+</div>
 
-/*(click)="Download()"*/
-<button class="addbutton" > Download Report as textfile </button>
+
+
+

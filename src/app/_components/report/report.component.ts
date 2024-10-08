@@ -45,21 +45,44 @@ import {MatDialog} from "@angular/material/dialog";
 export class ReportComponent implements OnInit {
   panelOpenState = false;
 
-  investigations: InvestigationList[] = []; // Create an array of InvestigationList objects.
+  decisionSupportDetails: any;
 
   constructor(private http: HttpClient, private authService: AuthService, private reportService: ReportService, private investigatonService: InvestigationService ,private dialog: MatDialog) { }
   ngOnInit(): void {
-    this.getDecisionSupportReport();
-    console.log(this.investigations);
+   this.getDecisionSupportReport();
+    //console.log(this.investigations);
+    console.log(this.decisionSupportDetails);
+    console.log('yo yo');
+    this.downloadJson();
+
   }
 
 
   getDecisionSupportReport(): void {
     // @ts-ignore
-    this.reportService.getReport().subscribe({
-      next: (data) => this.investigations = data,
-      error: (err) => console.error('Error fetching reports: ', err)
+    this.reportService.getReport('1').subscribe(
+      (data) => {this.decisionSupportDetails = data; console.log(data)},
+      (error)  => console.error('Error fetching reports: ', error)
+    );
+  }
+
+
+  downloadJson(): void{
+    const textLines = this.decisionSupportDetails.map((step: { textAnswer: string; id: any; description: any; answerLabel: any; }) => {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = step.textAnswer;
+      const plainText = tempDiv.innerText;
+
+      return `${step.id}. ${step.description}\nAnswer: ${step.answerLabel}\nText Answer: ${plainText.replace(/\n/g, ' ')}\n`;
     });
+
+    const textString = textLines.join('\n');
+
+    const blob = new Blob([textString], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'Test' + '.txt';
+    link.click();
   }
 
 }

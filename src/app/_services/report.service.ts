@@ -21,7 +21,8 @@ import {InvestigationList} from "../_classes/investigation-list";
 export class ReportService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getReport(decisionSupportId: string, headers: HttpHeaders): Observable<Report> {
-    return this.http.get<Report>(`${environment.getDecisionSupportReportURL}${decisionSupportId}?_format=json`, { headers });
+  getReport(decisionSupportId: string): Observable<Report> {
+    const headers = this.authService.getHeaders();
+    return this.http.get<Report>(`${environment.getDecisionSupportReportURL}${decisionSupportId}?_format=json`,{ headers });
   }
 }
