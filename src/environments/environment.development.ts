@@ -21,11 +21,11 @@ export const environment = {
   patchDecisionSupportURL: 'http://complaintdrupal.local/rest/support/update/',
   archiveDecisionSupportURL: 'http://complaintdrupal.local/rest/support/archive/',
 
-  //Document Upload Endpoints
-  fileUploadURL: 'http://complaintdrupal.local/file/upload/investigation_documents/_/file',
-  postDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/post',
-  getDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/get/',
-  archiveDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/investigation/document/delete/',
+ //Document Upload Endpoints
+ fileUploadURL: 'http://complaintdrupal.local/file/upload/decision_support_file/_/file',
+ postDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/post',
+ getDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/get/',
+ archiveDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/delete/',
 
   //Client
   clientId: 'your-client-id',
