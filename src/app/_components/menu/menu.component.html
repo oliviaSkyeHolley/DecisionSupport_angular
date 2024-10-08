@@ -1,0 +1,18 @@
+<!--
+  @component MenuComponent
+  @description Provides navigation between pages.
+-->
+<div class="menu">
+  <mat-toolbar>
+    <div routerLink="/home" class="logoButton">
+      <img ngSrc="/assets/Logo2.png" height="50" width="60" alt="Logo" priority>
+    </div>
+    <div class="nav-links">
+      <a [routerLink]="['/home']" [ngClass]="{'active': isActive('/home')}">Home</a>
+      <a [routerLink]="['/process']" [ngClass]="{'active': isActive('/process')}">Process Builder</a>
+      <a [routerLink]="['/support']" [ngClass]="{'active': isActive('/support')}">Decision Support</a>
+      <a [routerLink]="['/Report-Generator']" [ngClass]="{'active': isActive('/Report-Generator')}">Generate Report</a>
+    </div>
+    <button (click)="logout()" *ngIf="authService.isLoggedIn()">Logout</button>
+  </mat-toolbar>
+</div>

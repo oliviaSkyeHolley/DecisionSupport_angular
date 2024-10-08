@@ -1,0 +1,22 @@
+<!--
+  @component RenameDecisionSupportDialog Component
+  @description A component that pops up and allows the user to rename the decision support.
+-->
+
+<h2 mat-dialog-title>Rename Decision Support</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSave()">
+    <!-- What would you like to rename the decision support to? -->
+    <mat-dialog-content>
+        <p>New Name</p>
+        <mat-form-field>
+            <input matInput formControlName="name" placeholder="Title" required>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <!-- Close and Submit buttons -->
+    <mat-dialog-actions>
+        <button mat-button (click)="close()">Close</button>
+        <button mat-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+    </mat-dialog-actions>
+</form>

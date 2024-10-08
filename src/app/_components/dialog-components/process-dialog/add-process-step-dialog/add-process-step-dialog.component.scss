@@ -1,0 +1,94 @@
+/** Styling for mat dialog and form field */
+.mat-dialog-content {
+  width: 100%;
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+/*.RadioOp{
+  width: 50%;
+}*/
+
+.mat-dialog-title{
+  font-size: 35px;
+}
+
+.delete{
+  /*position: absolute;
+  right: 90px;
+  height: 50%; */
+  position: absolute;
+  right:    0;
+  bottom:   9%;
+}
+
+.deleteCondition {
+  position: absolute;
+  right:    0;
+  bottom:   50%;
+}
+
+.title{
+  font-size: 20px;
+  color: black;
+}
+
+.add{
+  background-color: #143354;
+  color: white !important;
+}
+
+.add:hover{
+  background-color: #7a9bbf;
+}
+
+.addCondition{
+  background-color: #accbe3;
+  color: white !important;
+}
+
+.addCondition:hover{
+  background-color: #7a9bbf;
+}
+
+/*working here right now*/
+:host ::ng-deep .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 10px;
+  /*--mdc-outlined-text-field-container-background-colour: */
+  border-color: black !important;
+
+}
+
+//:host ::ng-deep .mdc-text-field--filled{
+ // background-color: #accbe3;
+//}
+
+
+.createButton:enabled,
+button[enabled]{
+  color: black;
+  border-radius: 10px;
+}
+
+.createButton:enabled:hover,
+button[enabled]{
+  background-color: #7a9bbf;
+  color: white;
+  border-radius: 10px;
+}
+
+.closeButton:enabled,
+buton[enabled]{
+  color: black;
+  border-radius: 10px;
+}
+
+.closeButton:hover{
+  color: white;
+  background-color: #7a9bbf;
+  border-radius: 10px;
+}
+

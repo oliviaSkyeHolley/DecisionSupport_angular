@@ -1,0 +1,43 @@
+<!--
+  @component Document Upload Component
+  @description Allows the user to upload documents attatched to decision supports. 
+-->
+
+<div class="upload-container">
+    <!-- Select File -->
+    <button type="button" (click)="fileInput.click()"> Select File </button>
+    <input type="file" #fileInput (change)="onFileSelect($event)" style="display: none;">
+
+    <!-- Display it. -->
+    <ul *ngIf="selectedFile">
+        <li> {{ selectedFile.name }} ({{ selectedFile.size }} bytes) </li>
+    </ul>
+    <!-- Upload it. -->
+    <button (click)="onUpload()" [disabled]="!selectedFile"> Upload </button>
+    <div *ngIf="uploadResponse">
+        <p> Upload Response: {{ uploadResponse }} </p>
+    </div>
+</div>
+
+<!-- List Documents -->
+<div>
+    <div *ngFor="let document of filteredDocumentList">
+      <br />
+      <div *ngIf="document.isVisible">
+      <mat-card appearance="outlined">
+        <mat-card-content class="card-content">
+          <div class="content">
+            Document: {{document.label}}
+            <span class="actions">
+              <button mat-mini-fab class="delete-btn" (click)="deleteDocument(document.entityId)">
+                <mat-icon >delete</mat-icon>
+              </button>
+            </span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+      <br />
+      <mat-divider></mat-divider>
+    </div>
+  </div>  

@@ -1,0 +1,33 @@
+/** Styling for mat dialog */
+.mat-dialog-content {
+    width: 100%;
+  }
+
+p{
+  font-size: 16px;
+}
+
+.binButton:enabled,
+button[enabled]{
+  color: black;
+  border-radius: 10px;
+}
+
+.binButton:enabled:hover,
+button[enabled]{
+  background-color: #7a9bbf;
+  color: white;
+  border-radius: 10px;
+}
+
+.closeButton:enabled,
+buton[enabled]{
+  color: black;
+  border-radius: 10px;
+}
+
+.closeButton:hover{
+  color: white;
+  background-color: #7a9bbf;
+  border-radius: 10px;
+}
