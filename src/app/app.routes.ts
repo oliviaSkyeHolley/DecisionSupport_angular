@@ -7,12 +7,14 @@ import { ManageProcessComponent } from './_components/manage-process/manage-proc
 import { InvestigationComponent } from './_components/investigation/investigation.component';
 import {HomeComponent} from "./_components/home/home.component";
 import {ReportListComponent} from "./_components/report-list/report-list.component";
+import {ReportComponent} from "./_components/report/report.component";
 
 
 export const appRoutes: Routes = [
     { path: 'user/login', component: AuthenticateComponent},
     { path: 'home', component: HomeComponent},
     { path: 'Report-Generator', component: ReportListComponent},
+    { path: 'Report', component: ReportComponent},
     { path: 'process', component:ProcessListComponent, canActivate: [AuthGuard]},
     { path: 'process/:id',component:ManageProcessComponent, canActivate: [AuthGuard]},
     //{ path: 'process/:id/update', canActivate: [AuthGuard]},

@@ -13,20 +13,15 @@ import {ReportList} from '../_classes/report-list';
 import {Report} from '../_classes/report';
 import {AuthService} from "./auth.service";
 import {Investigation} from "../_classes/investigation";
+import {InvestigationList} from "../_classes/investigation-list";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
-
-  getReport(reportId: string, headers: HttpHeaders): Observable<Report> {
-    return this.http.get<Report>(`${environment.getDecisionSupportReportURL}${reportId}?_format=json`, { headers });
-  }
-
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getReportList(): Observable<ReportList[]> {
-    const headers = this.authService.getHeaders();
-    return this.http.get<ReportList[]>(environment.getDecisionSupportReportListURL, { headers });
+  getReport(decisionSupportId: string, headers: HttpHeaders): Observable<Report> {
+    return this.http.get<Report>(`${environment.getDecisionSupportReportURL}${decisionSupportId}?_format=json`, { headers });
   }
 }

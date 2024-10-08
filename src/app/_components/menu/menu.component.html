@@ -12,6 +12,7 @@
       <a [routerLink]="['/process']" [ngClass]="{'active': isActive('/process')}">Process Builder</a>
       <a [routerLink]="['/support']" [ngClass]="{'active': isActive('/support')}">Decision Support</a>
       <a [routerLink]="['/Report-Generator']" [ngClass]="{'active': isActive('/Report-Generator')}">Generate Report</a>
+      <!--<a [routerLink]="['/Report']" [ngClass]="{'active': isActive('/Report')}"> Report</a> -->
     </div>
     <button (click)="logout()" *ngIf="authService.isLoggedIn()">Logout</button>
   </mat-toolbar>

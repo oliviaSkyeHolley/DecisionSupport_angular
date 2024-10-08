@@ -8,7 +8,7 @@
 
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, Router} from '@angular/router';
+import {RouterLink, Router, Routes} from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { ReportList } from '../../_classes/report-list';
 import { ReportService } from '../../_services/report.service';
@@ -21,7 +21,11 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UnsavedStepAlertDialogComponent } from '../dialog-components/process-dialog/unsaved-step-alert-dialog/unsaved-step-alert-dialog.component';
-
+import { InvestigationList } from '../../_classes/investigation-list';
+import { InvestigationService } from '../../_services/investigation.service';
+import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../../_services/auth.service";
+import {ReportComponent} from "../report/report.component";
 @Component({
   selector: 'app-report-list',
   standalone: true,
@@ -39,84 +43,29 @@ import { UnsavedStepAlertDialogComponent } from '../dialog-components/process-di
 })
 
 export class ReportListComponent {
-  /** Inject Mat Snack Bar */
-  private snackBar = inject(MatSnackBar);
-  /** Array to store all reports retrieved from the backend */
-  reports: ReportList[] = [];
-  /** Table Columns */
-  displayedColumns: string[] = ['entityid', 'label', 'updatedTime', 'actions'];
+ investigations: InvestigationList[] = []; // Create an array of InvestigationList objects.
+  displayedColumns: string[] = ['investigationId', 'name', 'processId', 'createdTime', 'actions']; // machine names for the table's columns.
 
-  constructor(/*private reportService: reportService,*/ private dialog: MatDialog, private router: Router) { }
+  constructor(private http: HttpClient, private authService: AuthService, private investigationService: InvestigationService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    /** Fetch the list of processes and check for unsaved data when the component loads */
-   // this.getReportList();
-    this.checkUnsavedData();
+    this.getInvestigations();
+    console.log(this.investigations);
   }
 
-  /** Check for unSaved data and alert the user if data exist */
-  checkUnsavedData(): void{
-    //Get Data from local Storage
-    const unsavedData = localStorage.getItem("unsavedStepData");
-    //If data exist alert the user
-    if(unsavedData){
-      let formattedData = JSON.parse(unsavedData);
-      //Open Alert Dialog
-      const dialogRef = this.dialog.open(UnsavedStepAlertDialogComponent,{width: '800px', data: {unSavedData: formattedData}});
-      dialogRef.afterClosed().subscribe(result =>{
-        if(result){
-          //If the user want to continue. Navigate the user to the desired page
-          this.router.navigate(['/report_generator/', formattedData.reportId]);
-        }
-      })
+  // Queries the backend and returns all investigations.
+  getInvestigations(): void {
+    this.investigationService.getInvestigationList().subscribe({
+      next: (data) => this.investigations = data,
+      error: (err) => console.error('Error fetching reports: ', err)
+    });
+  }
 
-    }
-  }
-/*
-  /** Fetch the available processes from the backend and update the array objects
-  getReportList(): void {
-    this.reportService.getReportList().subscribe(
-      (data) => {
-        this.reports = data;
-      },
-      (error) =>{
-        // Log any errors encountered while fetching processes
-        console.error('Error fetching reports');
-        this.snackBar.open('Error Fetching reports - Try Again', 'Ok',{
-          duration: 3000
-        });
-      }
-    );
-  }
-*/
 
-  /** Opens CreateReportDialog and then request the backend to generate a new report with the provided data.
-  createProcess(): void {
-    const dialogRef = this.dialog.open(CreateReportDialogComponent, { width: '450px' });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.reportService.postReport(result).subscribe({
-          next: (response) => {
-            // Log the success message
-            console.log('Successfully created report');
-            this.snackBar.open('Successfully generated report', 'Ok', {
-              duration: 1000
-            });
-            // Refresh the list after a new process is created
-            this.getReportList();
-          },
-          error: (err) => {
-            // Log any errors encountered while creating process.
-            console.error('Error Generating Report:', err);
-            this.snackBar.open('Error Generating Report - Try Again', 'Ok', {
-              duration: 2000
-            });
-          }
-        });
-      }
-    })
+
+  // Sends an archive request to the backend.
+  createReport() {
   }
-    */
 
 
 }

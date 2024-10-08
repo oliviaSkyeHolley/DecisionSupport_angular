@@ -1,0 +1,19 @@
+
+<mat-accordion>
+  <mat-expansion-panel (opened) = "panelOpenState = true"
+                       (closed) = "panelOpenState = false">
+  <mat-expansion-panel-header>
+  <mat-panel-title>
+    {{panelOpenState ? 'Hide' : 'Show'}} The Report File
+  </mat-panel-title>
+  </mat-expansion-panel-header>
+    <iframe
+      frameborder="0"
+      height="450"
+      width="450">
+    </iframe>
+  </mat-expansion-panel>
+</mat-accordion>
+
+/*(click)="Download()"*/
+<button class="addbutton" > Download Report as textfile </button>
