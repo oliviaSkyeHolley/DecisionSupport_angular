@@ -49,6 +49,7 @@
   .content {
     padding: 24px;
     z-index: -1;
+    position: relative;
   }
   
   mat-sidenav-container {
@@ -92,9 +93,9 @@
   }
   
   .btn-primary {
-    background-color: transparent;
-    color: grey !important;
-    width: 5%;
+    background-color: #143354;
+    color: white !important;
+    margin-right: 10px;
     border-radius: 5px;
     border-style: solid;
     border: none;
@@ -112,5 +113,18 @@
     color: white !important;
     transition: 0.7s;
     font-size: 17px;
-  
+
+
   }
+  .button-container {
+    position: absolute;
+    bottom: 100px; 
+    right: 16px;  
+  }
+    
+.div-spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}

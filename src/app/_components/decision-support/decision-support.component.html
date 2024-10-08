@@ -3,7 +3,7 @@
   @description This is where 'DecisionSupport' happens. A process is rendered and then carried out as a decision support.
 -->
 
-<mat-sidenav-container autosize>
+<mat-sidenav-container autosize *ngIf="response">
     <mat-sidenav [opened]="true" mode="side" [style.width]="sideNavWidth()">
   
       <!-- Sidebar -->
@@ -35,7 +35,7 @@
       <!-- Sidebar extension/retraction toggle button as an arrow -->
       <button mat-icon-button class="toggle-button" (click)="collapsed.set(!collapsed())">
         <mat-icon [ngStyle]="{'color':'#accbe3'}">{{ !collapsed() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
-      </button> -->
+      </button> 
   
           <!-- Toggle button as an arrow -->
           <button mat-icon-button class="toggle-button" (click)="collapsed.set(!collapsed())">
@@ -124,8 +124,15 @@
         </div>
   
       </div> <!-- End of single step. -->
+  <!-- Buttons wrapper -->
+  <div class="button-container">
+    <button mat-button color="primary" (click)="onSave()" type="submit" class="btn-primary">Save Draft</button>
+    <button mat-button color="primary" (click)="onSave()" type="submit" class="btn-primary">Save</button>
+  </div>
     </mat-sidenav-content>
+      <!-- Save Button! -->
   </mat-sidenav-container>
   
-  <!-- Save Button! -->
-  <button mat-button color="primary" (click)="onSave()" type="submit" class="btn btn-primary">Save</button>
+  <div class="div-spinner" *ngIf="!response">
+    <mat-spinner></mat-spinner>
+  </div>

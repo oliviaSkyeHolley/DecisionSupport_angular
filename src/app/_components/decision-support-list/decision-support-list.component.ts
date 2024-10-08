@@ -19,11 +19,12 @@ import { DecisionSupportList } from '../../_classes/decision-support-list';
 import { DecisionSupportService } from '../../_services/decision-support.service';
 import { NewDecisionSupportDialogComponent } from '../dialog-components/decision-support-dialog/new-decision-support-dialog/new-decision-support-dialog.component';
 import { RenameDecisionSupportDialogComponent } from '../dialog-components/decision-support-dialog/rename-decision-support-dialog/rename-decision-support-dialog.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-decision-support-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatIconModule, MatTable, MatTableModule],
+  imports: [CommonModule, RouterLink, MatIconModule, MatTable, MatTableModule, MatProgressSpinnerModule],
   templateUrl: './decision-support-list.component.html',
   styleUrl: './decision-support-list.component.scss'
 })
@@ -31,6 +32,7 @@ import { RenameDecisionSupportDialogComponent } from '../dialog-components/decis
 export class DecisionSupportListComponent {
 
   decisionSupports: DecisionSupportList[] = []; // Create an array of DecisionSupportList objects.
+  response: boolean = false; //boolean value for spinner
   displayedColumns: string[] = ['decisionSupportId', 'name', 'processId', 'createdTime', 'updatedTime', 'actions']; // machine names for the table's columns.
 
   constructor(private http: HttpClient, private authService: AuthService, private decisionSupportService: DecisionSupportService, private dialog: MatDialog) { }
@@ -43,8 +45,8 @@ export class DecisionSupportListComponent {
   // Queries the backend and returns all decision supports.
   getDecisionSupports(): void {
     this.decisionSupportService.getDecisionSupportList().subscribe({
-      next: (data) => this.decisionSupports = data,
-      error: (err) => console.error('Error fetching reports: ', err)
+      next: (data) => {this.decisionSupports = data; this.response = true;},
+      error: (err) =>{ console.error('Error fetching reports: ', err); this.response = true;}
     });
   }
 

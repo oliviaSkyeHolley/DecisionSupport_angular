@@ -25,11 +25,12 @@ import { AuthService } from '../../_services/auth.service';
 import { DocumentUploadComponent } from '../document-upload/document-upload.component';
 import { DocumentService } from '../../_services/document.service';
 import { MatTooltip } from "@angular/material/tooltip";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-decision-support',
   standalone: true,
-  imports: [QuillModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, MatTooltip, DocumentUploadComponent],
+  imports: [QuillModule, MatProgressSpinnerModule, MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, MatTooltip, DocumentUploadComponent],
   templateUrl: './decision-support.component.html',
   styleUrl: './decision-support.component.scss'
 })
@@ -46,7 +47,7 @@ export class DecisionSupportComponent implements OnInit {
   oneStep: any; // Holds the step that is currently selected.
   userChoices: Map<string, string> = new Map(); // Map holding the user's choices for a radiobutton or checkbox.
   editorContent: any; // content of the quill enditor
-
+  response: boolean = false; //Boolean value for spinner
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
@@ -81,15 +82,16 @@ export class DecisionSupportComponent implements OnInit {
     this.decisionSupportService.getDecisionSupport(this.decisionSupportId, headers).subscribe(
       (data) => {
         this.decisionSupportDetails = data;
+        this.response = true;
         if (this.decisionSupportDetails.steps) {
           this.decisionSupportDetails.steps[0].isVisible = true;
           this.oneStep = this.decisionSupportDetails.steps[0];
           this.documentService.setDocumentDetails(this.decisionSupportDetails.entityId, this.decisionSupportDetails.decisionSupportLabel,this.oneStep.id);
-
         }
       },
       (error) => {
         console.error('Error fetching decision support details:', error);
+        this.response = true;
       }
     );
   }
