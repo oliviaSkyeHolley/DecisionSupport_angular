@@ -31,7 +31,7 @@ import { RenameDecisionSupportDialogComponent } from '../dialog-components/decis
 export class DecisionSupportListComponent {
 
   decisionSupports: DecisionSupportList[] = []; // Create an array of DecisionSupportList objects.
-  displayedColumns: string[] = ['decisionSupportId', 'name', 'processId', 'createdTime', 'actions']; // machine names for the table's columns.
+  displayedColumns: string[] = ['decisionSupportId', 'name', 'processId', 'createdTime', 'updatedTime', 'actions']; // machine names for the table's columns.
 
   constructor(private http: HttpClient, private authService: AuthService, private decisionSupportService: DecisionSupportService, private dialog: MatDialog) { }
 
