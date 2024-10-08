@@ -95,6 +95,7 @@ export class DecisionSupportComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //If the user click save 
+        this.decisionSupportDetails.isCompleted = true;
         this.decisionSupportService.patchDecisionSupport(this.decisionSupportDetails.entityId, this.decisionSupportDetails).subscribe(
           (data) => {
             console.log("Successfully saved decision support");

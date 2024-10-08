@@ -56,7 +56,6 @@ export class ProcessListComponent {
   ngOnInit(): void {
     /** Fetch the list of processes and check for unsaved data when the component loads */
     this.getProcessList();
-    this.checkUnsavedData();
   }
   
   /** Check for unSaved data and alert the user if data exist */
@@ -64,7 +63,7 @@ export class ProcessListComponent {
     //Get Data from local Storage
     const unsavedData = localStorage.getItem("unsavedStepData");
     //If data exist alert the user
-    if(unsavedData){
+    if(unsavedData && this.processes ){
       let formattedData = JSON.parse(unsavedData);
       //Open Alert Dialog
       const dialogRef = this.dialog.open(UnsavedStepAlertDialogComponent,{width: '800px', data: {unSavedData: formattedData}});
@@ -87,6 +86,7 @@ export class ProcessListComponent {
         this.processes = this.processes.filter(process => process.enabled == true);
         this.filterProcessList(this.revisionStatus); 
         this.response = true;
+        this.checkUnsavedData();
       },
       (error) =>{
         // Log any errors encountered while fetching processes

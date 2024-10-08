@@ -31,37 +31,40 @@ import { UnsavedDecisionSupportAlertDialogComponent } from '../dialog-components
 export class DecisionSupportListComponent {
 
   decisionSupports: DecisionSupportList[] = []; // Create an array of DecisionSupportList objects.
+  processLabel: string ="";
   response: boolean = false; //boolean value for spinner
-  displayedColumns: string[] = ['decisionSupportId', 'name', 'processId', 'createdTime', 'updatedTime', 'actions']; // machine names for the table's columns.
+  displayedColumns: string[] = ['decisionSupportId', 'name', 'processType', 'createdTime', 'updatedTime', 'actions']; // machine names for the table's columns.
 
-  constructor( private decisionSupportService: DecisionSupportService, private dialog: MatDialog, private router: Router) { }
+  constructor(private decisionSupportService: DecisionSupportService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.getDecisionSupports();
-    this.checkUnSavedData();
   }
 
   // Queries the backend and returns all decision supports.
   getDecisionSupports(): void {
     this.decisionSupportService.getDecisionSupportList().subscribe({
-      next: (data) => {this.decisionSupports = data; this.response = true;},
-      error: (err) =>{ console.error('Error fetching reports: ', err); this.response = true;}
+      next: (data) => { this.decisionSupports = data; this.response = true; this.checkUnSavedData();},
+      error: (err) => { console.error('Error fetching decision supports: ', err); this.response = true; }
     });
   }
 
-  checkUnSavedData(): void{
+  checkUnSavedData(): void {
     const unsavedData = localStorage.getItem("decision_support_data");
-     if (unsavedData) {
-       const formattedData = JSON.parse(unsavedData);
-       const dialogRef = this.dialog.open(UnsavedDecisionSupportAlertDialogComponent,{width: '800px', data: {unSavedData: formattedData}});
-       dialogRef.afterClosed().subscribe(result =>{
-         if(result){
-           //If the user want to continue. Navigate the user to the desired page
-           this.router.navigate(['/support/', formattedData.entityId]);
-         }
-       })
-     }
-   }
+    if (unsavedData && this.decisionSupports) {
+      const formattedData = JSON.parse(unsavedData);
+      const matchingDecisionSupport = this.decisionSupports.find(d =>d.entityId == formattedData.entityId);
+      if (matchingDecisionSupport) {
+        const dialogRef = this.dialog.open(UnsavedDecisionSupportAlertDialogComponent, { width: '800px', data: { unSavedData: formattedData } });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            //If the user want to continue. Navigate the user to the desired page
+            this.router.navigate(['/support/', formattedData.entityId]);
+          }
+        })
+      } else { localStorage.removeItem("decision_support_data") }
+    }
+  }
 
   // Opens NewDecisionSupportDialogComponent and then tells the backend to create a new decision support.
   addDecisionSupport(): void {
@@ -72,11 +75,11 @@ export class DecisionSupportListComponent {
     // Recieves result from NewDecisionSupportDialogComponent...
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        
+
         const formattedData = {
           label: result.name,
           process_id: result.process_id,
-          json_string: JSON.stringify({ name: result.name }) 
+          json_string: JSON.stringify({ name: result.name })
         }
         // ... and posts it to the backend!
         this.decisionSupportService.postDecisionSupport(formattedData).subscribe({

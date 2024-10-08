@@ -1,0 +1,28 @@
+
+<!-- <div class="wrapper">
+    <div class="top-container">
+      <h2 class="Tile">Generate Report</h2>
+      <button class="download" (click)="downloadJson()"> Download Report </button>
+    </div>
+      <div class="report-container" *ngFor="let support of decisionSupportDetails">
+        <p><b>Q{{support.id}}: {{support.description	}}</b> <br/>
+           <b>Answer:</b> {{support.answerLabel	}} <br/>
+           <b>Additional Explanation:</b> {{support.textAnswer	}} <br/> </p>
+      </div>
+  </div> -->
+
+ <div class="wrapper">
+    <div class="top-container">
+        <h2 class="Tile">Generate Report</h2>
+        <button class="download" (click)="downloadJson()"> Download Report </button>
+      </div>
+        <div class="container">
+            <!-- The preview container to display the steps -->
+            <div class="preview-container" >
+                <div *ngFor="let support of decisionSupportDetails">
+                <p><b>Q{{support.id}}: {{support.description	}}</b> <br/>
+                    <b>Answer:</b> {{support.answerLabel	}} <br/>
+                    <b>Additional Explanation:</b> {{support.textAnswer	}} <br/> </p>
+        </div>
+</div>
+</div>
