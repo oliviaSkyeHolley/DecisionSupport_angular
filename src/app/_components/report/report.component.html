@@ -23,6 +23,27 @@
                 <p><b>Q{{support.id}}: {{support.description	}}</b> <br/>
                     <b>Answer:</b> {{support.answerLabel	}} <br/>
                     <b>Additional Explanation:</b> {{support.textAnswer	}} <br/> </p>
+                </div>
+            </div>
+  </div>
+          <!-- List Documents -->
+          <div>
+            <div class="top-container">
+            <h2 class="Tile">Attachment Titles</h2>
+              </div>
+            <div *ngFor="let document of filteredDocumentList">
+              <br />
+              <div *ngIf="document.isVisible">
+                <mat-card appearance="outlined">
+                  <mat-card-content class="card-content">
+                    <div class="content">
+                      Document: {{document.label}}
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+              <br />
+              <mat-divider></mat-divider>
+            </div>
+          </div>
         </div>
-</div>
-</div>

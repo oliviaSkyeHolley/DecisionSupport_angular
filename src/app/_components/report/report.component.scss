@@ -11,12 +11,20 @@
     margin-bottom: 20px;
     border-radius: 8px;
   }
-  
+
+/* Rounded border */
+hr.rounded {
+  border-top: 2px solid #bbb;
+  border-radius: 5px;
+  border-color: #accbe3;
+}
+
+
   br{
     display: block;
     margin: 10px 0;
   }
-  
+
   .report-container {
     display: flex;
     //justify-content: space-between;
@@ -27,23 +35,23 @@
     margin-bottom: 20px;
     border-radius: 8px;
   }
-  
+
   .download{
     color:#ffff;
-    background-color: #143354;
+    background-color: #accbe3;
     border-radius: 10px;
     font-size: 18px;
     font-weight: bold;
     border-color: transparent;
     box-shadow: none;
     width: 250px;
-  
+
     padding: 12px 24px;
     transition: background-color 0.3s ease;
     cursor: pointer;
-  
+
   }
-  
+
   .download:hover{
     color:#ffff;
     background-color: #7a9bbf;
@@ -53,16 +61,16 @@
     border-color: transparent;
     font-color: white;
   }
-  
-  
+
+
   .Tile{
     left: 150px;
     width: 100%;
     font-size: 35px;
-    color: #143354;
+    color: #7a9bbf;
     //display: inline-block;
   }
-  
+
   .wrapper{
     //background-color: white;
     border-top: 4px;
@@ -80,5 +88,5 @@
     border: 2px solid white;
     padding: 2%;
     border-radius: 10px;
-   
+
 }
