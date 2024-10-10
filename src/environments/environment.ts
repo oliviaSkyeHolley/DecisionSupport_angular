@@ -27,6 +27,7 @@ export const environment = {
   getDecisionSupportDocumentsURL: 'http://drupaldecisionsupport.local/rest/support/file/get/',
   archiveDecisionSupportDocumentsURL: 'http://drupaldecisionsupport.local/rest/support/file/delete/',
 
+
   getDecisionSupportReportURL: 'http://drupaldecisionsupport.local/rest/support/report/',
 
   //Client
