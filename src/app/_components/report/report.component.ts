@@ -48,7 +48,6 @@ export class ReportComponent implements OnInit {
     }
   ngOnInit(): void {
    this.getDecisionSupportReport();
-    //console.log(this.investigations);
     console.log(this.decisionSupportDetails);
     console.log('yo yo');
     this.downloadJson();

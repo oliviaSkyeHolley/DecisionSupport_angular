@@ -13,7 +13,7 @@
         <li> {{ selectedFile.name }} ({{ selectedFile.size }} bytes) </li>
     </ul>
     <!-- Upload it. -->
-    <button (click)="onUpload()" [disabled]="!selectedFile"> Upload </button>
+    <button class="button" (click)="onUpload()" [disabled]="!selectedFile"> Upload </button>
     <div *ngIf="uploadResponse">
         <p> Upload Response: {{ uploadResponse }} </p>
     </div>
