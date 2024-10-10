@@ -1,22 +1,11 @@
-.mat-dialog-title{
-  font-size: 35px;
-}
 
-p{
-  font-size: 20px;
-}
-
-:host ::ng-deep .mdc-text-field--outlined{
-  --mdc-outlined-text-field-container-shape: 15px;
-}
-
-.createButton:enabled,
+.saveButton:enabled,
 button[enabled]{
   color: black;
   border-radius: 10px;
 }
 
-.createButton:enabled:hover,
+.saveButton:enabled:hover,
 button[enabled]{
   background-color: #7a9bbf;
   color: white;
@@ -33,14 +22,4 @@ buton[enabled]{
   color: white;
   background-color: #7a9bbf;
   border-radius: 10px;
-}
-
-
-.mat-dialog-content {
-  width: 100%;
-}
-
-
-mat-form-field {
-  width: 100%;
 }
