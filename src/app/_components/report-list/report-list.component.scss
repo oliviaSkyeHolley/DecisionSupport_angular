@@ -79,10 +79,7 @@ body {
     overflow:hidden !important;
   }
 
-  .mat-mdc-row:nth-child(even) {
-    background-color: #f1f1f1;
-  }
-  .mat-mdc-row:nth-child(odd) {
+  .mat-mdc-row:nth-child {
     background-color: #fff;
   }
   mat-cell {
