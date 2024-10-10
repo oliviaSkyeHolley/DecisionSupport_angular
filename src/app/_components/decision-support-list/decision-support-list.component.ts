@@ -19,6 +19,7 @@ import { NewDecisionSupportDialogComponent } from '../dialog-components/decision
 import { RenameDecisionSupportDialogComponent } from '../dialog-components/decision-support-dialog/rename-decision-support-dialog/rename-decision-support-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UnsavedDecisionSupportAlertDialogComponent } from '../dialog-components/decision-support-dialog/unsaved-decision-support-alert-dialog/unsaved-decision-support-alert-dialog.component';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-decision-support-list',
@@ -35,7 +36,7 @@ export class DecisionSupportListComponent {
   response: boolean = false; //boolean value for spinner
   displayedColumns: string[] = ['decisionSupportId', 'name', 'processType', 'createdTime', 'updatedTime', 'actions']; // machine names for the table's columns.
 
-  constructor(private decisionSupportService: DecisionSupportService, private dialog: MatDialog, private router: Router) { }
+  constructor(private decisionSupportService: DecisionSupportService, private dialog: MatDialog, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.getDecisionSupports();
@@ -116,15 +117,28 @@ export class DecisionSupportListComponent {
 
     dialogRef.afterClosed().subscribe(result => { //result = the new name
       if (result) {
-        this.decisionSupportService.patchDecisionSupport(id, null).subscribe({  // Need to edit the patch decision support function to accept "name" as a third parameter
-          next: (response) => {
-            console.log('Successfully renamed decision support: ', result);
-            this.getDecisionSupports();
+        // Update the json string to include the new name.
+        const headers = this.authService.getHeaders();
+        this.decisionSupportService.getDecisionSupport(id, headers).subscribe({
+          next: (renamedDS: any) => {
+            renamedDS.decisionSupportLabel = result;
+            // Send the new json string to the backend to update the entity
+            this.decisionSupportService.patchDecisionSupport(id, renamedDS).subscribe({
+              next: (response) => {
+                console.log('Successfully renamed decision support: ', result);
+                this.getDecisionSupports();
+              },
+              error: (err) => {
+                console.error('Error adding decision support: ', err);
+              }
+            });
           },
           error: (err) => {
-            console.error('Error adding decision support: ', err);
+            console.error('Error fetching the decision support: ', err);
           }
         });
+
+        
       }
     });
   }

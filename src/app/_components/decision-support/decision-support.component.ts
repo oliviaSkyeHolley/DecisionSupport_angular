@@ -69,6 +69,11 @@ export class DecisionSupportComponent implements OnInit {
 
   ngOnInit() {
     this.getDecisionSupportDetail();
+    
+    // I really don't like this...
+    //setTimeout(() => {
+    //  this.updateSteps();
+    //}, 500);
   }
 
   onSaveDraft() {
@@ -131,6 +136,9 @@ export class DecisionSupportComponent implements OnInit {
           this.decisionSupportDetails.steps[0].isVisible = true;
           this.oneStep = this.decisionSupportDetails.steps[0];
           this.documentService.setDocumentDetails(this.decisionSupportDetails.entityId, this.decisionSupportDetails.decisionSupportLabel, this.oneStep.id);
+
+          // Update the steps once they've come.
+          this.updateSteps();
         }
       },
       (error) => {
@@ -200,6 +208,7 @@ export class DecisionSupportComponent implements OnInit {
 
   // Updates the form, specifically what steps should be visilbe and therefore accessible at any time.
   updateSteps() {
+    console.log("Running Update Steps()!");
     let lastVisibleStepIndex = -1;
   
     // Iterate over all steps to update their visibility
