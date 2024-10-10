@@ -1,11 +1,11 @@
 <!--
   @component Document Upload Component
-  @description Allows the user to upload documents attatched to decision supports. 
+  @description Allows the user to upload documents attatched to decision supports.
 -->
 
 <div class="upload-container">
     <!-- Select File -->
-    <button type="button" (click)="fileInput.click()"> Select File </button>
+    <button class="button" type="button" (click)="fileInput.click()"> Select File </button>
     <input type="file" #fileInput (change)="onFileSelect($event)" style="display: none;">
 
     <!-- Display it. -->
@@ -30,7 +30,7 @@
             Document: {{document.label}}
             <span class="actions">
               <button mat-mini-fab class="delete-btn" (click)="deleteDocument(document.entityId)">
-                <mat-icon >delete</mat-icon>
+                <mat-icon class="material-icons">delete</mat-icon>
               </button>
             </span>
           </div>
@@ -40,4 +40,4 @@
       <br />
       <mat-divider></mat-divider>
     </div>
-  </div>  
+  </div>

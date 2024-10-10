@@ -4,8 +4,22 @@
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .delete-btn {
-    background-color: red;
+    background-color: #143354;
     margin-left: auto;
+  }
+
+  .material-icons{
+    color: white;
+  }
+
+  .button{
+    background-color: #accbe3;
+    color: white;
+  }
+
+  .button:hover{
+    background-color: #7a9bbf;
+    color: white;
   }
