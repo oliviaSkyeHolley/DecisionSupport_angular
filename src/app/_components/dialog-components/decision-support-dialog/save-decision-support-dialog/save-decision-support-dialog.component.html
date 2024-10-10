@@ -4,12 +4,12 @@
 -->
 
 <!-- Mat Dialog with Mesaage and action buttons -->
-<h2 mat-dialog-title>Save Decision Support</h2>
+<h2 mat-dialog-title>Submit Decision Support</h2>
 <mat-dialog-content>
-    <h3>Are you sure you want to save this decision support?</h3>
-    <p>Note: You can't make any changes once the decision support is saved.</p>
+    <h3>Are you sure you want to submit this decision support?</h3>
+    <p>Note: You can't make any changes once the decision support is submitted.</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button class="closeButton" mat-button (click)="close()">No</button>
-    <button class="binButton" mat-button color="primary" (click)="ok()">Save</button>
+    <button class="closeButton" mat-button (click)="close()">Cancel</button>
+    <button class="binButton" mat-button color="primary" (click)="ok()">Submit</button>
 </mat-dialog-actions>

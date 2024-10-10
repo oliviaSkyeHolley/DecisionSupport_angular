@@ -45,7 +45,10 @@ export class DecisionSupportListComponent {
   // Queries the backend and returns all decision supports.
   getDecisionSupports(): void {
     this.decisionSupportService.getDecisionSupportList().subscribe({
-      next: (data) => { this.decisionSupports = data; this.response = true; this.checkUnSavedData();},
+      next: (data) => {
+         this.decisionSupports = data; 
+         this.response = true;
+          this.checkUnSavedData();},
       error: (err) => { console.error('Error fetching decision supports: ', err); this.response = true; }
     });
   }

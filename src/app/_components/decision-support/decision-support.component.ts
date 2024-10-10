@@ -178,9 +178,9 @@ export class DecisionSupportComponent implements OnInit {
     //store the choice in userChoices
     this.userChoices.set(step.stepUuid, choice.choiceUuid);
     step.isCompleted = true;
-
+    this.updateLocalStorage();
     const selectedChoices = step.choices.filter(c => c.selected);
-    console.log("Selected", selectedChoices)
+
     step.answer = selectedChoices.map(c => c.description).join(', ');
     var currentindex = step.id;
     this.clearFields(currentindex);
@@ -192,6 +192,7 @@ export class DecisionSupportComponent implements OnInit {
   
   onTextAnswerChange(step: Step){
     step.isCompleted = true;
+    this.updateLocalStorage();
   }
 
   // Returns the description of a choice (in other words, the value next to a single radio button or checkbox).
@@ -208,7 +209,6 @@ export class DecisionSupportComponent implements OnInit {
 
   // Updates the form, specifically what steps should be visilbe and therefore accessible at any time.
   updateSteps() {
-    console.log("Running Update Steps()!");
     let lastVisibleStepIndex = -1;
   
     // Iterate over all steps to update their visibility

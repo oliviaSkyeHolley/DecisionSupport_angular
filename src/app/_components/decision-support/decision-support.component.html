@@ -68,7 +68,7 @@
           <br />
           <!-- Further details and document upload. -->
           <b>Please provide further details.</b><i>Optional</i><br /><br />
-          <quill-editor [(ngModel)]="oneStep.textAnswer"></quill-editor>
+          <quill-editor [(ngModel)]="oneStep.textAnswer"  (ngModelChange)="updateLocalStorage()"></quill-editor>
           <app-document-upload></app-document-upload><br /><br /><br /><br />
         </div>
   
@@ -101,7 +101,7 @@
   
           <!-- Further details and document upload. -->
           <b>Please provide further details.</b><i>Optional</i><br /><br />
-          <quill-editor [(ngModel)]="oneStep.textAnswer"></quill-editor>
+          <quill-editor [(ngModel)]="oneStep.textAnswer" (ngModelChange)="updateLocalStorage()"></quill-editor>
           <app-document-upload></app-document-upload><br /><br /><br /><br />
         </div>
     
@@ -124,7 +124,7 @@
         <!-- STEP TYPE: Text Box -->
         <div *ngIf="oneStep.type === 'textbox'" >
           <b>Please provide further details.</b><i>Optional</i><br /><br />
-          <quill-editor [(ngModel)]="oneStep.textAnswer"  (ngModelChange)="onTextAnswerChange(oneStep)"></quill-editor><br /><br />
+          <quill-editor [(ngModel)]="oneStep.textAnswer"  (ngModelChange)="onTextAnswerChange(oneStep); updateSteps()"></quill-editor><br /><br />
           <app-document-upload></app-document-upload><br /><br /><br /><br />
         </div>
   

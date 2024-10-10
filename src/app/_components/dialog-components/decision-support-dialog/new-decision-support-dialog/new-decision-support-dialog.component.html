@@ -16,8 +16,8 @@
     <!-- Collecting process type of the DecisionSupport -->
     <p> What process will you follow? </p>
     <mat-form-field appearance="outline">
-      <mat-select formControlName="process_id" placeholder="Select Process">
-        <mat-option *ngFor="let processId of processId" [value]="processId.value"> {{processId.label}} </mat-option>
+      <mat-select formControlName="process_id" placeholder="Select Process"  name="process_id"  required >
+        <mat-option *ngFor="let processId of processId" [value]="processId.value" > {{processId.label}} </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-dialog-content>
