@@ -8,7 +8,7 @@
 <form [formGroup]="form" (ngSubmit)="onSave()">
     <!-- What would you like to rename the decision support to? -->
     <mat-dialog-content>
-        <p>New Name</p>
+        <mat-label> New Name: </mat-label>
         <mat-form-field>
             <input matInput formControlName="name" placeholder="Title" required>
         </mat-form-field>

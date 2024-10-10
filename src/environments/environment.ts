@@ -27,6 +27,8 @@ export const environment = {
   getDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/get/',
   archiveDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/archive/',
 
+  getDecisionSupportReportURL: 'http://complaintdrupal.local/rest/support/report/',
+
   //Client
   clientId: 'your-client-id',
   clientSecret: 'your-client-secret'
