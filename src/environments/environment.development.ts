@@ -4,6 +4,7 @@ export const environment = {
   //Authentication Endpoints
   apiUrl: 'http://complaintdrupal.local/oauth/token',
   csrfTokenUrl: 'http://complaintdrupal.local/session/token',
+  getUserDataUrl: 'http://complaintdrupal.local/user/1?_format=json',
 
   //Process Endpoints
   getProcessURL: 'http://complaintdrupal.local/rest/process/get/',
@@ -25,9 +26,10 @@ export const environment = {
   fileUploadURL: 'http://complaintdrupal.local/file/upload/decision_support_file/_/file',
   postDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/post',
   getDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/get/',
-  archiveDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/delete/',
+  archiveDecisionSupportDocumentsURL: 'http://complaintdrupal.local/rest/support/file/archive/',
 
   getDecisionSupportReportURL: 'http://complaintdrupal.local/rest/support/report/',
+  getDecisionSupportReportListURL: 'http://complaintdrupal.local//rest/support/reportlist',
 
   //Client
   clientId: 'your-client-id',

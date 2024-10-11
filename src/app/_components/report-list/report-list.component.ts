@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../_services/auth.service";
 import { DecisionSupportService } from '../../_services/decision-support.service';
+import { ReportService } from '../../_services/report.service';
 @Component({
   selector: 'app-report-list',
   standalone: true,
@@ -25,7 +26,7 @@ export class ReportListComponent {
   filteredInvestigation: any;
   displayedColumns: string[] = ['investigationId', 'name', 'processId', 'createdTime', 'actions']; // machine names for the table's columns.
 
-  constructor(private http: HttpClient, private authService: AuthService, private investigationService: DecisionSupportService, private dialog: MatDialog) { }
+  constructor(private http: HttpClient, private authService: AuthService, private investigationService: ReportService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getInvestigations();
@@ -33,7 +34,7 @@ export class ReportListComponent {
   }
 
   getInvestigations(): void {
-    this.investigationService.getDecisionSupportList().subscribe(
+    this.investigationService.getReportList().subscribe(
       (data) => { 
         this.investigations = data; 
         this.filteredInvestigation = this.investigations.filter((d: { isCompleted: boolean; }) => d.isCompleted == true);

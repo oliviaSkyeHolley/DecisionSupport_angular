@@ -20,9 +20,14 @@
             <!-- The preview container to display the steps -->
             <div class="preview-container" >
                 <div *ngFor="let support of decisionSupportDetails">
-                <p><b>Q{{support.id}}: {{support.description	}}</b> <br/>
+                    <p><b>Q{{support.id}}: {{support.description	}}</b> <br/>
                     <b>Answer:</b> {{support.answerLabel	}} <br/>
-                    <b>Additional Explanation:</b> {{support.textAnswer	}} <br/> </p>
-        </div>
+                    <b>Additional Explanation:</b> {{support.textAnswer	}} <br/>
+                    <b>Attatched Files:</b>
+                    <div *ngFor="let file of support.attachedFiles">
+                      <li>{{file.label}}</li>
+                    </div>
+                      
+                </div>
 </div>
 </div>

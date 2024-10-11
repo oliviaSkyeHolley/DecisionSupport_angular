@@ -67,13 +67,37 @@ export class ReportComponent implements OnInit {
 
 
   downloadJson(): void{
-    const textLines = this.decisionSupportDetails.map((step: { textAnswer: string; id: any; description: any; answerLabel: any; }) => {
+    const textLines = this.decisionSupportDetails.map((step: { 
+      textAnswer: string; 
+      id: any; 
+      description: any; 
+      answerLabel: any; 
+      attachedFiles: { label: string; entityId: any; fileEntityId: any; isVisible: boolean; }[] 
+  }) => {
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = step.textAnswer;
       const plainText = tempDiv.innerText;
+  
+      // Filter attached files to only include those that are visible
+      const visibleFiles = step.attachedFiles.filter(file => file.isVisible);
 
-      return `${step.id}. ${step.description}\nAnswer: ${step.answerLabel}\nText Answer: ${plainText.replace(/\n/g, ' ')}\n`;
-    });
+      const filesList = visibleFiles.map(file => {
+        return `Label: ${file.label}, Entity ID: ${file.entityId}, File ID: ${file.fileEntityId}`;
+    }).join('\n'); // Join the files with a newline
+
+    // Only include the attached files section if there are visible files
+    const filesSection = filesList.length > 0 ? `Attached Files:\n${filesList}` : '';
+
+    return `${step.id}. ${step.description}\nAnswer: ${step.answerLabel}\nText Answer: ${plainText.replace(/\n/g, ' ')}\n${filesSection}`;
+  });
+    
+    //const textLines = this.decisionSupportDetails.map((step: { textAnswer: string; id: any; description: any; answerLabel: any; attatchedFiles: any }) => {
+    //  const tempDiv = document.createElement('div');
+    //  tempDiv.innerHTML = step.textAnswer;
+    //  const plainText = tempDiv.innerText;
+//
+    //  return `${step.id}. ${step.description}\nAnswer: ${step.answerLabel}\nText Answer: ${plainText.replace(/\n/g, ' ')}\nAttatched Files: ${step.attatchedFiles.replace(/\n/g, ' ')}`;
+    //});
 
     const textString = textLines.join('\n');
 
