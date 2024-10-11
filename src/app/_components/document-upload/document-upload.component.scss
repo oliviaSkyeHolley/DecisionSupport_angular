@@ -1,37 +1,11 @@
 
-  .card-content .content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.card-content .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .delete-btn {
-    background-color: #accbe3;
-    margin-left: auto;
-    box-shadow: none;
-  }
-
-  .delete-btn:hover {
-    background-color: #7a9bbf;
-    margin-left: auto;
-    box-shadow: none;
-  }
-
-  .material-icons{
-    color: white;
-  }
-
-  .button{
-    background-color: #accbe3;
-    color: #fff !important;
-    width: 20%;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-right: 10px;
-    border: none;
-  }
-
-  .button:hover{
-    background-color: #7a9bbf;
-    color: white;
-  }
+.delete-btn {
+  background-color: red;
+  margin-left: auto;
+}
