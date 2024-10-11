@@ -82,8 +82,6 @@ export class ProcessListComponent {
     this.processService.getProcessList().subscribe(
       (data) => { 
         this.processes = data; 
-        // Filter only enabled processes
-        this.processes = this.processes.filter(process => process.enabled == true);
         this.filterProcessList(this.revisionStatus); 
         this.response = true;
         this.checkUnsavedData();
