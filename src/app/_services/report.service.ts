@@ -25,17 +25,3 @@ export class ReportService {
     return this.http.get<any>(`${environment.getDecisionSupportReportListURL}`,{ headers });
   }
 }
-
-  getDocumentList(decisionSupportId:string){
-    const headers =this.authService.getHeaders();
-    return this.http.get<any[]>(`${environment.getDecisionSupportDocumentsURL}${decisionSupportId}`, {headers});
-  }
-
-  getDecisionSupportId(): string{
-    return this.decisionSupportId;
-  }
-
-  getStepId(): string{
-    return this.stepId;
-  }
-}
