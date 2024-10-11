@@ -24,7 +24,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export class ReportComponent {
   documentList: any[] = [];
-  filteredDocumentList: any[] = [];
   decisionSupportDetails: any = null;
   supportId: any;
   response: boolean = false;
@@ -34,7 +33,6 @@ export class ReportComponent {
   }
   ngOnInit(): void {
     this.getDecisionSupportReport();
-
   }
 
 
@@ -87,7 +85,7 @@ export class ReportComponent {
     });
 
     // Join all text lines into a single string
-    const textString = header + textLines.join('\n\n');
+    const textString = header + '\n\n' + textLines.join('\n\n');
 
     // Create a Blob and download the text file
     const blob = new Blob([textString], { type: 'text/plain' });
@@ -96,19 +94,6 @@ export class ReportComponent {
     link.download = reportLabel + '-Report.txt';
     link.click();
   }
-
-  getDocumentList(): void {
-    this.reportService.getDocumentList(this.reportService.getDecisionSupportId()).subscribe({
-      next: (data) => {
-        this.documentList = data;
-        const stepId = this.reportService.getStepId();
-        this.filteredDocumentList = this.documentList.filter(d => d.stepId == stepId);
-      },
-      error: (err) => console.error('Error fetching reports', err)
-    });
-  }
-
-
-
-
 }
+
+
