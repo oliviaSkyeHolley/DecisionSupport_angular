@@ -1,23 +1,40 @@
 
 
+.container {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  height: 100vh; 
+  padding: 20px;
+}
+
 .fadeIn {
   animation: fadeIn 5s;
   display: block;
-  margin-left: 5%;
+  text-align: center; 
 }
+
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
 
 h2 {
-
   font-size: 35px;
+  margin-top: 5px; 
+  font-family: 'Roboto', sans-serif;
 }
 
-.container {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 5px;
+
+.top-aligned {
+  margin-top: 0; 
+}
+
+
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05); 
 }

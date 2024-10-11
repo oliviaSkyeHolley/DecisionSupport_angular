@@ -115,7 +115,7 @@ export class DecisionSupportListComponent {
   renameDecisionSupport(id: string): void {
     // Open the rename decision support dialog component
     const dialogRef = this.dialog.open(RenameDecisionSupportDialogComponent, {
-      width: '400px'
+      width: '480px'
     });
 
     dialogRef.afterClosed().subscribe(result => { //result = the new name
