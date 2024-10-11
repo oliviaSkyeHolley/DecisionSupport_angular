@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
   }
-  
+
   /* Styling Container for the top section with title and create button */
   .top-container {
     display: flex;
@@ -18,28 +18,28 @@ body {
     margin-bottom: 20px;
     border-radius: 10px;
   }
-  
-  
+
+
   .top-container h2 {
       font-size: 24px;
       font-weight: 600;
-      color: #143354;
-  
+      color: #7a9bbf;
+
   }
-  
+
   .createbutton {
     color:#ffff;
-    background-color: #143354;
+    background-color: #accbe3;
     border-radius: 10px;
     font-size: 18px;
     font-weight: bold;
     padding: 12px 24px;
     transition: background-color 0.3s ease;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.2);
+    box-shadow: none;
     border: none;
   }
-  
+
   .createbutton:hover {
     color:#ffff;
     background-color: #7a9bbf;
@@ -48,75 +48,55 @@ body {
     font-weight: bold;
     border: none;
   }
-  
+
   .filter-div{
       display: flex;
       justify-content: flex-start;
       align-items: center;
       gap: 20px;
   }
-  
+
   .filter-div mat-select,
   .filter-div mat-form-field {
       width: 200px;
   }
-  
+
   .filter-div mat-form-field {
       flex: 1;
   }
-  
+
   /* Table styling */
   .mat-mdc-header-row{
-    background-color: #143354 !important;
+    background-color: #7a9bbf !important;
     color: white;
     border-radius: 10px;
     font-size: 16px;
   }
-  
-  
+
+
   .mat-mdc-table{
     border-radius: 8px;
     overflow:hidden !important;
   }
-  
-  .mat-mdc-row:nth-child(even) {
-    background-color: #ebebeb;
-  }
-  .mat-mdc-row:nth-child(odd) {
+
+  .mat-mdc-row:nth-child {
     background-color: #fff;
   }
   mat-cell {
     border-bottom: 1px solid #E0E0E0;
     padding: 16px;
   }
-  /*
-  mat-cell button {
-    background-color: #accbe3;
-    color: #fff;
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 14px;
-    margin-right: 10px;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .mat-column-label {
-      flex: 0 0 20%;
-  }
-    
-  */
-  
+
+
   .searchIcon{
     color: black;
   }
-  
-  
+
+
   .entityid{
       font-weight: 600;
   }
-  
+
   a:link {
       color: #65848b;
       font-weight: 500;
@@ -124,24 +104,24 @@ body {
       text-decoration: none;
       font-size: 15px;
   }
-  
-  
-  
+
+
+
   a:hover {
       color: #374357;
       background-color: transparent;
       text-decoration: none;
       }
-  
-  
+
+
   a:visited {
     color: #586d8a;
     background-color: transparent;
     text-decoration: none;
   }
-  
-  
-  
+
+
+
   /* No Data Styling */
   .noData {
       display: flex;
@@ -151,15 +131,15 @@ body {
       text-align: center;
       padding: 10%;
   }
-  
+
   .noData p {
       font-weight: 500;
       color: rgb(183, 183, 183);
       margin-bottom: 20px;
   }
-  
+
   .iconButton{
-    background-color: #143354;
+    background-color: #accbe3;
     color: #fff;
     border-radius: 6px;
     margin-right: 10px;
@@ -168,7 +148,7 @@ body {
     border: none;
     transition: background-color 0.3s ease;
   }
-  
+
   .iconButton:hover{
     background-color: #7a9bbf;
     color: #fff;
@@ -179,9 +159,9 @@ body {
     border: none;
     transition: background-color 0.3s ease;
   }
-  
+
   .addbutton{
-    background-color: #143354;
+    background-color: #accbe3;
     color: #fff;
     border-radius: 6px;
     margin-right: 10px;
@@ -191,8 +171,8 @@ body {
     transition: background-color 0.3s ease;
     width: 130px;
   }
-  
-  
+
+
   .button-container{
     width: 100%;
     /* padding-top: 1%; */
@@ -201,14 +181,14 @@ body {
     /*background-color: white;*/
     margin-bottom: 1%;
     display: inline-flex;
-  
+
     height: 40px;
     line-height: 40px;
-  
+
     float: right;
   }
-  
-  
+
+
   .wrapper{
     //background-color: white;
     border-top: 4px;
@@ -216,7 +196,7 @@ body {
     padding-right: 20px;
     padding-left: 20px;
   }
-  
+
   .div-spinner{
     display: flex;
     justify-content: center;
