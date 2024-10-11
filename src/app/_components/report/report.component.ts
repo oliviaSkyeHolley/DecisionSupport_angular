@@ -1,109 +1,93 @@
 /**
- * @whatItDoes Where 'decision support' happens. The investigation component carries out a process and records the result.
+ * @whatItDoes Where 'decision support report'. The Report component to generate report.
  *
  * @description
- *  This component takes the JSON string from the backend and renders a form to be filled out.
+ *  This component takes the JSON string from the backend and renders a report .
  */
 
 
-import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatListModule } from '@angular/material/list';
 import { MatDivider } from '@angular/material/divider';
 import { ReportService } from '../../_services/report.service';
-import { DocumentUploadComponent } from '../document-upload/document-upload.component';
-import {DocumentService} from "../../_services/document.service";
-import {MatTooltip} from "@angular/material/tooltip";
 import { ActivatedRoute } from '@angular/router';
-import {MatCard, MatCardContent} from "@angular/material/card";
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-report',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatSidenavModule, MatDivider, CommonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatRadioModule, FormsModule, MatCheckbox, MatTooltip, DocumentUploadComponent,  MatCard, MatCardContent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MatButtonModule, MatDivider, CommonModule, MatProgressSpinnerModule],
   templateUrl: './report.component.html',
   styleUrl: './report.component.scss'
 })
 
-export class ReportComponent implements OnInit {
-  panelOpenState = false;
+export class ReportComponent {
   documentList: any[] = [];
   filteredDocumentList: any[] = [];
-
-  decisionSupportDetails: any;
+  decisionSupportDetails: any = null;
   supportId: any;
+  response: boolean = false;
 
-
-    constructor( private reportService: ReportService, private route: ActivatedRoute) {
-      this.supportId = this.route.snapshot.params['id'];
-    }
+  constructor(private reportService: ReportService, private route: ActivatedRoute) {
+    this.supportId = this.route.snapshot.params['id'];
+  }
   ngOnInit(): void {
-   this.getDecisionSupportReport();
-    console.log(this.decisionSupportDetails);
-    console.log('yo yo');
-    this.downloadJson();
-    this.getDocumentList();
+    this.getDecisionSupportReport();
 
   }
 
 
   getDecisionSupportReport(): void {
-    // @ts-ignore
     this.reportService.getReport(this.supportId).subscribe(
-      (data) => {this.decisionSupportDetails = data; console.log(data)},
-      (error)  => console.error('Error fetching reports: ', error)
-    );
+      (data) => {
+        this.decisionSupportDetails = data;
+        this.response = true;
+        console.log(this.decisionSupportDetails)
+      }, (error) => {
+        // Log any errors encountered while fetching processes
+        this.response = true;
+        console.error('Error fetching reports', error);
+
+      }
+    )
   }
 
+  downloadJson(): void {
+    // Check if decisionSupportDetails and steps are defined
+    if (!this.decisionSupportDetails || !this.decisionSupportDetails.steps) {
+      console.error('No decision support details found.');
+      return;
+    }
 
-  downloadJson(): void{
-    const textLines = this.decisionSupportDetails.map((step: { 
-      textAnswer: string; 
-      id: any; 
-      description: any; 
-      answerLabel: any; 
-      attachedFiles: { label: string; entityId: any; fileEntityId: any; isVisible: boolean; }[] 
-  }) => {
+    // Create an array of text lines for each step
+    const textLines = this.decisionSupportDetails.steps.map((step: { step: { textAnswer: string; id: any; description: any; answerLabel: any; }; attachedFiles: any[]; }) => {
       const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = step.textAnswer;
+      tempDiv.innerHTML = step.step.textAnswer; // Accessing the textAnswer correctly
       const plainText = tempDiv.innerText;
-  
+
       // Filter attached files to only include those that are visible
       const visibleFiles = step.attachedFiles.filter(file => file.isVisible);
 
       const filesList = visibleFiles.map(file => {
         return `Label: ${file.label}, Entity ID: ${file.entityId}, File ID: ${file.fileEntityId}`;
-    }).join('\n'); // Join the files with a newline
+      }).join('\n'); // Join the files with a newline
 
-    // Only include the attached files section if there are visible files
-    const filesSection = filesList.length > 0 ? `Attached Files:\n${filesList}` : '';
+      // Only include the attached files section if there are visible files
+      const filesSection = filesList.length > 0 ? `Attached Files:\n${filesList}` : '';
 
-    return `${step.id}. ${step.description}\nAnswer: ${step.answerLabel}\nText Answer: ${plainText.replace(/\n/g, ' ')}\n${filesSection}`;
-  });
-    
-    //const textLines = this.decisionSupportDetails.map((step: { textAnswer: string; id: any; description: any; answerLabel: any; attatchedFiles: any }) => {
-    //  const tempDiv = document.createElement('div');
-    //  tempDiv.innerHTML = step.textAnswer;
-    //  const plainText = tempDiv.innerText;
-//
-    //  return `${step.id}. ${step.description}\nAnswer: ${step.answerLabel}\nText Answer: ${plainText.replace(/\n/g, ' ')}\nAttatched Files: ${step.attatchedFiles.replace(/\n/g, ' ')}`;
-    //});
+      // Constructing the output for each step
+      return `Q${step.step.id}: ${step.step.description}\nAnswer: ${step.step.answerLabel}\nText Answer: ${plainText.replace(/\n/g, ' ')}\n${filesSection}`;
+    });
 
-    const textString = textLines.join('\n');
+    // Join all text lines into a single string
+    const textString = textLines.join('\n\n');
 
+    // Create a Blob and download the text file
     const blob = new Blob([textString], { type: 'text/plain' });
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
-    link.download = 'Test' + '.txt';
+    link.download = 'Report.txt';
     link.click();
   }
 

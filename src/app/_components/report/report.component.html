@@ -1,33 +1,46 @@
+<div class="wrapper">
+  <div class="top-container">
+    <h2 class="Tile">Generate Report</h2>
+    <button class="download" (click)="downloadJson()">Download Report</button>
+  </div>
 
-<!-- <div class="wrapper">
-    <div class="top-container">
-      <h2 class="Tile">Generate Report</h2>
-      <button class="download" (click)="downloadJson()"> Download Report </button>
+  <div class="container" [ngClass]="{'no-data-container': decisionSupportDetails == null}" *ngIf="response">
+    <div *ngIf="decisionSupportDetails">
+      <div class="flex-container">
+        <div class="header-container"><br />
+          <!-- Show report metadata -->
+          <b>Report Name:</b> {{decisionSupportDetails.reportLabel}}<br />
+          <b>Process Name:</b> {{decisionSupportDetails.processLabel}}<br />
+          <b>Submitted Time:</b> {{decisionSupportDetails.submittedTime}}<br />
+          <br />
+        </div><br />
+        <div class="preview-container"><br /><br />
+          <mat-divider></mat-divider><br />
+          <div *ngFor="let support of decisionSupportDetails.steps">
+            <!-- Display the step details -->
+            <b>Q{{support.step.id}}: {{support.step.description}}</b><br />
+            <b>Answer:</b> {{support.step.answerLabel}}<br />
+            <b>Additional Explanation:</b> {{support.step.textAnswer}}<br />
+
+            <!-- Show attached files if they exist -->
+            <div *ngIf="support.attachedFiles.length > 0">
+              <b>Attached Files:</b>
+
+              <li *ngFor="let file of support.attachedFiles">{{file.label}}</li>
+
+            </div><br />
+            <mat-divider></mat-divider><br />
+          </div><br />
+        </div>
+      </div>
     </div>
-      <div class="report-container" *ngFor="let support of decisionSupportDetails">
-        <p><b>Q{{support.id}}: {{support.description	}}</b> <br/>
-           <b>Answer:</b> {{support.answerLabel	}} <br/>
-           <b>Additional Explanation:</b> {{support.textAnswer	}} <br/> </p>
-      </div>
-  </div> -->
-
- <div class="wrapper">
-    <div class="top-container">
-        <h2 class="Tile">Generate Report</h2>
-        <button class="download" (click)="downloadJson()"> Download Report </button>
-      </div>
-        <div class="container">
-            <!-- The preview container to display the steps -->
-            <div class="preview-container" >
-                <div *ngFor="let support of decisionSupportDetails">
-                    <p><b>Q{{support.id}}: {{support.description	}}</b> <br/>
-                    <b>Answer:</b> {{support.answerLabel	}} <br/>
-                    <b>Additional Explanation:</b> {{support.textAnswer	}} <br/>
-                    <b>Attatched Files:</b>
-                    <div *ngFor="let file of support.attachedFiles">
-                      <li>{{file.label}}</li>
-                    </div>
-                      
-                </div>
+  <!-- Display no data available message if no report available -->
+  <div class="noData" *ngIf="decisionSupportDetails == null">
+    <img src="/assets/noData.jpg" />
+    <p>No Report Found</p>
+  </div>
+  </div>
 </div>
+<div class="div-spinner" *ngIf="!response">
+  <mat-spinner></mat-spinner>
 </div>

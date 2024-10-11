@@ -78,7 +78,42 @@ br{
 .preview-container{
   background-color: #ffff;
   border: 2px solid white;
-  padding: 2%;
+  padding: 0 2%;
   border-radius: 10px;
- 
+  font-size: 17px;
+}
+.header-container{
+  background-color: #ffff;
+  border: 2px solid white;
+  padding:  2%;
+  border-radius: 10px;
+  font-size: 18px;
+}
+.div-spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+/* No Data Styling */
+.noData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10%;
+}
+
+.noData p {
+  font-weight: 500;
+  color: rgb(183, 183, 183);
+  margin-bottom: 20px;
+}
+
+.no-data-container {
+  background-color: white; 
+  padding: 20px; 
+  border-radius: 8px; 
 }
