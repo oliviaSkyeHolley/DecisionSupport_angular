@@ -38,3 +38,18 @@ img {
 img:hover {
   transform: scale(1.05); 
 }
+.typing-effect {
+  font-family: 'Courier New', monospace; 
+  font-size: 35px;
+  color: #333; 
+  white-space: nowrap;
+  overflow: hidden; 
+  border-right: 2px solid; 
+  animation: blink 0.7s infinite; 
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent; /* Cursor blink effect */
+  }
+}
