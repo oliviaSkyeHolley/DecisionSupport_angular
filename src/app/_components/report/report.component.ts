@@ -24,7 +24,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export class ReportComponent {
   documentList: any[] = [];
-  filteredDocumentList: any[] = [];
   decisionSupportDetails: any = null;
   supportId: any;
   response: boolean = false;
@@ -34,7 +33,6 @@ export class ReportComponent {
   }
   ngOnInit(): void {
     this.getDecisionSupportReport();
-
   }
 
 
@@ -59,6 +57,13 @@ export class ReportComponent {
       console.error('No decision support details found.');
       return;
     }
+    // Extract processLabel, reportLabel, and submittedTime
+    const processLabel = this.decisionSupportDetails.processLabel || 'N/A';
+    const reportLabel = this.decisionSupportDetails.reportLabel || 'N/A';
+    const submittedTime = this.decisionSupportDetails.submittedTime || 'N/A';
+
+    // Create a header for the report
+    const header = `Report Label: ${reportLabel}\nProcess Name: ${processLabel}\nSubmitted Time: ${submittedTime}\n\n`;
 
     // Create an array of text lines for each step
     const textLines = this.decisionSupportDetails.steps.map((step: { step: { textAnswer: string; id: any; description: any; answerLabel: any; }; attachedFiles: any[]; }) => {
@@ -66,10 +71,9 @@ export class ReportComponent {
       tempDiv.innerHTML = step.step.textAnswer; // Accessing the textAnswer correctly
       const plainText = tempDiv.innerText;
 
-      // Filter attached files to only include those that are visible
-      const visibleFiles = step.attachedFiles.filter(file => file.isVisible);
 
-      const filesList = visibleFiles.map(file => {
+
+      const filesList = step.attachedFiles.map(file => {
         return `Label: ${file.label}, Entity ID: ${file.entityId}, File ID: ${file.fileEntityId}`;
       }).join('\n'); // Join the files with a newline
 
@@ -81,28 +85,15 @@ export class ReportComponent {
     });
 
     // Join all text lines into a single string
-    const textString = textLines.join('\n\n');
+    const textString = header + '\n\n' + textLines.join('\n\n');
 
     // Create a Blob and download the text file
     const blob = new Blob([textString], { type: 'text/plain' });
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
-    link.download = 'Report.txt';
+    link.download = reportLabel + '-Report.txt';
     link.click();
   }
-
-  getDocumentList(): void {
-    this.reportService.getDocumentList(this.reportService.getDecisionSupportId()).subscribe({
-      next: (data) => {
-        this.documentList = data;
-        const stepId = this.reportService.getStepId();
-        this.filteredDocumentList = this.documentList.filter(d => d.stepId == stepId);
-      },
-      error: (err) => console.error('Error fetching reports', err)
-    });
-  }
-
-
-
-
 }
+
+
