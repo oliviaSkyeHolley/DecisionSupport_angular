@@ -18,7 +18,7 @@ export const environment = {
    //Decision Support Endpoints
    getDecisionSupportURL: 'http://decisionsupportdrupal.local/rest/support/get/',
    getDecisionSupportListURL:  'http://decisionsupportdrupal.local/rest/support/list',
-   postDecisionSupportURL: 'http://decisionsupportdrupal.local/rest/rest/support/post',
+   postDecisionSupportURL: 'http://decisionsupportdrupal.local/rest/support/post',
    patchDecisionSupportURL: 'http://decisionsupportdrupal.local/rest/support/update/',
    archiveDecisionSupportURL: 'http://decisionsupportdrupal.local/rest/support/archive/',
 
