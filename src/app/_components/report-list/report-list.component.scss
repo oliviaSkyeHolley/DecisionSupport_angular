@@ -223,3 +223,24 @@ a:visited {
   align-items: center;
   height: 70vh;
 }
+.div-spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+/* No Data Styling */
+.noData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10%;
+}
+
+.noData p {
+  font-weight: 500;
+  color: rgb(183, 183, 183);
+  margin-bottom: 20px;
+}
