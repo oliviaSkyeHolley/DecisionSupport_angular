@@ -43,7 +43,8 @@ export class AuthService {
       tap((res: any) => {
         console.log('Login response:', res); // Log the entire response
         if (res.access_token && res.refresh_token) {
-          this.setTokens(res.access_token, res.refresh_token);
+          this.setTokens(res.access_token, res.refresh_token);  
+          this.getUserData();
         } else {
           console.error('Tokens not found in response');
         }
@@ -52,6 +53,27 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+  //Check user data and role. by default user will have user role
+   private getUserData(){
+    const headers = this.getHeaders();
+    return this.http.get<any>(environment.getUserDataUrl, { headers })
+    .subscribe(
+      (response) => {
+        let roles = ['user'];// default role
+        if(response.roles && response.roles.length > 0){
+           roles = response.roles.map((role: any) => role.target_id); 
+        }
+        // Set user roles in local storage
+        localStorage.setItem("user_role", JSON.stringify(roles));
+      },
+      (error) => {
+        // Log error and set default role
+        localStorage.setItem("user_role", JSON.stringify(['user']));
+        console.error("Error fetching user data:", error);
+      }
+    );
+  }
+
 
   private getCsrfToken(): Observable<string> {
     if (this.csrfToken) {
@@ -85,7 +107,9 @@ export class AuthService {
 
   private handleError(error: HttpErrorResponse) {
     console.error('An error occurred:', error);
+    this.logout();
     return throwError(() => new Error('Something went wrong; please try again later.'));
+  
   }
 
 
@@ -95,6 +119,10 @@ export class AuthService {
 
   getAuthTokenFromStorage(): string | null {
     return this.getToken();
+  }
+
+  getUserRole(): string|null{
+   return localStorage.getItem('user_role')
   }
 
   getHeaders(): HttpHeaders {
@@ -132,6 +160,7 @@ export class AuthService {
 }
 
   refreshTokenMethod(): Observable<any> {
+    this.refreshToken = localStorage.getItem("refresh_token")
     const url = environment.apiUrl;
     const body = new URLSearchParams();
     body.set('grant_type', 'refresh_token');
@@ -156,6 +185,7 @@ export class AuthService {
     this.refreshToken = null;
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user_role');
     this.router.navigate(['/user/login']);
   }
 

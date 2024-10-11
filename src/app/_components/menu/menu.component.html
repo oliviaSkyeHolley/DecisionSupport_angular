@@ -9,7 +9,7 @@
     </div>
     <div class="nav-links">
       <a [routerLink]="['/home']" [ngClass]="{'active': isActive('/home')}">Home</a>
-      <a [routerLink]="['/process']" [ngClass]="{'active': isActive('/process')}">Process Builder</a>
+      <a *ngIf="isAdmin()" [routerLink]="['/process']" [ngClass]="{'active': isActive('/process')}">Process Builder</a>
       <a [routerLink]="['/support']" [ngClass]="{'active': isActive('/support')}">Decision Support</a>
       <a [routerLink]="['/Report-Generator']" [ngClass]="{'active': isActive('/Report-Generator')}">Generate Report</a>
     </div>

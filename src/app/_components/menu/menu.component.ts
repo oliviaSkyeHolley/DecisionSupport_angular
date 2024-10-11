@@ -31,5 +31,9 @@ export class MenuComponent {
   isActive(route: string): boolean{
     return this.router.url === route;
   }
+  isAdmin(): boolean {
+    const userRole = this.authService.getUserRole();
+    return userRole ? userRole.includes('administrator') : false; 
+  }
 }
 

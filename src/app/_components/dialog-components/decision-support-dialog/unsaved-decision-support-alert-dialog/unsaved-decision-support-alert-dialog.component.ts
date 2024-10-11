@@ -13,11 +13,11 @@ export class UnsavedDecisionSupportAlertDialogComponent {
   /** ID of the unsaved Decision Support */
   decisionSupportId: string = " ";
   /** Name of the unsaved Decision Support */
-  decisionSupportName: string ="Decision Support";
+  decisionSupportLabel: string ="Decision Support";
 
   constructor(public dialogRef: MatDialogRef<UnsavedDecisionSupportAlertDialogComponent>, @Inject(MAT_DIALOG_DATA) public unSavedData: any) {
     this.decisionSupportId = unSavedData.unSavedData.entityId;
-    this.decisionSupportName = unSavedData.unSavedData.label;
+    this.decisionSupportLabel = unSavedData.unSavedData.decisionSupportLabel;
   }
 
   /** Close the dialog when the user clicks Discard and remove the data from local storage*/
