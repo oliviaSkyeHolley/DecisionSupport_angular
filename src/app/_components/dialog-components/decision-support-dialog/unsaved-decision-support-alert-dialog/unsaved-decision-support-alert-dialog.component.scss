@@ -8,5 +8,21 @@
 }
 
 .delete-bt {
-  color: red !important;
+  background-color: #143354 !important;
+  color: white;
+}
+
+.delete-bt:hover {
+  background-color: #7a9bbf !important;
+  color: white;
+}
+
+.continue{
+  background-color: #accbe3;
+  color: white;
+}
+
+.continue:hover{
+  background-color: #7a9bbf;
+  color: white;
 }

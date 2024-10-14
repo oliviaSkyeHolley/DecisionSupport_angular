@@ -23,20 +23,20 @@ body {
 .top-container h2 {
     font-size: 24px;
     font-weight: 600;
-    color: #143354;
+    color: #7a9bbf;
 
 }
 
 .createbutton {
   color:#ffff;
-  background-color: #143354;
+  background-color: #7a9bbf;
   border-radius: 10px;
   font-size: 18px;
   font-weight: bold;
   padding: 12px 24px;
   transition: background-color 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(33, 150, 243, 0.2);
+  box-shadow: none;
   border: none;
 }
 
@@ -67,7 +67,7 @@ body {
 
 /* Table styling */
 .mat-mdc-header-row{
-  background-color: #143354 !important;
+  background-color: #7a9bbf !important;
   color: white;
   border-radius: 10px;
   font-size: 16px;
@@ -89,25 +89,6 @@ mat-cell {
   border-bottom: 1px solid #E0E0E0;
   padding: 16px;
 }
-/*
-mat-cell button {
-  background-color: #accbe3;
-  color: #fff;
-  border-radius: 10px;
-  padding: 8px 16px;
-  font-size: 14px;
-  margin-right: 10px;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.3s ease;
-}
-
-.mat-column-label {
-    flex: 0 0 20%;
-}
-  
-*/
-
 .searchIcon{
   color: black;
 }
@@ -159,7 +140,7 @@ a:visited {
 }
 
 .iconButton{
-  background-color: #143354;
+  background-color: #7a9bbf;
   color: #fff;
   border-radius: 6px;
   margin-right: 10px;
@@ -181,7 +162,7 @@ a:visited {
 }
 
 .addbutton{
-  background-color: #143354;
+  background-color: #7a9bbf;
   color: #fff;
   border-radius: 6px;
   margin-right: 10px;
