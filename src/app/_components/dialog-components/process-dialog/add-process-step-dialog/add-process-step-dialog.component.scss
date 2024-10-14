@@ -3,14 +3,14 @@
   width: 100%;
 }
 
+.material-icons{
+  color: #accbe3;
+  cursor:pointer;
+}
 
 mat-form-field {
   width: 100%;
 }
-
-/*.RadioOp{
-  width: 50%;
-}*/
 
 .mat-dialog-title{
   font-size: 35px;
@@ -37,7 +37,7 @@ mat-form-field {
 }
 
 .add{
-  background-color: #143354;
+  background-color: #accbe3;
   color: white !important;
 }
 
@@ -57,14 +57,9 @@ mat-form-field {
 /*working here right now*/
 :host ::ng-deep .mdc-text-field--outlined {
   --mdc-outlined-text-field-container-shape: 10px;
-  /*--mdc-outlined-text-field-container-background-colour: */
   border-color: black !important;
 
 }
-
-//:host ::ng-deep .mdc-text-field--filled{
- // background-color: #accbe3;
-//}
 
 
 .createButton:enabled,
